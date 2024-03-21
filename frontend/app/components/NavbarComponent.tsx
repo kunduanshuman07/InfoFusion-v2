@@ -10,7 +10,7 @@ const NavbarComponent = () => {
                 <DrawerComponent />
             </div>
             <div className="navbar-center">
-                <a className="text-xl font-bold text-info"><span className="underline">I</span>n<span className="underline">f</span>oFusion</a>
+                <a className="text-xl font-bold text-info">InfoFusion</a>
             </div>
             <div className="navbar-end">
                 <div className="tooltip tooltip-bottom" data-tip="Dashboard">

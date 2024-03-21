@@ -1,9 +1,10 @@
-import UserLayout from "./container/userLayout"
-
+import UserLayout from "./container/UserLayout";
+import Quiz from "./quiz/page";
 const page = () => {
   return (
     <div>
       <UserLayout/>
+      <Quiz/>
     </div>
   )
 }
