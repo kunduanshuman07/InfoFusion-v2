@@ -1,6 +1,6 @@
 import express from "express";
 import authRoutes from "../routes/auth.route.js";
-
+import quizRoutes from "../routes/quiz.route.js";
 
 const router = express.Router();
 
@@ -9,6 +9,10 @@ const defaultRoutes = [
         path: '/auth',
         route: authRoutes
     },
+    {
+        path: '/quiz',
+        route: quizRoutes
+    }
 ]
 
 defaultRoutes.forEach((routes)=>{

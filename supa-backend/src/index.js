@@ -5,6 +5,7 @@ import http from "http";
 import { config } from "dotenv";
 import router from "./routes/index.js";
 import logger from "./logger.js"
+
 // App
 config();
 const app = express();
