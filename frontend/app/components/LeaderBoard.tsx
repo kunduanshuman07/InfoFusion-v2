@@ -2,6 +2,7 @@ import { GiPodiumWinner } from "react-icons/gi";
 import { GiPodiumSecond } from "react-icons/gi";
 import { GiPodiumThird } from "react-icons/gi";
 import { GiDiamondTrophy } from "react-icons/gi";
+import { MdLeaderboard } from "react-icons/md";
 const LeaderBoard = () => {
   return (
     <div className="overflow-x-auto p-2 rounded-lg shadow-md flex flex-col">
@@ -28,7 +29,7 @@ const LeaderBoard = () => {
           <h1 className="font-bold text-sm text-center">Time: 4.55 min</h1>
         </div>
       </div>
-      <button className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-7">View complete Leaderboard</button>
+      <button className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-7"><MdLeaderboard/> View complete Leaderboard</button>
     </div>
   )
 }
