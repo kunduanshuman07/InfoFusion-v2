@@ -9,7 +9,7 @@ export const login = async (req, res) => {
         if (error) {
             res.status(400).send(`Error: ${error.message}`);
         }
-        if (data[0].password !== password) {
+        else if (data[0].password !== password) {
             res.status(400).send(`Error: Invalid Password`);
         }
         res.status(200).send({ message: 'User Logged In Succesfully', user: data[0] });
