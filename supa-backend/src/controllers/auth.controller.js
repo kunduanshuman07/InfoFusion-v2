@@ -6,17 +6,27 @@ export const login = async (req, res) => {
     const { username, password } = req.body;
     try {
         const { data, error } = await supabase.from('User').select('*').match({ username: username });
+
         if (error) {
-            res.status(400).send(`Error: ${error.message}`);
+            return res.status(400).send(`Error: ${error.message}`);
         }
-        else if (data[0].password !== password) {
-            res.status(400).send(`Error: Invalid Password`);
+
+        if (!data || data.length === 0) {
+            return res.status(200).send({message: 'User does not exist'});
         }
-        res.status(200).send({ message: 'User Logged In Succesfully', user: data[0] });
+
+        const user = data[0];
+
+        if (user.password !== password) {
+            return res.status(200).send({message: 'Incorrect Password'});
+        }
+
+        return res.status(200).send({ message: 'User Logged In Successfully', user });
     } catch (error) {
-        res.status(500).send(`Error: ${error}`);
+        return res.status(500).send(`Error: ${error.message}`);
     }
-}
+};
+
 
 export const register = async (req, res) => {
     const { firstname, lastname, username, email, password } = req.body;
