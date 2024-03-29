@@ -50,7 +50,7 @@ export const fetchCurrentQuiz = async (req, res) => {
         if (questionResp.error) {
             return res.status(200).send({ message: 'Error fetching current quiz questions.' });
         }
-        return res.status(200).send({ message: 'Current quiz successfully fetched', quizData: questionResp.data, quizTitle: data[0].title, quizIndex: data[0].quiz_index });
+        return res.status(200).send({ message: 'Current quiz successfully fetched', quizData: questionResp.data, quizTitle: data[0].title, quizIndex: data[0].quiz_index, quizDesc: data[0].quiz_description, descLink: data[0].desc_link });
     } catch (error) {
         res.status(500).send(`Error: ${error.message}`);
     }

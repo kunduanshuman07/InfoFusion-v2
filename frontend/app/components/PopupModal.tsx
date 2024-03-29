@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from "react";
 import { useLoading } from "../context/LoadingContext";
 
 interface PopupModalProps {
@@ -13,6 +14,9 @@ interface PopupModalProps {
 
 const PopupModal: React.FC<PopupModalProps> = ({ openModal, setOpenModal, actionTextOne, actionTextTwo, actionFunc, content }) => {
     const { loading, startLoading, stopLoading } = useLoading();
+    useEffect(()=>{
+        stopLoading();
+    })
     const handleAction = () => {
         startLoading();
         actionFunc();
