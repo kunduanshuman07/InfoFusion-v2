@@ -1,5 +1,6 @@
 'use client'
-import { useRouter } from "next/navigation";
+
+import { useLoading } from "../context/LoadingContext";
 
 interface PopupModalProps {
     openModal: any;
@@ -11,12 +12,16 @@ interface PopupModalProps {
 }
 
 const PopupModal: React.FC<PopupModalProps> = ({ openModal, setOpenModal, actionTextOne, actionTextTwo, actionFunc, content }) => {
-    const router = useRouter();
+    const { loading, startLoading, stopLoading } = useLoading();
     const handleAction = () => {
+        startLoading();
         actionFunc();
+        stopLoading();
     }
     const handleClose = () => {
+        startLoading();
         setOpenModal(false);
+        stopLoading();
     }
     return (
         <dialog id="my_modal_1" className={`modal modal-${openModal ? 'open' : 'close'} w-full`}>
@@ -25,7 +30,7 @@ const PopupModal: React.FC<PopupModalProps> = ({ openModal, setOpenModal, action
                     {content}
                 </div>
                 <div className="modal-action flex flex-row">
-                    <button className="btn mr-auto hover:btn-neutral text-white bg-[#0c4a6e]" onClick={handleAction}>{actionTextOne}</button>
+                    <button className="btn mr-auto hover:btn-neutral text-white bg-[#0c4a6e]" onClick={handleAction}>{actionTextOne} {loading && <span className="loading loading-dots loading-md"></span>}</button>
                     <button className="btn ml-auto btn-error text-white" onClick={handleClose}>{actionTextTwo}</button>
                 </div>
             </div>

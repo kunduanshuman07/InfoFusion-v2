@@ -7,18 +7,23 @@ import Image from "next/image";
 import { useState } from "react";
 import { registerUser } from "../server-actions/registerUser";
 import { useRouter } from "next/navigation";
+import { useLoading } from "../context/LoadingContext";
+import { loginUser } from "../server-actions/loginUser";
 const Register = () => {
     const router = useRouter();
+    const {loading, startLoading, stopLoading} = useLoading();
     const [firstname, setFirstName]  = useState<any>();
     const [lastname, setLastname] = useState<any>();
     const [email, setEmail] = useState<any>();
     const [username, setUsername] = useState<any>();
     const [password, setPassword] = useState<any>();
     const handleRegister = async() => {
+        startLoading();
         const {status, data} = await registerUser({firstname, lastname, email, username, password});
-        console.log(status, data);
-        if(status===200){
+        if(status===200){   
+            await loginUser({username, password});
             router.push('/');
+            stopLoading();
         }
     }
     return (
@@ -45,7 +50,7 @@ const Register = () => {
                     <Image src={PasswordSvg} alt="Password" />
                     <input type="text" className="grow input-sm" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                 </label>
-                <button className="btn btn-white mx-auto pl-10 pr-10 mt-10" onClick={handleRegister}>Register</button>
+                <button className="btn btn-white mx-auto pl-10 pr-10 mt-10" onClick={handleRegister}>Register {loading && <span className="loading loading-dots loading-md"></span>}</button>
                 <div className="flex flex-row">
                     <a className="text-xs text-white mt-2 mx-auto cursor-pointer" href="/login">Existing User? <span className="underline font-bold">Login</span></a>
                 </div>
