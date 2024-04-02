@@ -10,6 +10,7 @@ import React, {
   interface UserContextType {
     user: any|null;
     setUser: (user: any|null) => void;
+    removeUser: () => void;
   }
   
   const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -20,7 +21,11 @@ import React, {
   
   export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [user, setUser] = useState<any|null>(null);
-  
+    
+    const removeUser = () => {
+      window.localStorage.removeItem('User');
+    }
+
     useEffect(() => {
       const userString = window.localStorage.getItem('User');
       if (userString) {
@@ -41,6 +46,7 @@ import React, {
     const value: UserContextType = {
       user,
       setUser,
+      removeUser
     };
   
     return (
