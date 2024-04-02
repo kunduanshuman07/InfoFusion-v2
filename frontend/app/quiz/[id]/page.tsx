@@ -2,7 +2,9 @@
 import PopupModal from "@/app/components/PopupModal";
 import MyTimer from "@/app/components/QuizTimer";
 import { useLoading } from "@/app/context/LoadingContext";
+import { useUser } from "@/app/context/UserContext";
 import { fetchCurrentQuiz } from "@/app/server-actions/fetchCurrentQuiz";
+import { submitQuiz } from "@/app/server-actions/submitQuiz";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
@@ -11,6 +13,7 @@ import { RiTimerFlashFill } from "react-icons/ri";
 
 const QuizStart = () => {
   const router = useRouter();
+  const {user} = useUser();
   const seconds = 600;
   const timeStamp = new Date(Date.now() + seconds * 1000);
   const [popupModal, setPopupModal] = useState<any>(false);
@@ -18,14 +21,14 @@ const QuizStart = () => {
   const [quizData, setQuizData] = useState<any>([]);
   const [quizIndex, setQuizIndex] = useState<any>("");
   const [quizTitle, setQuizTitle] = useState<any>("");
+  const [quizId, setQuizId] = useState<any>();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<any>(0);
   const [selectedOptions, setSelectedOptions] = useState<any>(Array.from({ length: 10 }, () => null));
-
   useEffect(() => {
     const fetchQuizData = async () => {
       startLoading();
-      const { status, data } = await fetchCurrentQuiz();
-      console.log(data.quizData);
+      const { data } = await fetchCurrentQuiz();
+      setQuizId(data.quizId);
       setQuizData(data.quizData);
       setQuizIndex(data.quizIndex);
       setQuizTitle(data.quizTitle);
@@ -33,6 +36,10 @@ const QuizStart = () => {
     }
     fetchQuizData();
   }, [])
+
+  const handleTimerEnding = () => {
+    router.push('/');
+  }
 
   const handleNextQuestion = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -42,9 +49,11 @@ const QuizStart = () => {
     setCurrentQuestionIndex(currentQuestionIndex - 1);
   }
 
-  const handleSubmitQuiz = () => {
-    console.log("Selected Options:", selectedOptions);
-    router.push('/');
+  const handleSubmitQuiz = async() => {
+    const {status, data} = await submitQuiz({quizId: quizId, userId: user.id, quizData, selectedOptions});
+    if(status==200){
+      
+    }
   }
 
   const handleOptionChange = (option: any) => {
@@ -104,7 +113,7 @@ const QuizStart = () => {
                 <h1 className="text-xs ml-5 font-bold text-[#0c4a6e]">Q {currentQuestionIndex + 1} of 10</h1>
               </div>
               <button className="btn text-[#0c4a6e] mr-auto ml-10 mt-5">
-                <RiTimerFlashFill /> <MyTimer expiryTimestamp={timeStamp} />
+                <RiTimerFlashFill /> <MyTimer expiryTimestamp={timeStamp} handleTimerEnding={handleTimerEnding}/>
               </button>
               <button className="btn btn-success mr-10 text-white ml-auto ml-10 mt-5" onClick={()=>setPopupModal(true)}>
                 Submit Quiz

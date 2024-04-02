@@ -7,12 +7,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { loginUser } from "../server-actions/loginUser";
 import { useLoading } from "../context/LoadingContext";
+import { useUser } from "../context/UserContext";
 const Login = () => {
     const router = useRouter();
     const {loading, startLoading, stopLoading} = useLoading();
     const [username, setUsername] = useState<any>();
     const [password, setPassword] = useState<any>();
     const [loginError, setLoginError] = useState<any>('');
+    const {setUser} = useUser();
     const handleLogin = async () => {
         startLoading();
         const { status, data } = await loginUser({ username, password });
@@ -23,6 +25,7 @@ const Login = () => {
             setLoginError(data.message);
             stopLoading();
         } else if (status === 200) {
+            setUser(data.user);
             setLoginError('');
             router.push('/');
             stopLoading();
@@ -40,7 +43,7 @@ const Login = () => {
                 <h1 className="text-2xl font-bold text-white flex flex-row m-auto" ><FaArtstation className='my-auto mr-2' /> InfoFusion</h1>
                 <label className="input input-bordered flex items-center gap-2 mt-20">
                     <Image src={NameSvg} alt="Username" />
-                    <input type="text" className="grow input-sm" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                    <input type="text" className="grow input-sm" placeholder="Enter your email" value={username} onChange={(e) => setUsername(e.target.value)} />
                 </label>
                 <label className="input input-bordered flex items-center gap-2 mt-5">
                     <Image src={PasswordSvg} alt="Password" />

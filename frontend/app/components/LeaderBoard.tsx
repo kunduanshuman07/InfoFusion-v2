@@ -10,7 +10,7 @@ const LeaderBoard = () => {
   const [loading, setLoading] = useState<any>(true);
   useEffect(() => {
     setLoading(false);
-  },[])
+  }, [])
   return (
     <div className="overflow-x-auto p-2 rounded-lg shadow-md flex flex-col">
       {loading ? <div className="flex flex-col gap-4 w-full p-4">
@@ -21,7 +21,7 @@ const LeaderBoard = () => {
       </div>
         :
         <>
-          <h1 className="text-center font-bold text-[#1e3a8a] m-auto pl-10 pr-10 rounded-lg text-xl flex flex-row"><GiDiamondTrophy className="m-auto" /> Leaderboard</h1>
+          <h1 className="text-center font-bold text-[#1e3a8a] m-auto pl-10 pr-10 rounded-lg text-xl flex flex-row"><GiDiamondTrophy className="m-auto mr-2" /> Leaderboard</h1>
           <div className="grid grid-cols-1 mt-5 ">
             <div className="p-2 bg-[#0c4a6e] text-white ml-auto mr-auto mt-2 p-5 shadow-md rounded-lg">
               <h1 className="font-bold border-b border-gray-200 text-xl text-[#facc15]"><GiPodiumWinner className="ml-auto mr-auto" /></h1>
@@ -44,7 +44,9 @@ const LeaderBoard = () => {
               <h1 className="font-bold text-sm text-center">Time: 4.55 min</h1>
             </div>
           </div>
-          <button className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-7"><MdLeaderboard /> View complete Leaderboard</button>
+          <div className="flex flex-row">
+            <button className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-7"><MdLeaderboard /> View complete Leaderboard</button>
+          </div>
         </>
       }
 

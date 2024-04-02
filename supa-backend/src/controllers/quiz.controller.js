@@ -50,7 +50,7 @@ export const fetchCurrentQuiz = async (req, res) => {
         if (questionResp.error) {
             return res.status(200).send({ message: 'Error fetching current quiz questions.' });
         }
-        return res.status(200).send({ message: 'Current quiz successfully fetched', quizData: questionResp.data, quizTitle: data[0].title, quizIndex: data[0].quiz_index, quizDesc: data[0].quiz_description, descLink: data[0].desc_link });
+        return res.status(200).send({ message: 'Current quiz successfully fetched', quizId: data[0].id, quizTitle: data[0].title, quizIndex: data[0].quiz_index, quizDesc: data[0].quiz_description, descLink: data[0].desc_link, quizData: questionResp.data, });
     } catch (error) {
         res.status(500).send(`Error: ${error.message}`);
     }
@@ -61,5 +61,66 @@ export const fetchPastQuizzes = async (req, res) => {
 }
 
 export const submitQuiz = async (req, res) => {
-
+    const { userId, quizId, quizData, selectedOptions } = req.body;
+    const weightage = {
+        'Easy': 1,
+        'Medium': 1.5,
+        'Hard': 2,
+        'Misc': 2.5
+    }
+    let score = 0;
+    let weighted_score = 0;
+    let correct_answers = [];
+    let incorrect_answers = [];
+    let unattempted_questions = [];
+    for (let i = 0; i < 10; i++) {
+        if(quizData[i].correct_answer===selectedOptions[i]){
+            score=score+1;
+            weighted_score=weighted_score+weightage[quizData[i].category];
+            correct_answers.push({
+                question: quizData[i].title,
+                correct_answer: quizData[i].correct_answer,
+                your_answer: selectedOptions[i],
+                category: quizData[i].category
+            })
+        }
+        else if(quizData[i].correctAnswer!==selectedOptions[i]){
+            weighted_score=weighted_score-weightage[quizData[i].category];
+            incorrect_answers.push({
+                question: quizData[i].title,
+                correct_answer: quizData[i].correct_answer,
+                your_answer: selectedOptions[i],
+                category: quizData[i].category
+            })
+        }
+        else {
+            unattempted_questions.push({
+                question: quizData[i].title,
+                correct_answer: quizData[i].correct_answer,
+                your_answer: selectedOptions[i],
+                category: quizData[i].category
+            })
+        }
+    }
+    const total_score = score+weighted_score*4 +100;
+    try {
+        const {error} = await supabase.from('Quiz_Scores').insert([
+            {
+                user_id: userId,
+                quiz_id: quizId,
+                score,
+                weighted_score,
+                total_score,
+                incorrect_answers,
+                correct_answers,
+                unattempted_questions
+            }
+        ])
+        if (error) {
+            return res.status(200).send({ message: 'Error submitting quiz' });
+        }
+        return res.status(200).send({message: 'SuccessFull quiz submission'});
+    } catch (error) {
+        res.status(500).send(`Error: ${error.message}`);
+    }
 }

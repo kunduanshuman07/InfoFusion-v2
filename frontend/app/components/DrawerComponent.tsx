@@ -26,7 +26,7 @@ const DrawerComponent = () => {
                 <ul className="menu p-4 w-50 min-h-full bg-base-200 text-base-content">
                     <li className=" text-md mt-3"><a href='/'><MdQuiz className="mr-3"/> Quiz</a></li>
                     <li className=" text-md mt-3"><a href='/'><FaCampground className="mr-3"/> Debate</a></li>
-                    <li className=" text-md mt-3"><a href='/'><MdDashboard className="mr-3"/> Dashboard</a></li>
+                    <li className=" text-md mt-3"><a href='/dashboard'><MdDashboard className="mr-3"/> Dashboard</a></li>
                     <li className=" text-md mt-4"><a href='/'><FaMoneyBillAlt className="mr-3"/> Crowdfunding</a></li>
                     <li className=" text-md mt-4"><a href='/'><SiQuantconnect className="mr-3"/> Connect</a></li>
                     <li className=" text-md mt-auto"><a href='/'><MdSupportAgent className="mr-3"/> Support</a></li>

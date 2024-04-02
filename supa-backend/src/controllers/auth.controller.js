@@ -5,7 +5,7 @@ import { supabase } from "../config/db.config.js";
 export const login = async (req, res) => {
     const { username, password } = req.body;
     try {
-        const { data, error } = await supabase.from('User').select('*').match({ username: username });
+        const { data, error } = await supabase.from('User').select('*').match({ email: username });
 
         if (error) {
             return res.status(400).send(`Error: ${error.message}`);

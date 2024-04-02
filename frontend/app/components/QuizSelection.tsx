@@ -8,6 +8,7 @@ import { MdDashboard } from "react-icons/md";
 import PopupModal from "./PopupModal";
 import QuizPopUpContent from "./QuizPopUpContent";
 import { fetchCurrentQuiz } from "../server-actions/fetchCurrentQuiz";
+import { useUser } from "../context/UserContext";
 const QuizSelection = () => {
   const router = useRouter();
   const [quizPopup, setQuizPopup] = useState<any>(false);
@@ -34,6 +35,9 @@ const QuizSelection = () => {
   }
   const handleStartQuiz = () => {
     router.push(`/quiz/${quizIndex}`)
+  }
+  const handleDashboard = () => {
+    router.push('/dashboard');
   }
   return (
     <div className="p-2 shadow-md rounded-lg flex flex-col">
@@ -62,7 +66,7 @@ const QuizSelection = () => {
           <button className="btn bg-[#0c4a6e] m-auto mt-2 mb-1 text-white hover:btn-neutral mt-4" onClick={handleQuizPopUp}><FaHourglassStart /> Start Quiz</button>
           <div className="flex flex-row">
             <button className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-4"><SiPastebin /> Attempt past Quizzes</button>
-            <button className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-4"><MdDashboard /> Your Dashboard</button>
+            <button className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-4" onClick={handleDashboard}><MdDashboard /> Your Dashboard</button>
           </div>
           {quizPopup && <PopupModal openModal={quizPopup} setOpenModal={setQuizPopup} actionTextOne={'Go for it !'} actionTextTwo={'Cancel'} actionFunc={handleStartQuiz} content={<QuizPopUpContent />} />}
         </>}

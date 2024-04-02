@@ -1,19 +1,11 @@
 import { useTimer } from 'react-timer-hook';
-
-export default function MyTimer({ expiryTimestamp }: any) {
+export default function MyTimer({ expiryTimestamp, handleTimerEnding }: any) {
   const {
     seconds,
     minutes,
-    hours,
-    days,
-    isRunning,
-    start,
-    pause,
-    resume,
-    restart,
   } = useTimer({ 
         expiryTimestamp,
-        onExpire: () => console.warn('onExpire called') 
+        onExpire: () => handleTimerEnding() 
        })
 
   return (
