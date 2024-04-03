@@ -1,6 +1,5 @@
 import React from 'react'
 import StatComponent from '../components/StatComponent'
-import NavbarComponent from '../components/NavbarComponent'
 import DashboardDrawer from '../components/DashboardDrawer'
 import StatButtons from '../components/StatButtons'
 import LineChart from '../components/LineChart'
@@ -8,7 +7,6 @@ import DoughnutChart from '../components/DoughnutChart'
 const Dashboard = () => {
     return (
         <div className='flex flex-col w-full'>
-            <NavbarComponent />
             <div className='flex flex-row w-full mt-5'>
                 <div className='flex flex-col w-2/3 shadow-md rounded-lg p-2 ml-2'>
                     <div className='flex flex-row w-full'>

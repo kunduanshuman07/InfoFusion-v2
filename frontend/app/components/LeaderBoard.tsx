@@ -45,7 +45,7 @@ const LeaderBoard = () => {
             </div>
           </div>
           <div className="flex flex-row">
-            <button className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-7"><MdLeaderboard /> View complete Leaderboard</button>
+            <a className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-7"><MdLeaderboard /> View complete Leaderboard</a>
           </div>
         </>
       }

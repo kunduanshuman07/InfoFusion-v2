@@ -5,32 +5,15 @@ import NameSvg from "../assets-svgs/NameSvg.svg";
 import PasswordSvg from "../assets-svgs/PasswordSvg.svg";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { loginUser } from "../server-actions/loginUser";
-import { useLoading } from "../context/LoadingContext";
-import { useUser } from "../context/UserContext";
+
 const Login = () => {
     const router = useRouter();
-    const {loading, startLoading, stopLoading} = useLoading();
+    const [loading, setLoading] = useState<any>(false);
     const [username, setUsername] = useState<any>();
     const [password, setPassword] = useState<any>();
     const [loginError, setLoginError] = useState<any>('');
-    const {setUser} = useUser();
     const handleLogin = async () => {
-        startLoading();
-        const { status, data } = await loginUser({ username, password });
-        if (data.message === 'User does not exist') {
-            setLoginError(data.message);
-            stopLoading();
-        } else if (data.message === 'Incorrect Password') {
-            setLoginError(data.message);
-            stopLoading();
-        } else if (status === 200) {
-            setUser(data.user);
-            setLoginError('');
-            router.push('/');
-            stopLoading();
-        }
-
+        
     }
     return (
         <div className='grid grid-cols-1'>

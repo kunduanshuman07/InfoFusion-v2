@@ -7,23 +7,22 @@ import Image from "next/image";
 import { useState } from "react";
 import { registerUser } from "../server-actions/registerUser";
 import { useRouter } from "next/navigation";
-import { useLoading } from "../context/LoadingContext";
 import { loginUser } from "../server-actions/loginUser";
 const Register = () => {
     const router = useRouter();
-    const {loading, startLoading, stopLoading} = useLoading();
+    const [loading, setLoading] = useState<any>(false);
     const [firstname, setFirstName]  = useState<any>();
     const [lastname, setLastname] = useState<any>();
     const [email, setEmail] = useState<any>();
     const [username, setUsername] = useState<any>();
     const [password, setPassword] = useState<any>();
     const handleRegister = async() => {
-        startLoading();
+        setLoading(true);
         const {status, data} = await registerUser({firstname, lastname, email, username, password});
         if(status===200){   
             await loginUser({username, password});
             router.push('/');
-            stopLoading();
+            setLoading(false);
         }
     }
     return (

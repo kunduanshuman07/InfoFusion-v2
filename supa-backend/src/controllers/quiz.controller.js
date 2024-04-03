@@ -46,7 +46,7 @@ export const fetchCurrentQuiz = async (req, res) => {
         if (error) {
             return res.status(200).send({ message: 'Error fetching the latest quiz data.' });
         }
-        const questionResp = await supabase.from('Questions').select('*').match({ quiz_id: data[0].id }).order('created_at', { ascending: true });
+        const questionResp = await supabase.from('Questions').select('*').match({ quiz_id: data[0].id }).order('category', { ascending: true });
         if (questionResp.error) {
             return res.status(200).send({ message: 'Error fetching current quiz questions.' });
         }

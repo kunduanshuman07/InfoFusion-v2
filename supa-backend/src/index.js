@@ -4,7 +4,6 @@ import cors from "cors";
 import http from "http";
 import { config } from "dotenv";
 import router from "./routes/index.js";
-import logger from "./logger.js"
 
 // App
 config();
@@ -14,7 +13,6 @@ const PORT = process.env.PORT||5001;
 
 // Middlewares
 app.use(express.json());
-app.use(logger);
 app.use(cors({
     origin: "*",
     methods: ['GET', 'POST', 'PATCH', 'DELETE']

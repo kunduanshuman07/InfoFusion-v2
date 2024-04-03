@@ -7,13 +7,11 @@ import { IoLogOut } from "react-icons/io5";
 import { MdSupportAgent } from "react-icons/md";
 import { MdDashboard } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import { useUser } from "../context/UserContext";
 
 const DrawerComponent = () => {
     const router = useRouter();
-    const {removeUser} = useUser();
+    
     const handleLogout = () => {
-        removeUser();
         router.push('/login');
     }
     return (

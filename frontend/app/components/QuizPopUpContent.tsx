@@ -3,19 +3,26 @@ import React from 'react'
 const QuizPopUpContent = () => {
     return (
         <div className='flex flex-col'>
-            <h1 className='font-bold text-center text-xl'>Quiz Marking</h1>
-            <h1 className="text-xs mt-2 text-gray-400 font-bold m-auto mt-4"><span className="">Questions: 10</span><span className="ml-3">Maxmimum Marks: 100</span><span className="ml-3">Time: 5 minutes</span></h1>
-            <h1 className='font-bold mt-4 text-sm'>Difficulty & Weightage</h1>
-            <div className='flex flex-row m-auto mt-2'>
-                <button className='btn btn-xs btn-success text-white'>Easy - 0.5</button>
-                <button className='btn btn-xs ml-2 btn-secondary'>Medium - 0.75</button>
-                <button className='btn btn-xs ml-2 btn-primary'>Hard - 1</button>
-                <button className='btn btn-xs ml-2 bg-[#e11d48] text-white hover:bg-[#e11d48]'>Misc - 1.25</button>
+            <h1 className='font-bold text-center'>Read before starting the quiz</h1>
+            <div className='flex flex-col mt-3'>
+                <ul>
+                    <li><p className='text-xs font-bold text-[#94a3b8]'>1. There will be a total of 10 Questions.</p></li>
+                    <li className='mt-2'><p className='text-xs font-bold text-[#94a3b8]'>2. You will be given a maximum of 10 minutes to complete the quiz.</p></li>
+                    <li className='mt-2'><p className='text-xs font-bold text-[#94a3b8]'>3. Questions have been categorized into Easy, Medium, Hard and Misc.</p></li>
+                    <li className='mt-2 flex flex-col'><p className='text-xs font-bold text-[#94a3b8]'>4. Every category has its own different weightage as below:
+                        <ul className='ml-5'>
+                            <li className='mt-2'>Easy: 1.25</li>
+                            <li className='mt-2'>Hard: 1.50</li>
+                            <li className='mt-2'>Medium: 1.75</li>
+                            <li className='mt-2'>Misc: 2.0</li>
+                        </ul>
+                    </p></li>
+                    <li className='mt-2'><p className='text-xs font-bold text-[#94a3b8]'>4. Every question has 1 mark for a correct answer and 0 mark for incorrect answer or an unattempted question. Incorrect answers have no impact on the total mark but has exact negative impact on weighted score.</p></li>
+                    <li className='mt-2'><p className='text-xs font-bold text-[#94a3b8]'>5. The final score will be a cumulative of weighted score, total marks and some external undisclosable factors which affects your rating, rank and stats.</p></li>
+                    <li className='mt-2'><p className='text-xs font-bold text-[#94a3b8]'>6. Ending a quiz in between will result in submitting the quiz.</p></li>
+                </ul>
             </div>
-            <h1 className='font-bold mt-4 text-sm'>Weighted Marking?</h1>
-            <p className='mt-2 text-xs text-gray-500 font-bold'>(Easy) 0.5 x 3 + (Medium) 0.75 x 3 + (Hard) 1.0 x 2 + (Misc) 1.25 x 2</p>
-            <h1 className='font-bold mt-4 text-sm'>Total Score?</h1>
-            <p className='mt-2 text-xs text-gray-500 font-bold'>Weighted Score + Average Time left on correct answers</p>
+
         </div>
     )
 }
