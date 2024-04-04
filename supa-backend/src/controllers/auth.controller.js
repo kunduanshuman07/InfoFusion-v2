@@ -38,6 +38,25 @@ export const register = async (req, res) => {
             res.status(400).send(`Error: ${error.message}`);
         }
         const { data } = await supabase.from('User').select('*').match({ email: email });
+        const leaderboardResp = await supabase.from('Leaderboard').insert([
+            {
+                user_id: data[0].id,
+                rating: 0,
+                questions: 0,
+                correct_answers: 0,
+                easy: 0,
+                med: 0,
+                hard: 0,
+                misc: 0,
+                username: data[0].username,
+                quiz_count: 0,
+                rating_graph: [0],
+                highest_score: 0
+            }
+        ])
+        if (leaderboardResp.error) {
+            res.status(400).send(`Error: ${error.message}`);
+        }
         res.status(200).send({ message: 'User Registered Succesfully', user: data[0] });
     } catch (error) {
         res.status(500).send(`Error: ${error}`);

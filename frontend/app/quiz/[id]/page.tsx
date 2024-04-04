@@ -11,6 +11,8 @@ import { RiTimerFlashFill } from "react-icons/ri";
 
 const QuizStart = () => {
   const router = useRouter();
+  const userString = window.localStorage.getItem("User");
+  const user = userString ? JSON.parse(userString) : null;
   const seconds = 600;
   const timeStamp = new Date(Date.now() + seconds * 1000);
   const [popupModal, setPopupModal] = useState<any>(false);
@@ -44,12 +46,11 @@ const QuizStart = () => {
   const handlePrevQuestion = () => {
     setCurrentQuestionIndex(currentQuestionIndex - 1);
   }
-
-  const handleSubmitQuiz = async() => {
-    // const {status, data} = await submitQuiz({quizId: quizId, userId: user.id, quizData, selectedOptions});
-    // if(status==200){
-      
-    // }
+  const handleSubmitQuiz = async () => {
+    const { status, data } = await submitQuiz({ quizId: quizId, userId: user.id, quizData, selectedOptions, quizTitle, quizIndex, username: user.username });
+    if (status == 200) {
+      router.push(`/dashboard/scorecards`)
+    }
   }
 
   const handleOptionChange = (option: any) => {
@@ -109,9 +110,9 @@ const QuizStart = () => {
                 <h1 className="text-xs ml-5 font-bold text-[#0c4a6e]">Q {currentQuestionIndex + 1} of 10</h1>
               </div>
               <button className="btn text-[#0c4a6e] mr-auto ml-10 mt-5">
-                <RiTimerFlashFill /> <MyTimer expiryTimestamp={timeStamp} handleTimerEnding={handleTimerEnding}/>
+                <RiTimerFlashFill /> <MyTimer expiryTimestamp={timeStamp} handleTimerEnding={handleTimerEnding} />
               </button>
-              <button className="btn btn-success mr-10 text-white ml-auto ml-10 mt-5" onClick={()=>setPopupModal(true)}>
+              <button className="btn btn-success mr-10 text-white ml-auto ml-10 mt-5" onClick={() => setPopupModal(true)}>
                 Submit Quiz
               </button>
             </div>

@@ -5,6 +5,7 @@ import ScorecardTable from '../../components/ScorecardTable'
 const ScoreCards = () => {
   return (
     <div>
+        <UserLayout/>
         <ScorecardTable/>
     </div>
   )

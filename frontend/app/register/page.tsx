@@ -7,7 +7,6 @@ import Image from "next/image";
 import { useState } from "react";
 import { registerUser } from "../server-actions/registerUser";
 import { useRouter } from "next/navigation";
-import { loginUser } from "../server-actions/loginUser";
 const Register = () => {
     const router = useRouter();
     const [loading, setLoading] = useState<any>(false);
@@ -20,7 +19,7 @@ const Register = () => {
         setLoading(true);
         const {status, data} = await registerUser({firstname, lastname, email, username, password});
         if(status===200){   
-            await loginUser({username, password});
+            window.localStorage.setItem('User', JSON.stringify(data.user));
             router.push('/');
             setLoading(false);
         }

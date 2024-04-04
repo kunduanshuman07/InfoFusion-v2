@@ -2,6 +2,7 @@ import express from "express";
 import authRoutes from "../routes/auth.route.js";
 import quizRoutes from "../routes/quiz.route.js";
 import dashboardRoutes from "../routes/dashboard.route.js";
+import leaderboardRoutes from "../routes/leaderboard.route.js";
 
 const router = express.Router();
 
@@ -17,6 +18,10 @@ const defaultRoutes = [
     {
         path: '/dashboard',
         route: dashboardRoutes
+    },
+    {
+        path: '/leaderboard',
+        route: leaderboardRoutes
     }
 ]
 

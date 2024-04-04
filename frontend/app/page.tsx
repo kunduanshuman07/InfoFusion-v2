@@ -4,6 +4,7 @@ import Quiz from "./quiz/page";
 const Page = () => {
   return (
     <div>
+      <UserLayout/>
       <Quiz/>
     </div>
   )

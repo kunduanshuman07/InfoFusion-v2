@@ -13,6 +13,7 @@ const DrawerComponent = () => {
     
     const handleLogout = () => {
         router.push('/login');
+        window.localStorage.removeItem("User");
     }
     return (
         <div className="drawer">
@@ -26,12 +27,12 @@ const DrawerComponent = () => {
                 <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-50 min-h-full bg-base-200 text-base-content">
                     <li className=" text-md mt-3"><a href='/'><MdQuiz className="mr-3"/> Quiz</a></li>
-                    <li className=" text-md mt-3"><a href='/'><FaCampground className="mr-3"/> Debate</a></li>
                     <li className=" text-md mt-3"><a href='/dashboard'><MdDashboard className="mr-3"/> Dashboard</a></li>
+                    <li className=" text-md mt-3"><a href='/'><FaCampground className="mr-3"/> Debate</a></li>
                     <li className=" text-md mt-4"><a href='/'><FaMoneyBillAlt className="mr-3"/> Crowdfunding</a></li>
                     <li className=" text-md mt-4"><a href='/'><SiQuantconnect className="mr-3"/> Connect</a></li>
                     <li className=" text-md mt-auto"><a href='/'><MdSupportAgent className="mr-3"/> Support</a></li>
-                    <li className=" text-md mt-4"><a href='/login'><IoLogOut className="mr-3"/> Logout</a></li>
+                    <li className=" text-md mt-4" onClick={handleLogout}><a><IoLogOut className="mr-3"/> Logout</a></li>
                 </ul>
             </div>
         </div>

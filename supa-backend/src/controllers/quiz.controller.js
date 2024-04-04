@@ -60,8 +60,24 @@ export const fetchPastQuizzes = async (req, res) => {
 
 }
 
+export const fetchQuizEnability = async (req, res) => {
+    const { userId, quizId } = req.body;
+    try {
+        const { data, error } = await supabase.from('Quiz_Scores').select('*').match({ quiz_id: quizId, user_id: userId });
+        if (error) {
+            return res.status(200).send({ message: 'Error fetching the latest quiz enability.' });
+        }
+        if (data.length === 0) {
+            return res.status(200).send({ value: true });
+        }
+        return res.status(200).send({ value: false });
+    } catch (error) {
+        res.status(500).send(`Error: ${error.message}`);
+    }
+}
+
 export const submitQuiz = async (req, res) => {
-    const { userId, quizId, quizData, selectedOptions } = req.body;
+    const { userId, quizId, quizData, selectedOptions, quizTitle, quizIndex, username } = req.body;
     const weightage = {
         'Easy': 1,
         'Medium': 1.5,
@@ -72,54 +88,72 @@ export const submitQuiz = async (req, res) => {
     let weighted_score = 0;
     let correct_answers = [];
     let incorrect_answers = [];
-    let unattempted_questions = [];
+    let easycount = 0;
+    let medcount=0;
+    let hardcount=0;
+    let misccount=0;
     for (let i = 0; i < 10; i++) {
-        if(quizData[i].correct_answer===selectedOptions[i]){
-            score=score+1;
-            weighted_score=weighted_score+weightage[quizData[i].category];
-            correct_answers.push({
-                question: quizData[i].title,
-                correct_answer: quizData[i].correct_answer,
-                your_answer: selectedOptions[i],
-                category: quizData[i].category
-            })
+        const formattedObject = [quizData[i].title, quizData[i].correct_answer, selectedOptions[i], quizData[i].category]
+        if (quizData[i].correct_answer === selectedOptions[i]) {
+            if(quizData[i].category==='Easy'){
+                easycount=easycount+1;
+            }
+            else if(quizData[i].category==='Medium'){
+                medcount=medcount+1;
+            }
+            else if(quizData[i].category==='Hard'){
+                hardcount=hardcount+1;
+            }
+            else if(quizData[i].category==='Misc'){
+                misccount=misccount+1;
+            }
+            score = score + 1;
+            weighted_score = weighted_score + weightage[quizData[i].category];
+            correct_answers.push(formattedObject)
         }
-        else if(quizData[i].correctAnswer!==selectedOptions[i]){
-            weighted_score=weighted_score-weightage[quizData[i].category];
-            incorrect_answers.push({
-                question: quizData[i].title,
-                correct_answer: quizData[i].correct_answer,
-                your_answer: selectedOptions[i],
-                category: quizData[i].category
-            })
-        }
-        else {
-            unattempted_questions.push({
-                question: quizData[i].title,
-                correct_answer: quizData[i].correct_answer,
-                your_answer: selectedOptions[i],
-                category: quizData[i].category
-            })
+        else if (quizData[i].correctAnswer !== selectedOptions[i]) {
+            weighted_score = weighted_score - weightage[quizData[i].category];
+            incorrect_answers.push(formattedObject)
         }
     }
-    const total_score = score+weighted_score*4 +100;
+    const total_score = score + weighted_score * 4 + 100;
     try {
-        const {error} = await supabase.from('Quiz_Scores').insert([
+        const { error } = await supabase.from('Quiz_Scores').insert([
             {
                 user_id: userId,
                 quiz_id: quizId,
-                score,
-                weighted_score,
-                total_score,
-                incorrect_answers,
-                correct_answers,
-                unattempted_questions
+                score: score,
+                username: username,
+                weighted_score: weighted_score,
+                total_score: total_score,
+                incorrect_answers: incorrect_answers,
+                correct_answers: correct_answers,
+                quiz_title: quizTitle,
+                quiz_index: quizIndex
             }
         ])
         if (error) {
             return res.status(200).send({ message: 'Error submitting quiz' });
         }
-        return res.status(200).send({message: 'SuccessFull quiz submission'});
+        const { data } = await supabase.from('Leaderboard').select('*').match({ user_id: userId });
+        const user = data[0];
+        const newRating = user.quiz_count==0?(weighted_score*10): ((user.rating*user.quiz_count)+(weighted_score*10))/(user.quiz_count+1);
+        const new_high_score = user.highest_score<total_score?total_score: user.highest_score;
+        const updatedRatingGraph = [...user.rating_graph, newRating];
+        const leaderboardResp = await supabase.from('Leaderboard').update({
+            rating: Math.floor(newRating),
+            questions: user.questions+10,
+            correct_answers: user.correct_answers+correct_answers.length,
+            easy: user.easy+easycount,
+            med: user.med+medcount,
+            hard: user.hard+hardcount,
+            misc: user.misc+misccount,
+            quiz_count: user.quiz_count+1,
+            rating_graph: updatedRatingGraph,
+            highest_score: new_high_score,
+        }).match({ user_id: userId });
+        console.log(leaderboardResp.error);
+        return res.status(200).send({ message: 'SuccessFull quiz submission' });
     } catch (error) {
         res.status(500).send(`Error: ${error.message}`);
     }

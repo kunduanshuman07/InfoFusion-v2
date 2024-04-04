@@ -1,9 +1,13 @@
 import NavbarComponent from "../components/NavbarComponent"
 
-const UserLayout = () => {
+interface LayoutProps{
+  callFrom?: any;
+}
+
+const UserLayout:React.FC<LayoutProps> = ({callFrom}) => {
   return (
     <div>
-        <NavbarComponent/>
+        <NavbarComponent callFrom={callFrom}/>
     </div>
   )
 }

@@ -8,8 +8,11 @@ import { MdDashboard } from "react-icons/md";
 import PopupModal from "./PopupModal";
 import QuizPopUpContent from "./QuizPopUpContent";
 import { fetchCurrentQuiz } from "../server-actions/fetchCurrentQuiz";
+import { fetchQuizEnability } from "../server-actions/fetchQuizEnability";
 const QuizSelection = () => {
   const router = useRouter();
+  const userString = window.localStorage.getItem("User");
+  const user = userString ? JSON.parse(userString) : null;
   const [quizPopup, setQuizPopup] = useState<any>(false);
   const [quizData, setQuizData] = useState<any>();
   const [quizTitle, setQuizTitle] = useState<any>();
@@ -17,15 +20,20 @@ const QuizSelection = () => {
   const [quizDesc, setQuizDesc] = useState<any>();
   const [descLink, setQuizDescLink] = useState<any>();
   const [loading, setLoading] = useState<any>(true);
+  const [quizAccess, setQuizAccess] = useState<any>();
   useEffect(() => {
     const fetchQuizData = async () => {
-      const { status, data } = await fetchCurrentQuiz();
+      const { data } = await fetchCurrentQuiz();
+      const resp = await fetchQuizEnability({ userId: user.id, quizId: data.quizId });
       setQuizTitle(data.quizTitle);
       setQuizIndex(data.quizIndex);
       setQuizData(data.quizData);
       setQuizDesc(data.quizDesc);
       setQuizDescLink(data.descLink);
-      setLoading(false);
+      if (resp.status == 200) {
+        setQuizAccess(resp.data.value);
+        setLoading(false);
+      }
     }
     fetchQuizData();
   }, [])
@@ -59,10 +67,11 @@ const QuizSelection = () => {
             <button className="btn btn-xs ml-2 bg-[#475569] text-white font-bold">#Social Studies</button>
             <h1 className="italic text-error text-xs text-center ml-auto">Quiz ends in 12:00</h1>
           </div>
-          <button className="btn bg-[#0c4a6e] m-auto mt-2 mb-1 text-white hover:btn-neutral mt-4" onClick={handleQuizPopUp}><FaHourglassStart /> Start Quiz</button>
+          <button className="btn bg-[#0c4a6e] m-auto mt-2 mb-1 text-white hover:btn-neutral mt-4 btn-sm" onClick={handleQuizPopUp} disabled={!quizAccess}><FaHourglassStart /> Start Quiz</button>
+          {!quizAccess && <p className="text-xs text-center mt-1 text-error font-bold">{`You have attempted Today's Quiz`}</p>}
           <div className="flex flex-row">
-            <a className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-4"><SiPastebin /> Attempt past Quizzes</a>
-            <a className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-4" href="/dashboard"><MdDashboard /> Your Dashboard</a>
+            <a className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-2"><SiPastebin /> Attempt past Quizzes</a>
+            <a className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-2" href="/dashboard"><MdDashboard /> Your Dashboard</a>
           </div>
           {quizPopup && <PopupModal openModal={quizPopup} setOpenModal={setQuizPopup} actionTextOne={'Go for it !'} actionTextTwo={'Cancel'} actionFunc={handleStartQuiz} content={<QuizPopUpContent />} />}
         </>}
