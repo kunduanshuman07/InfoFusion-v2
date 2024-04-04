@@ -3,7 +3,7 @@ import { fetchDashboardData, fetchFullScorecard, fetchScorecards } from "../cont
 
 const router = express.Router();
 
-router.post('/fetch-user-dashboard', fetchDashboardData);
+router.post('/user-dashboard', fetchDashboardData);
 router.post('/scorecards', fetchScorecards);
 router.post('/scorecard', fetchFullScorecard);
 

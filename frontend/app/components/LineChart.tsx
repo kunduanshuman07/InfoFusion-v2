@@ -18,9 +18,19 @@ ChartJS.register(
   Tooltip
 );
 ChartJS.register(CategoryScale, /* ... */)
-const LineChart = () => {
+
+interface LineChartProps {
+  graph: any;
+}
+
+const LineChart: React.FC<LineChartProps> = ({ graph }) => {
+  const ratingLabel = [];
+  const n = graph.length; 
+  for (let i = 0; i < n; i++) {
+    ratingLabel.push("");
+  }
   const chartOptions = {
-    maintainAspectRatio: false, // Allow chart to be resized
+    maintainAspectRatio: false,
     responsive: true,
   };
   return (
@@ -28,28 +38,19 @@ const LineChart = () => {
       <Line
         className="bg-[#ffffff] shadow-md rounded-lg p-2"
         data={{
-          labels: [
-            "2023-01",
-            "2023-02",
-            "2023-03",
-            "2023-04",
-            "2023-05",
-            "2023-06",
-            "2023-07",
-          ],
+          labels: ratingLabel,
           datasets: [
             {
-              data: [100, 120, 115, 134, 168, 132, 200],
+              data: graph,
               backgroundColor: "#2dd4bf",
               showLine: true,
               stepped: false,
               borderJoinStyle: 'round',
               borderColor: "#2dd4bf",
               borderCapStyle: "round",
-              
             },
           ],
-          
+
         }}
         options={chartOptions}
       />

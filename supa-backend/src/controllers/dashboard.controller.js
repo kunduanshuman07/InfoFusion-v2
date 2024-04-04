@@ -3,9 +3,10 @@
 import { supabase } from '../config/db.config.js';
 
 export const fetchDashboardData = async (req, res) => {
+    const {userId} = req.body;
     try {
-        const {data, error} = await supabase.from('Quiz_Scores').select('*');
-        res.status(200).send(data);
+        const {data, error} = await supabase.from('Leaderboard').select('*').match({user_id: userId});
+        res.status(200).send({message: 'Successfully fetched Dashboard Data', data: data[0]});
     } catch (error) {
         res.status(500).send(`Error: ${error.mesage}`)
     }

@@ -5,30 +5,37 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const DoughnutChart = () => {
+interface DoughnutChartProps {
+    easy: any;
+    med: any;
+    hard: any;
+    misc: any;
+}
+
+const DoughnutChart:React.FC<DoughnutChartProps> = ({easy, med, hard, misc}) => {
 
     let data = [
         {
             label: "Easy",
-            value: 55,
+            value: easy,
             color: "#2dd4bf",
             cutout: "50%",
         },
         {
             label: "Medium",
-            value: 55,
+            value: med,
             color: "#0284c7",
             cutout: "50%",
         },
         {
             label: "Hard",
-            value: 15,
+            value: hard,
             color: "#f59e0b",
             cutout: "50%",
         },
         {
             label: "Misc",
-            value: 80,
+            value: misc,
             color: "#dc2626",
             cutout: "50%",
         },

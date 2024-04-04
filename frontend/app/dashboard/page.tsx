@@ -6,11 +6,22 @@ import StatButtons from '../components/StatButtons'
 import LineChart from '../components/LineChart'
 import DoughnutChart from '../components/DoughnutChart'
 import UserLayout from '../container/UserLayout'
+import { fetchDashboard } from '../server-actions/fetchDashboard'
 const Dashboard = () => {
     const [loading, setLoading] = useState<any>(true);
-    useEffect(()=>{
-        setLoading(false);
-    },[])
+    const [dashboard, setDashboard] = useState<any>();
+    useEffect(() => {
+        const userString = window.localStorage.getItem("User");
+        const user = userString ? JSON.parse(userString) : null;
+        const fetchDashboardData = async () => {
+            const { status, data } = await fetchDashboard({ userId: user.id });
+            if (status == 200) {
+                setDashboard(data.data);
+                setLoading(false);
+            }
+        }
+        fetchDashboardData();
+    }, [])
     return (
         <div className='flex flex-col w-full'>
             <UserLayout />
@@ -28,14 +39,14 @@ const Dashboard = () => {
                         :
                         <>
                             <div className='flex flex-row w-full'>
-                                <StatComponent color='red' contentone={'April 4, 2024'} contenttwo={31} contentthree={'Quiz Attempts'} />
+                                <StatComponent color='red' contentone={'April 4, 2024'} contenttwo={dashboard.quiz_count} contentthree={'Quiz Attempts'} />
                                 <StatComponent color='blue' contentone={'Rank'} contenttwo={1490} contentthree={'Out of 12890 participants'} />
-                                <StatComponent color='yellow' contentone={'Rating'} contenttwo={1889} contentthree={'Div 2'} />
+                                <StatComponent color='yellow' contentone={'Rating'} contenttwo={dashboard.rating} contentthree={'Div 2'} />
                             </div>
-                            <StatButtons />
+                            <StatButtons contentOne={dashboard.questions} contentTwo={dashboard.correct_answers} contentThree={dashboard.highest_score}/>
                             <div className='flex flex-row mt-5 p-4'>
-                                <LineChart />
-                                <DoughnutChart />
+                                <LineChart graph={dashboard.rating_graph}/>
+                                <DoughnutChart easy={dashboard.easy} med={dashboard.med} hard={dashboard.hard} misc={dashboard.misc}/>
                             </div>
                         </>
                     }
