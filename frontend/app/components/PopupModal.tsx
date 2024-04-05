@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 interface PopupModalProps {
     openModal: any;
     setOpenModal: (openModal: any) => void;
@@ -11,14 +11,10 @@ interface PopupModalProps {
 }
 
 const PopupModal: React.FC<PopupModalProps> = ({ openModal, setOpenModal, actionTextOne, actionTextTwo, actionFunc, content }) => {
-    const [loading, setLoading] = useState<any>(true);
-    useEffect(()=>{
-        setLoading(false);
-    },[])
+    const [loading, setLoading] = useState<any>(false);
     const handleAction = () => {
         setLoading(true);
         actionFunc();
-        setLoading(false);
     }
     const handleClose = () => {
         setLoading(true);
@@ -32,7 +28,7 @@ const PopupModal: React.FC<PopupModalProps> = ({ openModal, setOpenModal, action
                     {content}
                 </div>
                 <div className="modal-action flex flex-row">
-                    <button className="btn mr-auto hover:btn-neutral text-white bg-[#0c4a6e]" onClick={handleAction}>{actionTextOne} {loading && <span className="loading loading-dots loading-md"></span>}</button>
+                    <button className="btn mr-auto hover:btn-neutral text-white bg-[#0c4a6e]" onClick={handleAction}>{actionTextOne} {loading && <span className="loading loading-dots loading-sm"></span>}</button>
                     <button className="btn ml-auto bg-[#cbd5e1] text-neutral font-bold" onClick={handleClose}>{actionTextTwo}</button>
                 </div>
             </div>

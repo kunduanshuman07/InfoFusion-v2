@@ -1,11 +1,10 @@
 'use client'
 import { MdQuiz } from "react-icons/md";
-import { FaCampground } from "react-icons/fa";
-import { FaMoneyBillAlt } from "react-icons/fa";
-import { SiQuantconnect } from "react-icons/si";
 import { IoLogOut } from "react-icons/io5";
 import { MdSupportAgent } from "react-icons/md";
 import { MdDashboard } from "react-icons/md";
+import { MdLeaderboard } from "react-icons/md";
+import { FaSheetPlastic } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 
 const DrawerComponent = () => {
@@ -28,9 +27,8 @@ const DrawerComponent = () => {
                 <ul className="menu p-4 w-50 min-h-full bg-base-200 text-base-content">
                     <li className=" text-md mt-3"><a href='/'><MdQuiz className="mr-3"/> Quiz</a></li>
                     <li className=" text-md mt-3"><a href='/dashboard'><MdDashboard className="mr-3"/> Dashboard</a></li>
-                    <li className=" text-md mt-3"><a href='/'><FaCampground className="mr-3"/> Debate</a></li>
-                    <li className=" text-md mt-4"><a href='/'><FaMoneyBillAlt className="mr-3"/> Crowdfunding</a></li>
-                    <li className=" text-md mt-4"><a href='/'><SiQuantconnect className="mr-3"/> Connect</a></li>
+                    <li className=" text-md mt-3"><a href='/leaderboard'><MdLeaderboard className="mr-3"/> Leaderboard</a></li>
+                    <li className=" text-md mt-3"><a href='/dashboard/scorecards'><FaSheetPlastic className="mr-3"/> Scorecards</a></li>
                     <li className=" text-md mt-auto"><a href='/'><MdSupportAgent className="mr-3"/> Support</a></li>
                     <li className=" text-md mt-4" onClick={handleLogout}><a><IoLogOut className="mr-3"/> Logout</a></li>
                 </ul>
