@@ -16,7 +16,6 @@ const Login = () => {
     const handleLogin = async () => {
         setLoading(true);
         const {status, data} = await loginUser({username, password});
-        console.log(status, data);
         if(status==200){
             window.localStorage.setItem('User', JSON.stringify(data.user));
             router.push('/');

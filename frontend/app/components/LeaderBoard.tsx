@@ -6,10 +6,19 @@ import { GiPodiumThird } from "react-icons/gi";
 import { GiDiamondTrophy } from "react-icons/gi";
 import { MdLeaderboard } from "react-icons/md";
 import { useEffect } from "react";
+import { fetchLeaderboard } from "../server-actions/fetchLeaderboard";
 const LeaderBoard = () => {
   const [loading, setLoading] = useState<any>(true);
+  const [leaderboard, setLeaderboard] = useState<any>();
   useEffect(() => {
-    setLoading(false);
+    const fetchLeaderBoardData = async () => {
+      const {status, data} = await fetchLeaderboard();
+      if(status==200){
+        setLeaderboard(data.data);
+        setLoading(false);
+      }
+    }
+    fetchLeaderBoardData();
   }, [])
   return (
     <div className="overflow-x-auto p-2 rounded-lg shadow-md flex flex-col">
@@ -25,27 +34,27 @@ const LeaderBoard = () => {
           <div className="grid grid-cols-1 mt-5 ">
             <div className="p-2 bg-[#0c4a6e] text-white ml-auto mr-auto mt-2 p-5 shadow-md rounded-lg">
               <h1 className="font-bold border-b border-gray-200 text-xl text-[#facc15]"><GiPodiumWinner className="ml-auto mr-auto" /></h1>
-              <h1 className="font-bold mt-2 text-sm text-center">kundu_anshuman</h1>
-              <h1 className="font-bold text-sm text-center">Score: 90/100</h1>
-              <h1 className="font-bold text-sm text-center">Time: 4.55 min</h1>
+              <h1 className="font-bold mt-2 text-sm text-center">{leaderboard[0].username}</h1>
+              <h1 className="font-bold text-xs text-center">Rating: {leaderboard[0].rating}</h1>
+              <h1 className="font-bold text-xs text-center">Highest Score: {leaderboard[0].highest_score}</h1>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-5 mt-10">
             <div className="p-2 bg-[#0c4a6e] text-white ml-auto mr-auto mt-2 p-5 shadow-md rounded-lg">
               <h1 className="font-bold border-b border-gray-200 text-xl text-[#f87171]"><GiPodiumSecond className="ml-auto mr-auto" /></h1>
-              <h1 className="font-bold mt-2 text-sm text-center">kundu_anshuman</h1>
-              <h1 className="font-bold text-sm text-center">Score: 90/100</h1>
-              <h1 className="font-bold text-sm text-center">Time: 4.55 min</h1>
+              <h1 className="font-bold mt-2 text-sm text-center">{leaderboard[1].username}</h1>
+              <h1 className="font-bold text-xs text-center">Rating: {leaderboard[1].rating}</h1>
+              <h1 className="font-bold text-xs text-center">Highest Score: {leaderboard[1].highest_score}</h1>
             </div>
             <div className="p-2 bg-[#0c4a6e] text-white ml-auto mr-auto mt-2 p-5 shadow-md rounded-lg">
               <h1 className="font-bold border-b border-gray-200 text-xl text-[#d4d4d4]"><GiPodiumThird className="ml-auto mr-auto" /></h1>
-              <h1 className="font-bold mt-2 text-sm text-center">kundu_anshuman</h1>
-              <h1 className="font-bold text-sm text-center">Score: 90/100</h1>
-              <h1 className="font-bold text-sm text-center">Time: 4.55 min</h1>
+              <h1 className="font-bold mt-2 text-sm text-center">{leaderboard[2]?.username}</h1>
+              <h1 className="font-bold text-xs text-center">Rating: {leaderboard[2]?.rating}</h1>
+              <h1 className="font-bold text-xs text-center">Highest Score: {leaderboard[2]?.highest_score}</h1>
             </div>
           </div>
           <div className="flex flex-row">
-            <a className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-7"><MdLeaderboard /> View complete Leaderboard</a>
+            <a className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-7" href="/leaderboard"><MdLeaderboard /> View complete Leaderboard</a>
           </div>
         </>
       }

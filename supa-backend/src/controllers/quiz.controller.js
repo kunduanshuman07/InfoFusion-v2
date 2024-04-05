@@ -4,7 +4,7 @@ import { supabase } from '../config/db.config.js';
 
 export const addQuizByAdmin = async (req, res) => {
     const { quizTitle, quizData } = req.body;
-    const quiz_index = 1;
+    const quiz_index = 2;
     try {
         const { error } = await supabase.from('Quiz').insert([
             {

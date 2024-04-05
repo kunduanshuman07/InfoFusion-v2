@@ -48,9 +48,12 @@ const QuizSelection = () => {
       {loading ?
         <div className="flex flex-col gap-4 w-full">
           <div className="skeleton h-32 w-full"></div>
-          <div className="skeleton h-4 w-28"></div>
+          <div className="skeleton h-16 w-28"></div>
+          <div className="skeleton h-16 w-full"></div>
+          <div className="skeleton h-8 w-full"></div>
+          <div className="skeleton h-8 w-full"></div>
           <div className="skeleton h-4 w-full"></div>
-          <div className="skeleton h-4 w-full"></div>
+          <div className="skeleton h-2 w-full"></div>
         </div>
         :
         <>
@@ -58,7 +61,7 @@ const QuizSelection = () => {
           <h1 className="text-xs mt-2 text-gray-400 font-bold text-right"><span className="">Date: 19.02.2024</span></h1>
           <h1 className="text-xs mt-2 text-gray-400 font-bold text-right"><span className="">Quiz #{quizIndex}</span></h1>
           <h1 className="text-md mt-5">Description</h1>
-          <p className="text-xs bg-gray-100 rounded-lg p-2 mt-2">{quizDesc}<a className="text-xs text-[#0ea5e9] ml-1" href={descLink}>Read more</a></p>
+          <p className="text-xs bg-gray-100 rounded-lg p-2 mt-2">{quizDesc}<a className="text-xs text-[#0ea5e9] ml-1" href={descLink} target="_blank">Read more</a></p>
           <h1 className="text-xs mt-2 text-gray-400 font-bold"><span className="">Questions: 10</span><span className="ml-3">Maxmimum Marks: 100</span><span className="ml-3">Time: 5 minutes</span></h1>
           <h1 className="mt-5">Tags</h1>
           <div className="flex flex-row mt-2 mb-3">

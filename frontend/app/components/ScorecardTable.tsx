@@ -42,7 +42,7 @@ const ScorecardTable = () => {
                         <button className="btn bg-[#0284c7] text-white font-bold hover:bg-[#0e7490] ml-5 mt-5">Date Filter <TbFilterSearch /></button>
                     </div>
                     <div className="mt-5">
-                        <div className="grid grid-cols-4">
+                        <div className="grid grid-cols-3">
                             {scorecardData?.map((scorecards: any, index: any) => (
                                 <div className="shadow-md p-4 flex flex-col rounded-lg m-2" key={index}>
                                     <h1 className="text-sm font-bold text-[#075985] text-center">Quiz #{scorecards.quiz_index} : {scorecards.quiz_title}</h1>
