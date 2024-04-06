@@ -14,7 +14,7 @@ const NavbarComponent: React.FC<NavbarProps> = ({ callFrom }) => {
                 {callFrom === 'Scorecards' ? <></> : <DrawerComponent />}
             </div>
             <div className="navbar-center">
-                <a className="text-2xl font-bold text-[#1e3a8a] flex flex-row" ><FaArtstation className='m-auto mr-2' /> InfoFusion</a>
+                <a className="text-2xl font-bold text-[#0891b2] flex flex-row cursor-pointer" href="/"><FaArtstation className='m-auto mr-2' /> InfoFusion</a>
             </div>
             <div className="navbar-end">
                 <NextBreadcrumb

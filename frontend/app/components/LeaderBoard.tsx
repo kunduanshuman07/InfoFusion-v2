@@ -30,9 +30,9 @@ const LeaderBoard = () => {
       </div>
         :
         <>
-          <h1 className="text-center font-bold text-[#1e3a8a] m-auto pl-10 pr-10 rounded-lg text-xl flex flex-row"><GiDiamondTrophy className="m-auto mr-2" /> Leaderboard</h1>
+          <h1 className="text-center font-bold text-[#0891b2] m-auto pl-10 pr-10 rounded-lg text-xl flex flex-row"><GiDiamondTrophy className="m-auto mr-2" /> Leaderboard</h1>
           <div className="grid grid-cols-1 mt-5 ">
-            <div className="p-2 bg-[#0c4a6e] text-white ml-auto mr-auto mt-2 p-5 shadow-md rounded-lg">
+            <div className="p-2 bg-[#0891b2] text-white ml-auto mr-auto mt-2 p-5 shadow-md rounded-lg">
               <h1 className="font-bold border-b border-gray-200 text-xl text-[#facc15]"><GiPodiumWinner className="ml-auto mr-auto" /></h1>
               <h1 className="font-bold mt-2 text-sm text-center">{leaderboard[0].username}</h1>
               <h1 className="font-bold text-xs text-center">Rating: {leaderboard[0].rating}</h1>
@@ -40,13 +40,13 @@ const LeaderBoard = () => {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-5 mt-10">
-            <div className="p-2 bg-[#0c4a6e] text-white ml-auto mr-auto mt-2 p-5 shadow-md rounded-lg">
+            <div className="p-2 bg-[#0891b2] text-white ml-auto mr-auto mt-2 p-5 shadow-md rounded-lg">
               <h1 className="font-bold border-b border-gray-200 text-xl text-[#f87171]"><GiPodiumSecond className="ml-auto mr-auto" /></h1>
               <h1 className="font-bold mt-2 text-sm text-center">{leaderboard[1].username}</h1>
               <h1 className="font-bold text-xs text-center">Rating: {leaderboard[1].rating}</h1>
               <h1 className="font-bold text-xs text-center">Highest Score: {leaderboard[1].highest_score}</h1>
             </div>
-            <div className="p-2 bg-[#0c4a6e] text-white ml-auto mr-auto mt-2 p-5 shadow-md rounded-lg">
+            <div className="p-2 bg-[#0891b2] text-white ml-auto mr-auto mt-2 p-5 shadow-md rounded-lg">
               <h1 className="font-bold border-b border-gray-200 text-xl text-[#d4d4d4]"><GiPodiumThird className="ml-auto mr-auto" /></h1>
               <h1 className="font-bold mt-2 text-sm text-center">{leaderboard[2]?.username}</h1>
               <h1 className="font-bold text-xs text-center">Rating: {leaderboard[2]?.rating}</h1>
@@ -54,7 +54,7 @@ const LeaderBoard = () => {
             </div>
           </div>
           <div className="flex flex-row">
-            <a className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-7" href="/leaderboard"><MdLeaderboard /> View complete Leaderboard</a>
+            <a className="btn text-xs m-auto btn-xs text-[#0891b2] bg-[#ecfeff] pl-10 pr-10 hover:bg-[#e0f2fe] mt-7" href="/leaderboard"><MdLeaderboard /> View complete Leaderboard</a>
           </div>
         </>
       }

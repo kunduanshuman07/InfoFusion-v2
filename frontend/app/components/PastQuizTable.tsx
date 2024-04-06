@@ -2,7 +2,6 @@
 import { TbFilterSearch } from "react-icons/tb";
 import { FaEye } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { fetchScorecards } from "../server-actions/fetchScorecards";
 import { formatDateAndTime } from "../utils/timeFormat";
 import { fetchPastQuiz } from "../server-actions/fetchPastQuiz";
 import PastQuizModal from "./PastQuizAccess";

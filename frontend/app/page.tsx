@@ -1,11 +1,10 @@
 'use client'
 import UserLayout from "./container/UserLayout";
-import Quiz from "./quiz/page";
+import Home from "./home/page";
 const Page = () => {
   return (
     <div>
-      <UserLayout/>
-      <Quiz/>
+      <Home/>
     </div>
   )
 }

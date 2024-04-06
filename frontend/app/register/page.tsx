@@ -20,35 +20,34 @@ const Register = () => {
         const {status, data} = await registerUser({firstname, lastname, email, username, password});
         if(status===200){   
             window.localStorage.setItem('User', JSON.stringify(data.user));
-            router.push('/');
-            setLoading(false);
+            router.push('/quiz');
         }
     }
     return (
         <div className='grid grid-cols-1'>
-            <div className="shadow-md flex flex-col w-1/3 mx-auto rounded-lg bg-[#0c4a6e] mt-10 px-10 py-20 pt-5 pb-5">
+            <div className="shadow-md flex flex-col w-1/3 mx-auto rounded-lg bg-[#0e7490] mt-10 px-10 py-20 pt-5 pb-5">
                 <h1 className="text-2xl font-bold text-white flex flex-row m-auto" ><FaArtstation className='my-auto mr-2' /> InfoFusion</h1>
-                <label className="input input-sm input-bordered flex items-center gap-2 mt-10">
+                <label className="input input input-bordered flex items-center gap-2 mt-5">
                     <Image src={NameSvg} alt="FirstName" />
-                    <input type="text" className="grow input-sm" placeholder="First Name" value={firstname} onChange={(e)=>setFirstName(e.target.value)}/>
+                    <input type="text" className="grow input" placeholder="First Name" value={firstname} onChange={(e)=>setFirstName(e.target.value)}/>
                 </label>
-                <label className="input input-sm input-bordered flex items-center gap-2 mt-5">
+                <label className="input input input-bordered flex items-center gap-2 mt-5">
                     <Image src={NameSvg} alt="LastName" />
-                    <input type="text" className="grow input-sm" placeholder="Last Name" value={lastname} onChange={(e)=>setLastname(e.target.value)}/>
+                    <input type="text" className="grow input" placeholder="Last Name" value={lastname} onChange={(e)=>setLastname(e.target.value)}/>
                 </label>
-                <label className="input input-sm input-bordered flex items-center gap-2 mt-5">
+                <label className="input input input-bordered flex items-center gap-2 mt-5">
                     <Image src={EmailSvg} alt="Email" />
-                    <input type="text" className="grow input-sm" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                    <input type="text" className="grow input" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                 </label>
-                <label className="input input-sm input-bordered flex items-center gap-2 mt-5">
+                <label className="input input input-bordered flex items-center gap-2 mt-5">
                     <Image src={NameSvg} alt="Username" />
-                    <input type="text" className="grow input-sm" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
+                    <input type="text" className="grow input" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
                 </label>
-                <label className="input input-sm input-bordered flex items-center gap-2 mt-5">
+                <label className="input input input-bordered flex items-center gap-2 mt-5">
                     <Image src={PasswordSvg} alt="Password" />
-                    <input type="text" className="grow input-sm" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                    <input type="text" className="grow input" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                 </label>
-                <button className="btn btn-white mx-auto pl-10 pr-10 mt-10" onClick={handleRegister}>Register {loading && <span className="loading loading-dots loading-md"></span>}</button>
+                <button className="btn btn-white mx-auto pl-10 pr-10 mt-5" onClick={handleRegister}>Register {loading && <span className="loading loading-dots loading-md"></span>}</button>
                 <div className="flex flex-row">
                     <a className="text-xs text-white mt-2 mx-auto cursor-pointer" href="/login">Existing User? <span className="underline font-bold">Login</span></a>
                 </div>
