@@ -57,7 +57,32 @@ export const fetchCurrentQuiz = async (req, res) => {
 }
 
 export const fetchPastQuizzes = async (req, res) => {
+    try {
+        const { data, error } = await supabase.from('Quiz').select('*');
+        if (error) {
+            return res.status(200).send({ message: "Error fetching past quizzes!" });
+        }
+        return res.status(200).send({ message: "Successfully fetched Past Quizzes!", data: data });
+    } catch (error) {
+        res.status(500).send(`Error: ${error.message}`);
+    }
+}
 
+export const fetchQuizById = async (req, res) => {
+    const {quizId} = req.body;
+    try {
+        const { data, error } = await supabase.from('Quiz').select('*').match({id: quizId}).order('created_at', {ascending: true});
+        if (error) {
+            return res.status(200).send({ message: 'Error fetching the latest quiz data.' });
+        }
+        const questionResp = await supabase.from('Questions').select('*').match({ quiz_id: data[0].id }).order('category', { ascending: true });
+        if (questionResp.error) {
+            return res.status(200).send({ message: 'Error fetching current quiz questions.' });
+        }
+        return res.status(200).send({ message: 'Current quiz successfully fetched', quizId: data[0].id, quizTitle: data[0].title, quizIndex: data[0].quiz_index, quizDesc: data[0].quiz_description, descLink: data[0].desc_link, quizData: questionResp.data, });
+    } catch (error) {
+        res.status(500).send(`Error: ${error.message}`);
+    }
 }
 
 export const fetchQuizEnability = async (req, res) => {
@@ -89,23 +114,23 @@ export const submitQuiz = async (req, res) => {
     let correct_answers = [];
     let incorrect_answers = [];
     let easycount = 0;
-    let medcount=0;
-    let hardcount=0;
-    let misccount=0;
+    let medcount = 0;
+    let hardcount = 0;
+    let misccount = 0;
     for (let i = 0; i < 10; i++) {
         const formattedObject = [quizData[i].title, quizData[i].correct_answer, selectedOptions[i], quizData[i].category]
         if (quizData[i].correct_answer === selectedOptions[i]) {
-            if(quizData[i].category==='Easy'){
-                easycount=easycount+1;
+            if (quizData[i].category === 'Easy') {
+                easycount = easycount + 1;
             }
-            else if(quizData[i].category==='Medium'){
-                medcount=medcount+1;
+            else if (quizData[i].category === 'Medium') {
+                medcount = medcount + 1;
             }
-            else if(quizData[i].category==='Hard'){
-                hardcount=hardcount+1;
+            else if (quizData[i].category === 'Hard') {
+                hardcount = hardcount + 1;
             }
-            else if(quizData[i].category==='Misc'){
-                misccount=misccount+1;
+            else if (quizData[i].category === 'Misc') {
+                misccount = misccount + 1;
             }
             score = score + 1;
             weighted_score = weighted_score + weightage[quizData[i].category];
@@ -137,18 +162,18 @@ export const submitQuiz = async (req, res) => {
         }
         const { data } = await supabase.from('Leaderboard').select('*').match({ user_id: userId });
         const user = data[0];
-        const newRating = user.quiz_count==0?(weighted_score*10): ((user.rating*user.quiz_count)+(weighted_score*10))/(user.quiz_count+1);
-        const new_high_score = user.highest_score<total_score?total_score: user.highest_score;
+        const newRating = user.quiz_count == 0 ? (weighted_score * 10) : ((user.rating * user.quiz_count) + (weighted_score * 10)) / (user.quiz_count + 1);
+        const new_high_score = user.highest_score < total_score ? total_score : user.highest_score;
         const updatedRatingGraph = [...user.rating_graph, newRating];
         const leaderboardResp = await supabase.from('Leaderboard').update({
             rating: Math.floor(newRating),
-            questions: user.questions+10,
-            correct_answers: user.correct_answers+correct_answers.length,
-            easy: user.easy+easycount,
-            med: user.med+medcount,
-            hard: user.hard+hardcount,
-            misc: user.misc+misccount,
-            quiz_count: user.quiz_count+1,
+            questions: user.questions + 10,
+            correct_answers: user.correct_answers + correct_answers.length,
+            easy: user.easy + easycount,
+            med: user.med + medcount,
+            hard: user.hard + hardcount,
+            misc: user.misc + misccount,
+            quiz_count: user.quiz_count + 1,
             rating_graph: updatedRatingGraph,
             highest_score: new_high_score,
         }).match({ user_id: userId });

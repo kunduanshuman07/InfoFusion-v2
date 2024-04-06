@@ -73,7 +73,7 @@ const QuizSelection = () => {
           <button className="btn bg-[#0c4a6e] m-auto mt-2 mb-1 text-white hover:btn-neutral mt-4 btn-sm" onClick={handleQuizPopUp} disabled={!quizAccess}><FaHourglassStart /> Start Quiz</button>
           {!quizAccess && <p className="text-xs text-center mt-1 text-error font-bold">{`You have attempted Today's Quiz`}</p>}
           <div className="flex flex-row">
-            <a className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-2"><SiPastebin /> Attempt past Quizzes</a>
+            <a className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-2" href="/pastquizzes"><SiPastebin /> Attempt past Quizzes</a>
             <a className="btn text-xs m-auto btn-xs text-[#0ea5e9] bg-[#e0f2fe] pl-10 pr-10 hover:bg-[#e0f2fe] mt-2" href="/dashboard"><MdDashboard /> Your Dashboard</a>
           </div>
           {quizPopup && <PopupModal openModal={quizPopup} setOpenModal={setQuizPopup} actionTextOne={'Go for it !'} actionTextTwo={'Cancel'} actionFunc={handleStartQuiz} content={<QuizPopUpContent />} />}
