@@ -1,3 +1,5 @@
+'use client'
+
 import { MdDoNotDisturbOnTotalSilence } from "react-icons/md";
 import { FaMedium } from "react-icons/fa6";
 import { FaHardHat } from "react-icons/fa";

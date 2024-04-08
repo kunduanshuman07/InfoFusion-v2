@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import UserLayout from '../../container/UserLayout'
 import ScorecardTable from '../../components/ScorecardTable'

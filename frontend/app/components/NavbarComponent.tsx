@@ -1,3 +1,5 @@
+'use client'
+
 import { FaArtstation } from "react-icons/fa";
 import DrawerComponent from "./DrawerComponent"
 import { MdKeyboardArrowRight } from "react-icons/md";

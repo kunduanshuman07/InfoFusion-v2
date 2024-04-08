@@ -1,3 +1,5 @@
+'use client'
+
 import LeaderBoard from "../components/LeaderBoard"
 import QuizSelection from "../components/QuizSelection"
 import UserLayout from "../container/UserLayout";

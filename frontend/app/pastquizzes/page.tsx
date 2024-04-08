@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+
 import UserLayout from '../container/UserLayout'
 import PastQuizTable from '../components/PastQuizTable'
 

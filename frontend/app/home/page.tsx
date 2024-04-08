@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect } from 'react'
 import HomeNavbar from '../components/HomeNavbar'
 import Image from 'next/image'

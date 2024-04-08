@@ -1,4 +1,7 @@
+'use client'
+
 import NavbarComponent from "../components/NavbarComponent"
+
 
 interface LayoutProps{
   callFrom?: any;
