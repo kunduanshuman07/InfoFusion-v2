@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect } from "react";
 import { FaArtstation } from "react-icons/fa";
 import { IoLogIn } from "react-icons/io5";
