@@ -1,7 +1,6 @@
 'use client'
 import PopupModal from "@/app/components/PopupModal";
 import MyTimer from "@/app/components/QuizTimer";
-import { useUser } from "@/app/context/UserContext";
 import { fetchCurrentQuiz } from "@/app/server-actions/fetchCurrentQuiz";
 import { submitQuiz } from "@/app/server-actions/submitQuiz";
 import { useRouter } from "next/navigation";
@@ -12,8 +11,8 @@ import { RiTimerFlashFill } from "react-icons/ri";
 
 const QuizStart = () => {
   const router = useRouter();
-  const {user} = useUser();
   const seconds = 600;
+  const [user, setUser] = useState<any>();
   const timeStamp = new Date(Date.now() + seconds * 1000);
   const [popupModal, setPopupModal] = useState<any>(false);
   const [loading, setLoading] = useState<any>(true);
@@ -25,19 +24,22 @@ const QuizStart = () => {
   const [selectedOptions, setSelectedOptions] = useState<any>(Array.from({ length: 10 }, () => null));
   useEffect(() => {
     const fetchQuizData = async () => {
-      const { data } = await fetchCurrentQuiz();
-      setQuizId(data.quizId);
-      setQuizData(data.quizData);
-      setQuizIndex(data.quizIndex);
-      setQuizTitle(data.quizTitle);
-      setLoading(false);
+      if (typeof window !== 'undefined') {
+        const userString = window !== undefined && window.localStorage.getItem("User");
+        const user = userString ? JSON.parse(userString) : null;
+        const { data } = await fetchCurrentQuiz();
+        setQuizId(data.quizId);
+        setQuizData(data.quizData);
+        setQuizIndex(data.quizIndex);
+        setQuizTitle(data.quizTitle);
+        setLoading(false);
+      }
+      else {
+        router.push('/login');
+      }
+
     }
-    if(user!=null){
-      fetchQuizData();
-    }
-    else{
-      router.push('/login');
-    }
+    fetchQuizData();
   }, [])
 
   const handleTimerEnding = () => {
