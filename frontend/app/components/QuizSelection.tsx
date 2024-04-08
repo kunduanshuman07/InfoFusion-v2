@@ -11,7 +11,7 @@ import { fetchCurrentQuiz } from "../server-actions/fetchCurrentQuiz";
 import { fetchQuizEnability } from "../server-actions/fetchQuizEnability";
 const QuizSelection = () => {
   const router = useRouter();
-  const userString = window.localStorage.getItem("User");
+  const userString = localStorage.getItem("User");
   const user = userString ? JSON.parse(userString) : null;
   const [quizPopup, setQuizPopup] = useState<any>(false);
   const [quizData, setQuizData] = useState<any>();

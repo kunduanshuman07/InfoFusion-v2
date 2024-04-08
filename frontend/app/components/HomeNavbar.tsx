@@ -1,19 +1,29 @@
+import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { FaArtstation } from "react-icons/fa";
 import { IoLogIn } from "react-icons/io5";
 import { SiGnuprivacyguard } from "react-icons/si";
+import { fetchUser } from "../server-actions/fetchUser";
+import { useRouter } from "next/navigation";
 const HomeNavbar = () => {
     const [loggedin, setLoggedin] = useState<any>(false);
     const [loading, setLoading] = useState<any>(true);
+    const { data } = useSession();
     const [user, setUser] = useState<any>();
+    const router = useRouter();
     useEffect(() => {
-        const userString = window.localStorage.getItem("User");
-        const user = userString ? JSON.parse(userString) : null;
-        if (user != null) {
-            setLoggedin(true);
-            setUser(user);
+        const fetchUserData = async () => {
+            const userResponse = await fetchUser({ userId: data?.user?.email });
+            if (userResponse.status == 200) {
+                setUser(userResponse.data);
+                setLoggedin(true);
+                setLoading(false);
+            }
+            else {
+                router.push('/login');
+            }
         }
-        setLoading(false);
+        fetchUserData();
     }, [])
     return (
         <div className="navbar bg-base-100" style={{ maxHeight: "10px" }}>

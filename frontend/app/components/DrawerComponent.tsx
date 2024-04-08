@@ -12,7 +12,7 @@ const DrawerComponent = () => {
     
     const handleLogout = () => {
         router.push('/login');
-        window.localStorage.removeItem("User");
+        localStorage.removeItem("User");
     }
     return (
         <div className="drawer">

@@ -19,7 +19,6 @@ const LeaderboardPage = () => {
         }
         fetchLeaderBoardData();
     }, [])
-    console.log(leaderboard);
     return (
         <div>
             <UserLayout />

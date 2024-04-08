@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { registerUser } from "../server-actions/registerUser";
 import { useRouter } from "next/navigation";
+import { useUser } from "../context/UserContext";
 const Register = () => {
     const router = useRouter();
     const [loading, setLoading] = useState<any>(false);
@@ -15,11 +16,12 @@ const Register = () => {
     const [email, setEmail] = useState<any>();
     const [username, setUsername] = useState<any>();
     const [password, setPassword] = useState<any>();
+    const {setUser} = useUser();
     const handleRegister = async() => {
         setLoading(true);
         const {status, data} = await registerUser({firstname, lastname, email, username, password});
         if(status===200){   
-            window.localStorage.setItem('User', JSON.stringify(data.user));
+            setUser(data.user);
             router.push('/quiz');
         }
     }

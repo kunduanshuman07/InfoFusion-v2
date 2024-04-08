@@ -1,17 +1,18 @@
 'use client'
 import { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
+import EditProfileModal from "./EditProfileModal";
 const DashboardDrawer = () => {
     const [loading, setLoading] = useState<any>(true);
-    const [user, setUser] = useState<any>();
+    const [user, setUser] = useState<any>([]);
+    const [modalOpen, setOpenModal] = useState<any>(false);
     useEffect(() => {
-        const fetchUser = () => {
-            const userString = window.localStorage.getItem("User");
-            const user = userString ? JSON.parse(userString) : null;
+        const userString = window.localStorage.getItem("User");
+        const user = userString ? JSON.parse(userString) : null;
+        if(user!=null){
             setUser(user);
-            setLoading(false);
         }
-        fetchUser();
+        setLoading(false);
     }, [])
     return (
         <div className='flex flex-col pl-2'>
@@ -33,7 +34,7 @@ const DashboardDrawer = () => {
                             <h2 className="card-title">{user?.firstname} {user?.lastname}</h2>
                             <p className='text-xs'>@{user?.username} | {user?.email}</p>
                             <div className="card-actions justify-end mt-2">
-                                <button className="btn btn-accent btn-sm text-white font-bold hover:bg-[#06b6d4]"><MdEdit className="mr-2" />Edit Profile</button>
+                                <button className="btn btn-accent btn-sm text-white font-bold hover:bg-[#06b6d4]" onClick={() => setOpenModal(true)}><MdEdit className="mr-2" />Edit Profile</button>
                             </div>
                         </div>
                     </div>
@@ -59,6 +60,7 @@ const DashboardDrawer = () => {
                         </div>
                     </div>
                 </>}
+            {modalOpen && <EditProfileModal openModal={modalOpen} setOpenModal={setOpenModal} />}
         </div>
     )
 }

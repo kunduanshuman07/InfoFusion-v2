@@ -1,6 +1,7 @@
 'use client'
 import PopupModal from "@/app/components/PopupModal";
 import MyTimer from "@/app/components/QuizTimer";
+import { useUser } from "@/app/context/UserContext";
 import { fetchCurrentQuiz } from "@/app/server-actions/fetchCurrentQuiz";
 import { submitQuiz } from "@/app/server-actions/submitQuiz";
 import { useRouter } from "next/navigation";
@@ -11,8 +12,7 @@ import { RiTimerFlashFill } from "react-icons/ri";
 
 const QuizStart = () => {
   const router = useRouter();
-  const userString = window.localStorage.getItem("User");
-  const user = userString ? JSON.parse(userString) : null;
+  const {user} = useUser();
   const seconds = 600;
   const timeStamp = new Date(Date.now() + seconds * 1000);
   const [popupModal, setPopupModal] = useState<any>(false);
@@ -32,7 +32,12 @@ const QuizStart = () => {
       setQuizTitle(data.quizTitle);
       setLoading(false);
     }
-    fetchQuizData();
+    if(user!=null){
+      fetchQuizData();
+    }
+    else{
+      router.push('/login');
+    }
   }, [])
 
   const handleTimerEnding = () => {

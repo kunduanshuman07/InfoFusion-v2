@@ -10,7 +10,6 @@ interface PastQuizModalProps {
 }
 
 const PastQuizModal: React.FC<PastQuizModalProps> = ({ openModal, setOpenModal, quizId, quizTitle }) => {
-    console.log(quizTitle);
     const [loading, setLoading] = useState<any>(true);
     const [quizData, setQuizData] = useState<any>(false);
 
