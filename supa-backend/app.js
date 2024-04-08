@@ -20,7 +20,9 @@ app.use(cors({
 
 // Routes 
 app.use('/v2', router);
-
+app.get('/', (req,res)=>{
+    res.send('Landing Page');
+})
 // Server
 server.listen(PORT, ()=>{
     console.log(`Server started PORT: ${PORT}`);
