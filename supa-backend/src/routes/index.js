@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import express from "express";
 import authRoutes from "../routes/auth.route.js";
 import quizRoutes from "../routes/quiz.route.js";

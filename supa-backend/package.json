@@ -18,5 +18,8 @@
   },
   "author": "Anshuman Kundu",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "bin" : {
+    "execute" : "index.js"
+  }
 }
