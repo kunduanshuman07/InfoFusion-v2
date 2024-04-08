@@ -27,12 +27,18 @@ const QuizStart = () => {
       if (typeof window !== 'undefined') {
         const userString = window !== undefined && window.localStorage.getItem("User");
         const user = userString ? JSON.parse(userString) : null;
-        const { data } = await fetchCurrentQuiz();
-        setQuizId(data.quizId);
-        setQuizData(data.quizData);
-        setQuizIndex(data.quizIndex);
-        setQuizTitle(data.quizTitle);
-        setLoading(false);
+        if (user != null) {
+          setUser(user);
+          const { data } = await fetchCurrentQuiz();
+          setQuizId(data.quizId);
+          setQuizData(data.quizData);
+          setQuizIndex(data.quizIndex);
+          setQuizTitle(data.quizTitle);
+          setLoading(false);
+        }
+        else {
+          router.push('/login');
+        }
       }
       else {
         router.push('/login');
