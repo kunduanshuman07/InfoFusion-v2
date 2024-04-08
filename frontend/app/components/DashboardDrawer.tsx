@@ -7,10 +7,12 @@ const DashboardDrawer = () => {
     const [user, setUser] = useState<any>([]);
     const [modalOpen, setOpenModal] = useState<any>(false);
     useEffect(() => {
-        const userString = window.localStorage.getItem("User");
-        const user = userString ? JSON.parse(userString) : null;
-        if(user!=null){
-            setUser(user);
+        if (typeof window !== 'undefined') {
+            const userString = window.localStorage.getItem("User");
+            const user = userString ? JSON.parse(userString) : null;
+            if (user != null) {
+                setUser(user);
+            }
         }
         setLoading(false);
     }, [])

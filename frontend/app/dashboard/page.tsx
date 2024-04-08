@@ -16,22 +16,24 @@ const Dashboard = () => {
     const [userCount, setUserCount] = useState<any>();
     const [datefield, setDatefield] = useState<any>();
     useEffect(() => {
-        const userString = window.localStorage.getItem("User");
-        const user = userString ? JSON.parse(userString) : null;
         const fetchDashboardData = async () => {
-            const { status, data } = await fetchDashboard({ userId: user.id });
-            const leaderBoardResp = await fetchLeaderboard();
-            const dateToday = Date.now();
-            if (status == 200 && leaderBoardResp.status == 200) {
-                setDashboard(data.data);
-                setUserCount(leaderBoardResp.data.data.length);
-                setDatefield(formatDateAndTime(dateToday));
-                leaderBoardResp.data.data.map((users: any, index: any) => {
-                    if (users.user_id === user.id) {
-                        setLeaderboardRank(index + 1);
-                    }
-                })
-                setLoading(false);
+            if (typeof window !== 'undefined') {
+                const userString = window.localStorage.getItem("User");
+                const user = userString ? JSON.parse(userString) : null;
+                const { status, data } = await fetchDashboard({ userId: user.id });
+                const leaderBoardResp = await fetchLeaderboard();
+                const dateToday = Date.now();
+                if (status == 200 && leaderBoardResp.status == 200) {
+                    setDashboard(data.data);
+                    setUserCount(leaderBoardResp.data.data.length);
+                    setDatefield(formatDateAndTime(dateToday));
+                    leaderBoardResp.data.data.map((users: any, index: any) => {
+                        if (users.user_id === user.id) {
+                            setLeaderboardRank(index + 1);
+                        }
+                    })
+                    setLoading(false);
+                }
             }
         }
         fetchDashboardData();

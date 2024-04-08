@@ -5,17 +5,21 @@ import { useEffect, useState } from "react";
 import { fetchScorecards } from "../server-actions/fetchScorecards";
 import { formatDateAndTime } from "../utils/timeFormat";
 const ScorecardTable = () => {
-    const userString = window !== undefined && window.localStorage.getItem("User");
-    const user = userString ? JSON.parse(userString) : null;
     const [loading, setLoading] = useState<any>(true);
+    const [user, setUser] = useState<any>();
     const [scorecardData, setScorecardData] = useState<any>([]);
     useEffect(() => {
         const fetchScorecardsData = async () => {
-            const { status, data } = await fetchScorecards({ userId: user.id });
-            if (status == 200) {
-                console.log(data.data);
-                setScorecardData(data.data);
-                setLoading(false);
+            if (typeof window !== 'undefined') {
+                const userString = window !== undefined && window.localStorage.getItem("User");
+                const user = userString ? JSON.parse(userString) : null;
+                setUser(user);
+                const { status, data } = await fetchScorecards({ userId: user.id });
+                if (status == 200) {
+                    console.log(data.data);
+                    setScorecardData(data.data);
+                    setLoading(false);
+                }
             }
         }
         fetchScorecardsData();

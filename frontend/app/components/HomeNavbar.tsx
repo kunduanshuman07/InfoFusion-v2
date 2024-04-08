@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { FaArtstation } from "react-icons/fa";
 import { IoLogIn } from "react-icons/io5";
@@ -8,14 +7,14 @@ import { useRouter } from "next/navigation";
 const HomeNavbar = () => {
     const [loggedin, setLoggedin] = useState<any>(false);
     const [loading, setLoading] = useState<any>(true);
-    const { data } = useSession();
     const [user, setUser] = useState<any>();
     const router = useRouter();
     useEffect(() => {
-        const fetchUserData = async () => {
-            const userResponse = await fetchUser({ userId: data?.user?.email });
-            if (userResponse.status == 200) {
-                setUser(userResponse.data);
+        if (typeof window !== 'undefined') {
+            const userString = window.localStorage.getItem("User");
+            const user = userString ? JSON.parse(userString) : null;
+            if (user != null) {
+                setUser(user);
                 setLoggedin(true);
                 setLoading(false);
             }
@@ -23,7 +22,9 @@ const HomeNavbar = () => {
                 router.push('/login');
             }
         }
-        fetchUserData();
+        else {
+            router.push('/login');
+        }
     }, [])
     return (
         <div className="navbar bg-base-100" style={{ maxHeight: "10px" }}>

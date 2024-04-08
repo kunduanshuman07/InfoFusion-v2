@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import HomeNavbar from '../components/HomeNavbar'
 import Image from 'next/image'
 import HomePageImage from "../assets-svgs/HomePageImg1.jpg";
@@ -9,15 +9,17 @@ const Home = () => {
     const [user, setUser] = useState<any>();
     const [getStarted, setGetstarted] = useState<any>('/');
     useEffect(() => {
-        const userString = window.localStorage.getItem("User");
-        const user = userString ? JSON.parse(userString) : null;
-        if (user != null) {
-            setLoggedin(true);
-            setGetstarted('/quiz');
-            setUser(user);
-        }
-        else{
-            setGetstarted('/login');
+        if (typeof window !== 'undefined') {
+            const userString = window.localStorage.getItem("User");
+            const user = userString ? JSON.parse(userString) : null;
+            if (user != null) {
+                setLoggedin(true);
+                setGetstarted('/quiz');
+                setUser(user);
+            }
+            else {
+                setGetstarted('/login');
+            }
         }
     }, [])
     return (
@@ -40,7 +42,7 @@ const Home = () => {
                             <li className="step text-[#0891b2] font-bold">Excel</li>
                         </ul>
                     </div>
-                    <a className='bg-[#06b6d4] btn text-white font-bold m-auto p-2 pl-8 pr-8 cursor-pointer rounded-lg mt-4 hover:bg-[#0891b2]' href={getStarted}>Get Started <BsAlignStart/></a>
+                    <a className='bg-[#06b6d4] btn text-white font-bold m-auto p-2 pl-8 pr-8 cursor-pointer rounded-lg mt-4 hover:bg-[#0891b2]' href={getStarted}>Get Started <BsAlignStart /></a>
                 </div>
                 <div className='flex'>
                     <Image src={HomePageImage} alt='InfoFusion' width={500} height={400} className='m-auto rounded-lg border border-[#06b6d4] border-5' />

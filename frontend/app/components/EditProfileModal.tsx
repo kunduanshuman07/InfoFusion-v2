@@ -16,14 +16,16 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ openModal, setOpenM
         setOpenModal(false);
     }
     useEffect(() => {
-        const userString = window.localStorage.getItem("User");
-        const user = userString ? JSON.parse(userString) : null;
-        if (user != null) {
-            setFirstname(user.firstname);
-            setLastname(user.lastname);
-            setUsername(user.username);
+        if (typeof window !== 'undefined') {
+            const userString = window.localStorage.getItem("User");
+            const user = userString ? JSON.parse(userString) : null;
+            if (user != null) {
+                setFirstname(user.firstname);
+                setLastname(user.lastname);
+                setUsername(user.username);
+            }
+            setLoading(false);
         }
-        setLoading(false);
     }, [])
     return (
         <dialog id="my_modal_1" className={`modal modal-${openModal ? 'open' : 'close'}`}>
