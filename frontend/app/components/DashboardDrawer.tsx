@@ -2,20 +2,19 @@
 import { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import EditProfileModal from "./EditProfileModal";
-const DashboardDrawer = () => {
+
+interface DashboardProps{
+    user: any;
+}
+
+const DashboardDrawer:React.FC<DashboardProps> = ({user}) => {
     const [loading, setLoading] = useState<any>(true);
-    const [user, setUser] = useState<any>([]);
     const [modalOpen, setOpenModal] = useState<any>(false);
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const userString = window.localStorage.getItem("User");
-            const user = userString ? JSON.parse(userString) : null;
-            if (user != null) {
-                setUser(user);
-            }
+        if(user){
+            setLoading(false);
         }
-        setLoading(false);
-    }, [])
+    }, [user])
     return (
         <div className='flex flex-col pl-2'>
             {loading ?
@@ -62,7 +61,7 @@ const DashboardDrawer = () => {
                         </div>
                     </div>
                 </>}
-            {modalOpen && <EditProfileModal openModal={modalOpen} setOpenModal={setOpenModal} />}
+            {modalOpen && <EditProfileModal openModal={modalOpen} setOpenModal={setOpenModal} user={user}/>}
         </div>
     )
 }

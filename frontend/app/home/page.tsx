@@ -5,27 +5,36 @@ import Image from 'next/image'
 import HomePageImage from "../assets-svgs/HomePageImg1.jpg";
 import HomeCarousel from '../components/HomeCarousel';
 import { BsAlignStart } from "react-icons/bs";
+import { useSession } from 'next-auth/react';
+import { fetchUser } from '../server-actions/fetchUser';
 const Home = () => {
     const [loggedin, setLoggedin] = useState<any>(false);
-    const [user, setUser] = useState<any>();
     const [getStarted, setGetstarted] = useState<any>('/');
+    const { data } = useSession();
+    const [user, setUser] = useState<any>();
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const userString = window.localStorage.getItem("User");
-            const user = userString ? JSON.parse(userString) : null;
-            if (user != null) {
+        const fetchUserData = async () => {
+            const resp = await fetchUser({ userId: data?.user?.email });
+            if (resp.status === 200) {
+                setUser(resp.data.user);
+            }
+        }
+        if (data != null) {
+            fetchUserData();
+        }
+    }, [data])
+    useEffect(() => {
+            if (user) {
                 setLoggedin(true);
                 setGetstarted('/quiz');
-                setUser(user);
             }
             else {
                 setGetstarted('/login');
             }
-        }
-    }, [])
+    }, [user])
     return (
         <div className='flex flex-col'>
-            <HomeNavbar />
+            <HomeNavbar user={user}/>
             <div className='grid grid-cols-2 w-full p-4'>
                 <div className='flex flex-col'>
                     <div className='flex flex-col mb-4'>

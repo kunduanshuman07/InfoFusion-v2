@@ -9,35 +9,48 @@ import UserLayout from '../container/UserLayout'
 import { fetchDashboard } from '../server-actions/fetchDashboard'
 import { fetchLeaderboard } from '../server-actions/fetchLeaderboard'
 import { formatDateAndTime } from '../utils/timeFormat'
+import { fetchUser } from '../server-actions/fetchUser'
+import { useSession } from 'next-auth/react'
 const Dashboard = () => {
+    const { data } = useSession();
     const [loading, setLoading] = useState<any>(true);
     const [dashboard, setDashboard] = useState<any>();
     const [leaderboardRank, setLeaderboardRank] = useState<any>();
     const [userCount, setUserCount] = useState<any>();
     const [datefield, setDatefield] = useState<any>();
+    const [user, setUser] = useState<any>();
     useEffect(() => {
-        const fetchDashboardData = async () => {
-            if (typeof window !== 'undefined') {
-                const userString = window.localStorage.getItem("User");
-                const user = userString ? JSON.parse(userString) : null;
-                const { status, data } = await fetchDashboard({ userId: user.id });
-                const leaderBoardResp = await fetchLeaderboard();
-                const dateToday = Date.now();
-                if (status == 200 && leaderBoardResp.status == 200) {
-                    setDashboard(data.data);
-                    setUserCount(leaderBoardResp.data.data.length);
-                    setDatefield(formatDateAndTime(dateToday));
-                    leaderBoardResp.data.data.map((users: any, index: any) => {
-                        if (users.user_id === user.id) {
-                            setLeaderboardRank(index + 1);
-                        }
-                    })
-                    setLoading(false);
-                }
+        const fetchUserData = async () => {
+            const resp = await fetchUser({ userId: data?.user?.email });
+            if (resp.status === 200) {
+                setUser(resp.data.user);
             }
         }
-        fetchDashboardData();
-    }, [])
+        if (data != null) {
+            fetchUserData();
+        }
+    }, [data])
+    useEffect(() => {
+        const fetchDashboardData = async () => {
+            const { status, data } = await fetchDashboard({ userId: user.id });
+            const leaderBoardResp = await fetchLeaderboard();
+            const dateToday = Date.now();
+            if (status == 200 && leaderBoardResp.status == 200) {
+                setDashboard(data.data);
+                setUserCount(leaderBoardResp.data.data.length);
+                setDatefield(formatDateAndTime(dateToday));
+                leaderBoardResp.data.data.map((users: any, index: any) => {
+                    if (users.user_id === user.id) {
+                        setLeaderboardRank(index + 1);
+                    }
+                })
+                setLoading(false);
+            }
+        }
+        if(user){
+            fetchDashboardData();
+        }
+    }, [user])
     return (
         <div className='flex flex-col w-full'>
             <UserLayout />
@@ -68,7 +81,7 @@ const Dashboard = () => {
                     }
                 </div>
                 <div className='w-1/3'>
-                    <DashboardDrawer />
+                    <DashboardDrawer user={user}/>
                 </div>
             </div>
 

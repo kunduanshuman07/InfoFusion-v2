@@ -9,10 +9,14 @@ import PopupModal from "./PopupModal";
 import QuizPopUpContent from "./QuizPopUpContent";
 import { fetchCurrentQuiz } from "../server-actions/fetchCurrentQuiz";
 import { fetchQuizEnability } from "../server-actions/fetchQuizEnability";
-const QuizSelection = () => {
+
+interface QuizProps{
+  user: any;
+}
+
+const QuizSelection:React.FC<QuizProps> = ({user}) => {
+  console.log(user);
   const router = useRouter();
-  const userString = localStorage.getItem("User");
-  const user = userString ? JSON.parse(userString) : null;
   const [quizPopup, setQuizPopup] = useState<any>(false);
   const [quizData, setQuizData] = useState<any>();
   const [quizTitle, setQuizTitle] = useState<any>();
@@ -35,8 +39,10 @@ const QuizSelection = () => {
         setLoading(false);
       }
     }
-    fetchQuizData();
-  }, [])
+    if(user){
+      fetchQuizData();
+    }
+  }, [user])
   const handleQuizPopUp = () => {
     setQuizPopup(true);
   }

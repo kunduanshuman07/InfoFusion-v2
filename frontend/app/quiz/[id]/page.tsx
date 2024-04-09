@@ -2,7 +2,9 @@
 import PopupModal from "@/app/components/PopupModal";
 import MyTimer from "@/app/components/QuizTimer";
 import { fetchCurrentQuiz } from "@/app/server-actions/fetchCurrentQuiz";
+import { fetchUser } from "@/app/server-actions/fetchUser";
 import { submitQuiz } from "@/app/server-actions/submitQuiz";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
@@ -10,9 +12,9 @@ import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 import { RiTimerFlashFill } from "react-icons/ri";
 
 const QuizStart = () => {
+  const {data} = useSession();
   const router = useRouter();
   const seconds = 600;
-  const [user, setUser] = useState<any>();
   const timeStamp = new Date(Date.now() + seconds * 1000);
   const [popupModal, setPopupModal] = useState<any>(false);
   const [loading, setLoading] = useState<any>(true);
@@ -22,34 +24,32 @@ const QuizStart = () => {
   const [quizId, setQuizId] = useState<any>();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<any>(0);
   const [selectedOptions, setSelectedOptions] = useState<any>(Array.from({ length: 10 }, () => null));
+  const [user, setUser] = useState<any>();
+  useEffect(()=>{
+    const fetchUserData = async() => {
+      const resp = await fetchUser({userId: data?.user?.email});
+      if(resp.status===200){
+        setUser(resp.data.user); 
+      }
+    }
+    if(data!=null){
+      fetchUserData();
+    }
+  },[data])
   useEffect(() => {
     const fetchQuizData = async () => {
-      if (typeof window !== 'undefined') {
-        const userString = window !== undefined && window.localStorage.getItem("User");
-        const user = userString ? JSON.parse(userString) : null;
-        if (user != null) {
-          setUser(user);
-          const { data } = await fetchCurrentQuiz();
+      const { data } = await fetchCurrentQuiz();
           setQuizId(data.quizId);
           setQuizData(data.quizData);
           setQuizIndex(data.quizIndex);
           setQuizTitle(data.quizTitle);
           setLoading(false);
-        }
-        else {
-          router.push('/login');
-        }
-      }
-      else {
-        router.push('/login');
-      }
-
     }
     fetchQuizData();
   }, [])
 
   const handleTimerEnding = () => {
-    router.push('/');
+    router.push('/quiz');
   }
 
   const handleNextQuestion = () => {

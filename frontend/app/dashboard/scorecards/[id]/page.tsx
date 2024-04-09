@@ -19,7 +19,7 @@ const ScorecardModal = () => {
             setLoading(false);
         }
         fetchScorecardData();
-    }, [])
+    }, [id])
     const onGetExportProduct = async () => {
         const num = 1+Math.floor(Math.random()*10);
         const title=`Scorecard_${num}`

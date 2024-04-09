@@ -6,13 +6,14 @@ import { MdDashboard } from "react-icons/md";
 import { MdLeaderboard } from "react-icons/md";
 import { FaSheetPlastic } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 const DrawerComponent = () => {
     const router = useRouter();
     
-    const handleLogout = () => {
-        router.push('/login');
-        localStorage.removeItem("User");
+    const handleLogout = async() => {
+        const data = await signOut({ redirect: false, callbackUrl: '/' })
+        router.push('/');
     }
     return (
         <div className="drawer">

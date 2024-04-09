@@ -3,30 +3,22 @@ import { useState, useEffect } from "react";
 import { FaArtstation } from "react-icons/fa";
 import { IoLogIn } from "react-icons/io5";
 import { SiGnuprivacyguard } from "react-icons/si";
-import { fetchUser } from "../server-actions/fetchUser";
 import { useRouter } from "next/navigation";
-const HomeNavbar = () => {
+
+interface HomeProps {
+    user: any;
+}
+
+const HomeNavbar: React.FC<HomeProps> = ({ user }) => {
     const [loggedin, setLoggedin] = useState<any>(false);
     const [loading, setLoading] = useState<any>(true);
-    const [user, setUser] = useState<any>();
     const router = useRouter();
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const userString = window.localStorage.getItem("User");
-            const user = userString ? JSON.parse(userString) : null;
-            if (user != null) {
-                setUser(user);
-                setLoggedin(true);
-                setLoading(false);
-            }
-            else {
-                router.push('/login');
-            }
+        if (user) {
+            setLoggedin(true);
         }
-        else {
-            router.push('/login');
-        }
-    }, [])
+        setLoading(false);
+    }, [user])
     return (
         <div className="navbar bg-base-100" style={{ maxHeight: "10px" }}>
             <div className="flex-1">

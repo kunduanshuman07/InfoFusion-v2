@@ -5,9 +5,10 @@ import { AiOutlineEdit } from "react-icons/ai";
 interface EditProfileModalProps {
     openModal: any;
     setOpenModal: (openModal: any) => void;
+    user: any;
 }
 
-const EditProfileModal: React.FC<EditProfileModalProps> = ({ openModal, setOpenModal }) => {
+const EditProfileModal: React.FC<EditProfileModalProps> = ({ openModal, setOpenModal, user }) => {
     const [loading, setLoading] = useState<any>(true);
     const [firstName, setFirstname] = useState<any>("");
     const [lastName, setLastname] = useState<any>("");
@@ -16,17 +17,13 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ openModal, setOpenM
         setOpenModal(false);
     }
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const userString = window.localStorage.getItem("User");
-            const user = userString ? JSON.parse(userString) : null;
-            if (user != null) {
-                setFirstname(user.firstname);
-                setLastname(user.lastname);
-                setUsername(user.username);
-            }
-            setLoading(false);
+        if (user) {
+            setFirstname(user.firstname);
+            setLastname(user.lastname);
+            setUsername(user.username);
         }
-    }, [])
+        setLoading(false);
+    }, [user])
     return (
         <dialog id="my_modal_1" className={`modal modal-${openModal ? 'open' : 'close'}`}>
             <div className={`modal-box ${loading ? 'p-4' : 'p-4'}`}>

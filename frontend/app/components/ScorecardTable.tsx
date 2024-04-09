@@ -4,26 +4,26 @@ import { FaEye } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { fetchScorecards } from "../server-actions/fetchScorecards";
 import { formatDateAndTime } from "../utils/timeFormat";
-const ScorecardTable = () => {
+
+interface ScorecardProps {
+    user: any;
+}
+
+const ScorecardTable: React.FC<ScorecardProps> = ({ user }) => {
     const [loading, setLoading] = useState<any>(true);
-    const [user, setUser] = useState<any>();
     const [scorecardData, setScorecardData] = useState<any>([]);
     useEffect(() => {
         const fetchScorecardsData = async () => {
-            if (typeof window !== 'undefined') {
-                const userString = window !== undefined && window.localStorage.getItem("User");
-                const user = userString ? JSON.parse(userString) : null;
-                setUser(user);
-                const { status, data } = await fetchScorecards({ userId: user.id });
-                if (status == 200) {
-                    console.log(data.data);
-                    setScorecardData(data.data);
-                    setLoading(false);
-                }
+            const { status, data } = await fetchScorecards({ userId: user.id });
+            if (status == 200) {
+                setScorecardData(data.data);
+                setLoading(false);
             }
         }
-        fetchScorecardsData();
-    }, [])
+        if (user) {
+            fetchScorecardsData();
+        }
+    }, [user])
     const formatIdForViewScore = (userId: string, quizId: string) => {
         const id = `${userId}+${quizId}`;
         return id;

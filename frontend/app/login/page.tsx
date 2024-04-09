@@ -6,7 +6,7 @@ import PasswordSvg from "../assets-svgs/PasswordSvg.svg";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { loginUser } from "../server-actions/loginUser";
-
+import { signIn } from "next-auth/react";
 const Login = () => {
     const router = useRouter();
     const [loading, setLoading] = useState<any>(false);
@@ -15,10 +15,17 @@ const Login = () => {
     const [loginError, setLoginError] = useState<any>('');
     const handleLogin = async () => {
         setLoading(true);
-        const {status, data} = await loginUser({username, password});
-        if(status==200){
-            window.localStorage.setItem('User', JSON.stringify(data.user));
-            router.push('/quiz');
+        const res = await signIn("credentials", {
+            email: username, 
+            password: password,
+            redirect: false,
+        })
+        if(!res?.ok){
+            setLoading(false);
+            setLoginError('Invalid Credentials. Please try again!')
+        }
+        else{
+            router.push('/quiz')
         }
     }
     return (
