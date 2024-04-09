@@ -5,7 +5,6 @@ import NameSvg from "../assets-svgs/NameSvg.svg";
 import PasswordSvg from "../assets-svgs/PasswordSvg.svg";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { loginUser } from "../server-actions/loginUser";
 import { signIn } from "next-auth/react";
 const Login = () => {
     const router = useRouter();

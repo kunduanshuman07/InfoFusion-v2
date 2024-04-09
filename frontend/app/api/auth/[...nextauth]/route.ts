@@ -1,9 +1,8 @@
 'use server'
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-// import { loginUser } from "@/app/server-actions/loginUser";
-import { createClient } from "@supabase/supabase-js"
-const supabase = createClient(process.env.SUPABASE_URL||'undefined', process.env.SUPABASE_KEY||'undefined');
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
+import { cookies } from "next/headers"
 const authOptions = {
     providers: [
         CredentialsProvider({
@@ -18,19 +17,21 @@ const authOptions = {
                 if(!email || !password){
                     return null;
                 }
+                const cookieStore = cookies();
+                const supabase = createServerComponentClient({ cookies: () => cookieStore });
                 const res = await supabase.from('User').select('*').match({ email: email});
                 console.log(res);
-                if (!res.data || res.data.length === 0){
-                    return null;
+                if(res?.data?.[0].password===password){
+                    return res.data[0];
                 }
-                if (res.data[0].password !== password){
-                    return null;
-                }
-                return res.data[0];
+                return null;
             }
         })
     ],
     secret: process.env.NEXTAUTH_SECRET,
+    pages: {
+        signIn: "/signIn"
+    }
 }
 
 const handler = NextAuth(authOptions);
