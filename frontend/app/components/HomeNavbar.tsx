@@ -10,6 +10,7 @@ interface HomeProps {
 }
 
 const HomeNavbar: React.FC<HomeProps> = ({ user }) => {
+    const screenWidth = typeof window !== 'undefined' ? window.screen.availWidth : 1001;
     const [loggedin, setLoggedin] = useState<any>(false);
     const [loading, setLoading] = useState<any>(true);
     const router = useRouter();
@@ -31,9 +32,15 @@ const HomeNavbar: React.FC<HomeProps> = ({ user }) => {
                     loading ?
                         <span className="loading loading-ring loading-md"></span>
                         :
+                        screenWidth>800?
                         <>
                             <a className='bg-[#0e7490] btn btn-sm text-white font-bold m-auto p-2 pl-8 pr-8 cursor-pointer rounded-lg hover:bg-[#06b6d4]' href="/login">Login <IoLogIn /></a>
                             <a className='bg-[#0e7490] btn btn-sm ml-5 text-white font-bold m-auto p-2 pl-8 pr-8 cursor-pointer rounded-lg hover:bg-[#06b6d4]' href="/register">Register <SiGnuprivacyguard /></a>
+                        </>
+                        :
+                        <>
+                            <a className='bg-[#0e7490] btn btn-xs text-white font-bold m-auto pl-4 pr-4 cursor-pointer rounded-lg hover:bg-[#06b6d4]' href="/login">Login <IoLogIn /></a>
+                            <a className='bg-[#0e7490] btn btn-xs ml-2 text-white font-bold m-auto pl-4 pr-4 cursor-pointer rounded-lg hover:bg-[#06b6d4]' href="/register">Register <SiGnuprivacyguard /></a>
                         </>
                 }
             </div>
