@@ -1,7 +1,9 @@
 'use server'
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { loginUser } from "@/app/server-actions/loginUser";
+// import { loginUser } from "@/app/server-actions/loginUser";
+import { createClient } from "@supabase/supabase-js"
+const supabase = createClient(process.env.SUPABASE_URL||'undefined', process.env.SUPABASE_KEY||'undefined');
 const authOptions = {
     providers: [
         CredentialsProvider({
@@ -16,12 +18,15 @@ const authOptions = {
                 if(!email || !password){
                     return null;
                 }
-                const res = await loginUser({username: email, password});
+                const res = await supabase.from('User').select('*').match({ email: email});
                 console.log(res);
-                if(res?.data?.user?.password===password){
-                    return res.data.user;
+                if (!res.data || res.data.length === 0){
+                    return null;
                 }
-                return null;
+                if (res.data[0].password !== password){
+                    return null;
+                }
+                return res.data[0];
             }
         })
     ],
