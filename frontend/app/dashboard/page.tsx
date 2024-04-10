@@ -12,6 +12,7 @@ import { formatDateAndTime } from '../utils/timeFormat'
 import { fetchUser } from '../server-actions/fetchUser'
 import { useSession } from 'next-auth/react'
 const Dashboard = () => {
+    const screenWidth = typeof window !== 'undefined' ? window.screen.availWidth : 1001;
     const { data } = useSession();
     const [loading, setLoading] = useState<any>(true);
     const [dashboard, setDashboard] = useState<any>();
@@ -47,7 +48,7 @@ const Dashboard = () => {
                 setLoading(false);
             }
         }
-        if(user){
+        if (user) {
             fetchDashboardData();
         }
     }, [user])
@@ -55,7 +56,7 @@ const Dashboard = () => {
         <div className='flex flex-col w-full'>
             <UserLayout />
             <div className='flex flex-row w-full mt-5'>
-                <div className='flex flex-col w-2/3 shadow-md rounded-lg p-2 ml-2'>
+                <div className={`flex flex-col shadow-md rounded-lg p-2 ${screenWidth<1000?'w-full': 'w-2/3 ml-2'}`}>
                     {loading ?
                         <div className="flex flex-col gap-4 w-full p-2">
                             <div className="skeleton h-32 w-full"></div>
@@ -67,22 +68,22 @@ const Dashboard = () => {
                         </div>
                         :
                         <>
-                            <div className='flex flex-row w-full'>
+                            <div className={`flex w-full ${screenWidth<1000? 'flex-col': 'flex-row'}`}>
                                 <StatComponent color='red' contentone={datefield} contenttwo={dashboard.quiz_count} contentthree={'Quiz Attempts'} />
                                 <StatComponent color='blue' contentone={'Rank'} contenttwo={leaderboardRank} contentthree={`Out of ${userCount} participants`} />
                                 <StatComponent color='yellow' contentone={'Rating'} contenttwo={dashboard.rating} contentthree={'Div 2'} />
                             </div>
                             <StatButtons contentOne={dashboard.questions} contentTwo={dashboard.correct_answers} contentThree={dashboard.highest_score} />
-                            <div className='flex flex-row mt-5 p-4'>
+                            <div className={`flex mt-5 p-4 ${screenWidth<1000?'flex-col': 'flex-row'}`}>
                                 <LineChart graph={dashboard.rating_graph} />
                                 <DoughnutChart easy={dashboard.easy} med={dashboard.med} hard={dashboard.hard} misc={dashboard.misc} />
                             </div>
                         </>
                     }
                 </div>
-                <div className='w-1/3'>
-                    <DashboardDrawer user={user}/>
-                </div>
+                {screenWidth > 1000 && <div className='w-1/3'>
+                    <DashboardDrawer user={user} />
+                </div>}
             </div>
 
         </div>

@@ -12,6 +12,7 @@ import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 import { RiTimerFlashFill } from "react-icons/ri";
 
 const QuizStart = () => {
+  const screenWidth = typeof window !== 'undefined' ? window.screen.availWidth : 1001;
   const {data} = useSession();
   const router = useRouter();
   const seconds = 600;
@@ -116,16 +117,16 @@ const QuizStart = () => {
               </div>
             </div>
           </div>
-          <div className='grid grid-cols-1'>
-            <div className='flex flex-row'>
-              <div className="mt-5 ml-10 p-4 bg-[#fffbeb] rounded-lg flex flex-row">
+          <div className='grid grid-cols-1 p-2'>
+            <div className={ `grid ${screenWidth<1000?'grid-cols-1': 'grid-cols-3'}`}>
+              <div className={ `mt-1 p-4 bg-[#fffbeb] rounded-lg flex flex-row ${screenWidth<1000? '': 'ml-10'}`}>
                 <progress className="progress progress-warning w-56 m-auto" value={currentQuestionIndex + 1} max="10"></progress>
                 <h1 className="text-xs ml-5 font-bold text-[#0c4a6e]">Q {currentQuestionIndex + 1} of 10</h1>
               </div>
-              <button className="btn text-[#0c4a6e] mr-auto ml-10 mt-5">
+              <button className={`btn text-[#0c4a6e] mt-1 ${screenWidth<1000? 'm-auto': 'mr-auto ml-10 mt-3'}`}>
                 <RiTimerFlashFill /> <MyTimer expiryTimestamp={timeStamp} handleTimerEnding={handleTimerEnding} />
               </button>
-              <button className="btn btn-success mr-10 text-white ml-auto ml-10 mt-5" onClick={() => setPopupModal(true)}>
+              <button className={`btn btn-success text-white mt-1 ${screenWidth<1000? '': 'ml-auto mr-10'}`} onClick={() => setPopupModal(true)}>
                 Submit Quiz
               </button>
             </div>

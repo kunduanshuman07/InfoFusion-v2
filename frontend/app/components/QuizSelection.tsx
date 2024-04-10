@@ -67,19 +67,18 @@ const QuizSelection:React.FC<QuizProps> = ({user}) => {
           <h1 className="text-xs mt-2 text-gray-400 font-bold text-right"><span className="">Quiz #{quizIndex}</span></h1>
           <h1 className="text-md mt-5">Description</h1>
           <p className="text-xs bg-gray-100 rounded-lg p-2 mt-2">{quizDesc}<a className="text-xs text-[#0ea5e9] ml-1" href={descLink} target="_blank">Read more</a></p>
-          <h1 className="text-xs mt-2 text-gray-400 font-bold"><span className="">Questions: 10</span><span className="ml-3">Maxmimum Marks: 100</span><span className="ml-3">Time: 5 minutes</span></h1>
+          <h1 className="text-xs mt-2 text-gray-400 font-bold"><span className="">Questions: 10</span><span className="ml-3">Time: 5 minutes</span></h1>
           <h1 className="mt-5">Tags</h1>
           <div className="flex flex-row mt-2 mb-3">
             <button className="btn btn-xs bg-[#0891b2] text-white font-bold">#InfoFusion</button>
             <button className="btn btn-xs ml-2 bg-[#0891b2] text-white font-bold">#History</button>
             <button className="btn btn-xs ml-2 bg-[#0891b2] text-white font-bold">#Social Studies</button>
-            <h1 className="italic text-error text-xs text-center ml-auto">Quiz ends in 12:00</h1>
           </div>
           <button className="btn bg-[#0891b2] m-auto mt-2 mb-1 text-white hover:btn-neutral mt-4 btn-sm" onClick={handleQuizPopUp} disabled={!quizAccess}><FaHourglassStart /> Start Quiz</button>
           {!quizAccess && <p className="text-xs text-center mt-1 text-error font-bold">{`You have attempted Today's Quiz`}</p>}
           <div className="flex flex-row">
-            <a className="btn text-xs m-auto btn-xs text-[#0891b2] bg-[#ecfeff] pl-10 pr-10 hover:bg-[#e0f2fe] mt-2" href="/pastquizzes"><SiPastebin /> Past Quizzes</a>
-            <a className="btn text-xs m-auto btn-xs text-[#0891b2] bg-[#ecfeff] pl-10 pr-10 hover:bg-[#e0f2fe] mt-2" href="/dashboard"><MdDashboard /> Dashboard</a>
+            <a className="btn text-xs mr-auto btn-xs text-[#0891b2] bg-[#ecfeff] p-2 hover:bg-[#e0f2fe] mt-2" href="/pastquizzes"><SiPastebin /> Past Quizzes</a>
+            <a className="btn text-xs ml-auto btn-xs text-[#0891b2] bg-[#ecfeff] p-2 hover:bg-[#e0f2fe] mt-2" href="/dashboard"><MdDashboard /> Dashboard</a>
           </div>
           {quizPopup && <PopupModal openModal={quizPopup} setOpenModal={setQuizPopup} actionTextOne={'Go for it !'} actionTextTwo={'Cancel'} actionFunc={handleStartQuiz} content={<QuizPopUpContent />} />}
         </>}

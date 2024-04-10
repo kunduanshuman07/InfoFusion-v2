@@ -6,6 +6,7 @@ import { formatDateAndTime } from "../utils/timeFormat";
 import { fetchPastQuiz } from "../server-actions/fetchPastQuiz";
 import PastQuizModal from "./PastQuizAccess";
 const PastQuizTable = () => {
+    const screenWidth = typeof window !== 'undefined' ? window.screen.availWidth : 1001;
     const [loading, setLoading] = useState<any>(true);
     const [pastquizzes, setPastQuizzes] = useState<any>([]);
     const [modalOpen, setModalOpen] = useState<any>(false);
@@ -46,7 +47,7 @@ const PastQuizTable = () => {
                         <button className="btn bg-[#0284c7] text-white font-bold hover:bg-[#0e7490] ml-5 mt-5">Date Filter <TbFilterSearch /></button>
                     </div>
                     <div className="mt-5">
-                        <div className="grid grid-cols-3">
+                        <div className={`grid ${screenWidth<1000?'grid-cols-1':'grid-cols-3'}`}>
                             {pastquizzes?.map((quiz: any, index: any) => (
                                 <div className="shadow-md p-4 flex flex-col rounded-lg m-2" key={index}>
                                     <h1 className="text-sm font-bold text-[#075985] text-center">Quiz #{quiz.quiz_index} : {quiz.title}</h1>

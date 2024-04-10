@@ -13,6 +13,7 @@ interface DoughnutChartProps {
 }
 
 const DoughnutChart:React.FC<DoughnutChartProps> = ({easy, med, hard, misc}) => {
+    const screenWidth = typeof window !== 'undefined' ? window.screen.availWidth : 1001;
 
     let data = [
         {
@@ -63,7 +64,7 @@ const DoughnutChart:React.FC<DoughnutChartProps> = ({easy, med, hard, misc}) => 
     };
 
     return (
-    <div className="m-auto ml-2" style={{ maxWidth: "100%", maxHeight: "100%" }}>
+    <div className={`m-auto ${screenWidth<1000?'mt-2': 'ml-2'}`} style={{ maxWidth: "100%", maxHeight: "100%" }}>
         <Doughnut data={finalData} options={options} className="bg-[#ffffff] shadow-md rounded-lg p-4"/>
     </div>
     )

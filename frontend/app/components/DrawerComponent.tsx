@@ -7,11 +7,11 @@ import { MdLeaderboard } from "react-icons/md";
 import { FaSheetPlastic } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
-
+import { GiRamProfile } from "react-icons/gi";
 const DrawerComponent = () => {
     const router = useRouter();
-    
-    const handleLogout = async() => {
+    const screenWidth = typeof window !== 'undefined' ? window.screen.availWidth : 1001;
+    const handleLogout = async () => {
         const data = await signOut({ redirect: false, callbackUrl: '/' })
         router.push('/');
     }
@@ -26,12 +26,13 @@ const DrawerComponent = () => {
             <div className="drawer-side">
                 <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-50 min-h-full bg-base-200 text-base-content">
-                    <li className=" text-md mt-3"><a href='/quiz'><MdQuiz className="mr-3"/> Quiz</a></li>
-                    <li className=" text-md mt-3"><a href='/dashboard'><MdDashboard className="mr-3"/> Dashboard</a></li>
-                    <li className=" text-md mt-3"><a href='/leaderboard'><MdLeaderboard className="mr-3"/> Leaderboard</a></li>
-                    <li className=" text-md mt-3"><a href='/dashboard/scorecards'><FaSheetPlastic className="mr-3"/> Scorecards</a></li>
-                    <li className=" text-md mt-auto"><a href='/'><MdSupportAgent className="mr-3"/> Support</a></li>
-                    <li className=" text-md mt-4" onClick={handleLogout}><a><IoLogOut className="mr-3"/> Logout</a></li>
+                    <li className=" text-md mt-3"><a href='/quiz'><MdQuiz className="mr-3" /> Quiz</a></li>
+                    <li className=" text-md mt-3"><a href='/dashboard'><MdDashboard className="mr-3" /> Dashboard</a></li>
+                    <li className=" text-md mt-3"><a href='/leaderboard'><MdLeaderboard className="mr-3" /> Leaderboard</a></li>
+                    <li className=" text-md mt-3"><a href='/dashboard/scorecards'><FaSheetPlastic className="mr-3" /> Scorecards</a></li>
+                    {screenWidth<1000 && <li className=" text-md mt-3"><a href='/profile'><GiRamProfile className="mr-3" /> Profile</a></li>}
+                    <li className=" text-md mt-auto"><a href='/'><MdSupportAgent className="mr-3" /> Support</a></li>
+                    <li className=" text-md mt-4" onClick={handleLogout}><a><IoLogOut className="mr-3" /> Logout</a></li>
                 </ul>
             </div>
         </div>
