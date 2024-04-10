@@ -1,85 +1,68 @@
 'use client'
-import { FaArtstation } from "react-icons/fa";
-import Image from "next/image";
-import NameSvg from "../assets-svgs/NameSvg.svg";
-import PasswordSvg from "../assets-svgs/PasswordSvg.svg";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { FaArtstation } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-const Login = () => {
-    const screenWidth = typeof window !== 'undefined' ? window.screen.availWidth : 1001;
-    const router = useRouter();
-    const [loading, setLoading] = useState<any>(false);
-    const [username, setUsername] = useState<any>();
-    const [password, setPassword] = useState<any>();
-    const [loginError, setLoginError] = useState<any>('');
-    const handleLogin = async () => {
+const AuthCompLogin = () => {
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
+    const [errorMsg, setErrorMsg] = useState<string>('');
+    const router=useRouter()
+    const handleLogin = async() => {
         setLoading(true);
         const res = await signIn("credentials", {
-            email: username,
+            email: email, 
             password: password,
             redirect: false,
         })
-        if (!res?.ok) {
+        console.log(res);
+        if(!res?.ok){
             setLoading(false);
-            setLoginError('Invalid Credentials. Please try again!')
+            setErrorMsg('Invalid Credentials. Please try again!')
         }
-        else {
-            router.push('/quiz')
+        else{
+            router.push('/')
         }
     }
     return (
-        <div className='grid grid-cols-1 p-5'>
-            {loginError !== '' &&
-                screenWidth > 1000 ?
-                <div role="alert" className="alert alert-error w-1/3 m-auto mt-2 flex flex-row">
-                    <span className="text-white font-bold mx-auto">{loginError} !</span>
-                </div>
-                :
-                loginError !== '' &&
-                <div className="toast toast-top toast-center">
-                    <div className="alert alert-error">
-                        <span className="text-xs text-white">Check your credentials and try again.</span>
+        <div className='flex justify-center items-center h-screen bg-base-200'>
+            <div className='card w-96 bg-base-100 shadow-xl p-5'>
+                <button className="btn bg-[#f8fafc] font-bold text-center text-[#0891b2] mt-5 hover:bg-[#f8fafc]">
+                    <FaArtstation />
+                    InfoFusion</button>
+                <div className='card-body'>
+                    <div className="p-2">
+                        <label htmlFor="email" className="block text-black mb-2 my-2">Email *</label>
+                        <input
+                            type="text"
+                            id="email"
+                            name="email"
+                            className="grow border border-gray-600 rounded py-2 px-3 w-full"
+                            placeholder="Enter you email address"
+                            required
+                            value={email}
+                            onChange={(e)=>setEmail(e.target.value)}
+                        />
+                        <label htmlFor="password" className="block text-black mb-2 my-5">Password *</label>
+                        <input
+                            type="text"
+                            id="password"
+                            name="password"
+                            className="grow border border-gray-600 rounded py-2 px-3 w-full mb-3"
+                            placeholder="Enter your password"
+                            required
+                            value={password}
+                            onChange={(e)=>setPassword(e.target.value)}
+                        />
                     </div>
+                    <h1 className="text-error font-bold text-center mt-2 text-xs">{errorMsg}</h1>
+                    <button className='btn bg-[#0891b2] mt-2 text-white font-bold' onClick={handleLogin}>Login {loading&&<span className="loading loading-dots loading-md"></span>}</button>
+                    <a href='/register' className='text-center underline text-xs font-bold mt-4'>New user? Register</a>
                 </div>
-            }
-            {screenWidth > 1000 ?
-                <div className="shadow-md flex flex-col w-1/3 mx-auto rounded-lg bg-[#0e7490] mt-10 p-10">
-                    <h1 className="text-2xl font-bold text-white flex flex-row m-auto" ><FaArtstation className='my-auto mr-2' /> InfoFusion</h1>
-                    <label className="input input-bordered flex items-center gap-2 mt-20">
-                        <Image src={NameSvg} alt="Username" />
-                        <input type="text" className="grow input-sm" placeholder="Enter your email" value={username} onChange={(e) => setUsername(e.target.value)} />
-                    </label>
-                    <label className="input input-bordered flex items-center gap-2 mt-5">
-                        <Image src={PasswordSvg} alt="Password" />
-                        <input type="text" className="grow input-sm" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    </label>
-                    <button className="btn btn-white mx-auto pl-10 pr-10 mt-10" onClick={handleLogin}>Login {loading && <span className="loading loading-dots loading-md"></span>}</button>
-                    <div className="flex flex-row mt-5">
-                        <a className="text-xs text-white mt-2 cursor-pointer" href="/register">New to IF? <span className="underline font-bold">Register</span></a>
-                        <a className="text-xs text-[#cffafe] font-bold mt-2 cursor-pointer ml-auto">Forgot Password</a>
-                    </div>
-                </div>
-                :
-                <div className="shadow-md flex flex-col w-full m-auto rounded-lg bg-[#0e7490] p-10">
-                    <h1 className="text-2xl font-bold text-white flex flex-row m-auto" ><FaArtstation className='my-auto mr-2' /> InfoFusion</h1>
-                    <label className="input input-bordered flex items-center gap-2 mt-20">
-                        <Image src={NameSvg} alt="Username" />
-                        <input type="text" className="grow input-sm" placeholder="Enter your email" value={username} onChange={(e) => setUsername(e.target.value)} />
-                    </label>
-                    <label className="input input-bordered flex items-center gap-2 mt-5">
-                        <Image src={PasswordSvg} alt="Password" />
-                        <input type="text" className="grow input-sm" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    </label>
-                    <button className="btn btn-white mx-auto pl-10 pr-10 mt-10" onClick={handleLogin}>Login {loading && <span className="loading loading-dots loading-md"></span>}</button>
-                    <div className="flex flex-row mt-5">
-                        <a className="text-xs text-white mt-2 cursor-pointer" href="/register">New to IF? <span className="underline font-bold">Register</span></a>
-                        <a className="text-xs text-[#cffafe] font-bold mt-2 cursor-pointer ml-auto">Forgot Password</a>
-                    </div>
-                </div>
-            }
+            </div>
         </div>
     )
 }
 
-export default Login
+export default AuthCompLogin
