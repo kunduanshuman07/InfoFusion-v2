@@ -22,7 +22,7 @@ const AuthCompLogin = () => {
             setErrorMsg('Invalid Credentials. Please try again!')
         }
         else{
-            router.push('/')
+            router.push('/quiz')
         }
     }
     return (

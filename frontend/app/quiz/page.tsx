@@ -7,6 +7,7 @@ import UserLayout from "../container/UserLayout";
 import { useSession } from "next-auth/react";
 import { fetchUser } from "../server-actions/fetchUser";
 const Quiz = () => {
+  const screenWidth = typeof window !== 'undefined' ? window.screen.availWidth : 1001;
   const {data} = useSession();
   const [user, setUser] = useState<any>();
   useEffect(()=>{
@@ -23,9 +24,9 @@ const Quiz = () => {
   return (
     <div>
       <UserLayout/>
-      <div className="grid grid-cols-2 gap-4 p-4">
+      <div className={`grid ${screenWidth >1000 ? 'grid-cols-2': 'grid-cols-1'} gap-4 p-4`}>
       <QuizSelection user={user}/>
-      <LeaderBoard />
+      {screenWidth>1000 && <LeaderBoard />}
     </div>
     </div>
   )

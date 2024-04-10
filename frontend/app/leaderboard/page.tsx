@@ -34,6 +34,7 @@ const LeaderboardPage = () => {
                 </div>
                 :
                 <div className="flex flex-col p-4 w-full">
+                    <p className="text-xs text-[#22d3ee] font-bold m-auto">QA: Quiz Attempts HS: Highest Score CA: Correct Answers</p>
                     <LeaderboardHeader />
                     {leaderboard?.map((leads: any, index: any)=>(
                         <LeaderboardCard key={index} rank={index+1} username={leads.username} rating={leads.rating} highest_score={leads.highest_score} attempts={leads.quiz_count} correct_answers={leads.correct_answers}/>

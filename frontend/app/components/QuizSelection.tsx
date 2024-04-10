@@ -15,7 +15,6 @@ interface QuizProps{
 }
 
 const QuizSelection:React.FC<QuizProps> = ({user}) => {
-  console.log(user);
   const router = useRouter();
   const [quizPopup, setQuizPopup] = useState<any>(false);
   const [quizData, setQuizData] = useState<any>();
