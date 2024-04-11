@@ -3,10 +3,13 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react'
 import { useUser } from '../context/UserContext';
 import { fetchCurrentQuiz } from '../apis/fetchCurrentQuiz';
+import { useSession } from 'next-auth/react';
+import { fetchUser } from '../apis/fetchUser';
 
 const ContestInformation = () => {
   const router = useRouter();
-  const { user } = useUser();
+  const { data } = useSession();
+  const [user, setUser] = useState<any>();
   const [quizPopup, setQuizPopup] = useState<any>(false);
   const [quizData, setQuizData] = useState<any>();
   const [quizTitle, setQuizTitle] = useState<any>();
@@ -14,6 +17,17 @@ const ContestInformation = () => {
   const [quizDesc, setQuizDesc] = useState<any>();
   const [descLink, setQuizDescLink] = useState<any>();
   const [loading, setLoading] = useState<any>(true);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const resp = await fetchUser({ userId: data?.user?.email });
+      if (resp.status === 200) {
+        setUser(resp.data.user);
+      }
+    }
+    if (data != null) {
+      fetchUserData();
+    }
+  }, [data])
   useEffect(() => {
     const fetchQuizData = async () => {
       const { data } = await fetchCurrentQuiz();
