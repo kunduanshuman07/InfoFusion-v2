@@ -18,22 +18,21 @@ const ProfileComp: React.FC<ProfileProps> = ({ user }) => {
         <h1 className="font-bold text-xs mt-4 flex flex-row"><GoDotFill className="my-auto mr-2 text-error" />Advanced</h1>
         <div className="grid grid-cols-3 flex flex-col py-1 px-2">
           <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">React Js</h1>
-          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">React Js</h1>
-          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">React Js</h1>
+          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">Node Js</h1>
+          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">Express Js</h1>
         </div>
         <h1 className="font-bold text-xs mt-4 flex flex-row"><GoDotFill className="my-auto mr-2 text-warning" />Intermediate</h1>
         <div className="grid grid-cols-3 flex flex-col py-1 px-2">
-          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">React Js</h1>
-          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">React Js</h1>
-          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">React Js</h1>
-          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">React Js</h1>
-          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">React Js</h1>
+          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">ML</h1>
+          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">AI</h1>
+          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">SQL</h1>
+          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">MongoDB</h1>
         </div>
         <h1 className="font-bold text-xs mt-4 flex flex-row"><GoDotFill className="my-auto mr-2 text-info" />Fundamental</h1>
         <div className="grid grid-cols-3 flex flex-col py-1 px-2">
-          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">React Js</h1>
-          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">React Js</h1>
-          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">React Js</h1>
+          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">C</h1>
+          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">C++</h1>
+          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">Javascript</h1>
         </div>
       </div>
     </div>
