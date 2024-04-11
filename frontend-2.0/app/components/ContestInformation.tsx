@@ -46,7 +46,7 @@ const ContestInformation: React.FC<ContestInformationProps> = ({ user, quizLoadi
         <>
           <h1 className='text-xl'>Welcome to The Daily Tech Quiz #{quizIndex}</h1>
           <p className='text-xs text-slate-400 mt-4'>This quiz is sponsered by InfoFusion.</p>
-          <p className='bg-slate-500 text-white p-5 rounded-lg mt-5'>{quizDesc}</p>
+          <p className='bg-slate-500 text-white p-5 rounded-lg mt-5 text-sm'>{quizDesc}</p>
           <a className='text-xs text-cyan-400 mt-2' href={descLink}>Read More</a>
           <div className='flex flex-col mt-5'>
             <button className='btn bg-cyan-800 text-white font-bold hover:bg-cyan-800 m-auto px-20'>Participants: 200</button>
