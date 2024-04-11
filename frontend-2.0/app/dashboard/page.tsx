@@ -47,10 +47,17 @@ const Dashboard = () => {
   }, [user])
   return (
     <div className='flex flex-col p-5 w-full'>
-      <div className="flex sm:flex-row flex-col">
-        <ProfileComp user={user} />
-        <StatsComp userCount={userCount} leaderboardRank={leaderboardRank} dashboard={dashboard} />
-      </div>
+      {loading ?
+        <div className='flex flex-row mx-auto my-2 p-5'>
+          <h1 className='mr-2'>Loading</h1>
+          <span className="loading loading-spinner loading-sm"></span>
+        </div>
+        :
+        <div className="flex sm:flex-row flex-col">
+          <ProfileComp user={user} />
+          <StatsComp userCount={userCount} leaderboardRank={leaderboardRank} dashboard={dashboard} />
+        </div>
+      }
     </div>
   )
 }

@@ -6,28 +6,19 @@ import { fetchCurrentQuiz } from '../apis/fetchCurrentQuiz';
 import { useSession } from 'next-auth/react';
 import { fetchUser } from '../apis/fetchUser';
 
-const ContestInformation = () => {
+interface ContestInformationProps {
+  user: any;
+}
+
+const ContestInformation: React.FC<ContestInformationProps> = ({ user }) => {
   const router = useRouter();
-  const { data } = useSession();
-  const [user, setUser] = useState<any>();
-  const [quizPopup, setQuizPopup] = useState<any>(false);
   const [quizData, setQuizData] = useState<any>();
   const [quizTitle, setQuizTitle] = useState<any>();
   const [quizIndex, setQuizIndex] = useState<any>();
   const [quizDesc, setQuizDesc] = useState<any>();
   const [descLink, setQuizDescLink] = useState<any>();
   const [loading, setLoading] = useState<any>(true);
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const resp = await fetchUser({ userId: data?.user?.email });
-      if (resp.status === 200) {
-        setUser(resp.data.user);
-      }
-    }
-    if (data != null) {
-      fetchUserData();
-    }
-  }, [data])
+
   useEffect(() => {
     const fetchQuizData = async () => {
       const { data } = await fetchCurrentQuiz();
@@ -45,15 +36,23 @@ const ContestInformation = () => {
 
   return (
     <div className='sm:w-2/3 w-full mt-4 flex flex-col'>
-      <h1 className='text-xl'>Welcome to The Daily Tech Quiz #{quizIndex}</h1>
-      <p className='text-xs text-slate-400 mt-4'>This quiz is sponsered by InfoFusion.</p>
-      <p className='bg-slate-300 p-2 rounded-lg mt-5'>{quizDesc}</p>
-      <a className='text-xs text-cyan-400 mt-2' href={descLink}>Read More</a>
-      <div className='flex flex-col mt-5'>
-        <button className='btn bg-cyan-800 text-white font-bold hover:bg-cyan-800 m-auto px-20'>Participants: 200</button>
-        <button className='btn bg-cyan-800 text-white font-bold hover:bg-cyan-800 m-auto mt-4 px-20'>Total Prize: 200$</button>
-      </div>
-      
+      {loading ?
+        <div className='flex flex-row mx-auto my-2'>
+          <h1 className='mr-2'>Loading</h1>
+          <span className="loading loading-spinner loading-sm"></span>
+        </div>
+        :
+        <>
+          <h1 className='text-xl'>Welcome to The Daily Tech Quiz #{quizIndex}</h1>
+          <p className='text-xs text-slate-400 mt-4'>This quiz is sponsered by InfoFusion.</p>
+          <p className='bg-slate-500 text-white p-5 rounded-lg mt-5'>{quizDesc}</p>
+          <a className='text-xs text-cyan-400 mt-2' href={descLink}>Read More</a>
+          <div className='flex flex-col mt-5'>
+            <button className='btn bg-cyan-800 text-white font-bold hover:bg-cyan-800 m-auto px-20'>Participants: 200</button>
+            <button className='btn bg-amber-800 text-white font-bold hover:bg-amber-800 m-auto mt-4 px-20'>Total Prize: 200$</button>
+          </div>
+        </>
+      }
     </div>
   )
 }

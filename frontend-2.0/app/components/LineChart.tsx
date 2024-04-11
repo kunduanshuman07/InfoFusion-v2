@@ -33,7 +33,7 @@ const LineChart: React.FC<LineChartProps> = ({ graph }) => {
     responsive: true,
   };
   return (
-    <div className="mt-2 w-full">
+    <div className="w-full">
       <Line
         className="bg-[#ffffff] shadow-md rounded-lg p-5"
         data={{

@@ -67,7 +67,8 @@ const StatsComp: React.FC<StatsProps> = ({ userCount, leaderboardRank, dashboard
           </div>
         </div>
       </div>
-      <div className="flex sm:flex-row flex-col w-full mt-2">
+      <div className="flex flex-col w-full mt-2">
+        <h1 className="font-bold text-sm m-auto mt-4">Rating Graph</h1>
         <LineChart graph={dashboard?.rating_graph}/>
       </div>
     </div>
