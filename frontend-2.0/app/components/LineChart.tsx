@@ -24,7 +24,7 @@ interface LineChartProps {
 
 const LineChart: React.FC<LineChartProps> = ({ graph }) => {
   const ratingLabel = [];
-  const n = graph.length;
+  const n = graph?.length;
   for (let i = 0; i < n; i++) {
     ratingLabel.push("");
   }
