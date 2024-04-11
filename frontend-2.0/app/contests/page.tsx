@@ -11,9 +11,12 @@ import TechImage5 from "../assets/Tech5.jpg";
 import Image from 'next/image';
 import { fetchCurrentQuiz } from '../apis/fetchCurrentQuiz';
 import { fetchPastQuiz } from '../apis/fetchPastQuiz';
+import { useRouter } from 'next/navigation';
 const Contests = () => {
   const { user } = useUser();
+  const router = useRouter();
   const [loading, setLoading] = useState<any>(true);
+  const [buttonLoading, setButtonLoading] = useState<any>(false);
   const [presentQuiz, setPresentQuiz] = useState<any>();
   const [pastQuiz, setPastQuiz] = useState<any>();
   useEffect(() => {
@@ -29,6 +32,11 @@ const Contests = () => {
     fetchPastQuizzes();
     setLoading(false);
   }, [])
+  const handleEnterContest = () => {
+    setButtonLoading(true);
+    const id='123';
+    router.push(`/contests/${id}`);
+  }
   return (
     <div className='flex flex-col'>
       <ContestHeader />
@@ -36,10 +44,10 @@ const Contests = () => {
         <button className='btn btn-sm bg-slate-200 text-neutral flex mt-4 hover:bg-slate-200 m-auto'><FaChevronLeft className='my-auto mx-2' /> OnGoing Quiz <FaChevronRight className='my-auto mx-2' /></button>
         <div className='shadow-md rounded-lg mt-2 sm:mr-auto mx-auto flex flex-row p-4 sm:w-1/3 w-full'>
           <div className='flex flex-col'>
-            <Image src={TechImage3} alt='Tech' width={450} style={{ maxHeight: "150px", borderRadius: "10px" }} className='m-auto'/>
+            <Image src={TechImage3} alt='Tech' width={450} style={{ maxHeight: "150px", borderRadius: "10px" }} className='m-auto' />
             <h1 className='mt-6 font-bold'>{presentQuiz?.quizTitle}</h1>
             <p className='mt-1 text-xs'>Ends in 12:05:65 hrs</p>
-            <button className='btn btn-sm mr-auto mt-2 btn-neutral px-10'>Enter</button>
+            <button className='btn btn-sm mr-auto mt-2 btn-neutral px-10' onClick={handleEnterContest}>Enter {buttonLoading ? <span className="loading loading-spinner loading-xs"></span> : ''}</button>
           </div>
         </div>
         <button className='btn btn-sm bg-slate-200 text-neutral flex mt-4 hover:bg-slate-200 m-auto'><FaChevronLeft className='my-auto mx-2' /> Upcoming Quizzes <FaChevronRight className='my-auto mx-2' /></button>
