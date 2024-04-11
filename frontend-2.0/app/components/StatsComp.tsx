@@ -33,7 +33,7 @@ const StatsComp: React.FC<StatsProps> = ({ userCount, leaderboardRank, dashboard
         <div className="w-full shadow-md flex flex-row items-center p-5 rounded-lg">
           <div className="flex flex-col w-1/2 items-center">
             <h1 className="text-xs font-bold">Solved Problems</h1>
-            <h1 className="mt-4 rounded-full p-10 text-cyan-800 font-bold text-3xl" style={{ border: "4px solid #94a3b8" }}>{dashboard?.questions}</h1>
+            <h1 className="mt-4 rounded-full sm:p-10 p-5 text-cyan-800 font-bold text-3xl" style={{ border: "4px solid #94a3b8" }}>{dashboard?.questions}</h1>
           </div>
           <div className="flex flex-col w-1/2 items-center">
             <div className="flex flex-col">
