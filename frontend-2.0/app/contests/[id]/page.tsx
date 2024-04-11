@@ -10,6 +10,7 @@ const ContestPage = () => {
     const { data } = useSession();
     const [user, setUser] = useState<any>();
     const [loading, setLoading] = useState<any>(true);
+    const [quizloading, setQuizLoading] = useState<any>(true);
     useEffect(() => {
         const fetchUserData = async () => {
             const resp = await fetchUser({ userId: data?.user?.email });
@@ -33,8 +34,8 @@ const ContestPage = () => {
                 <>
                     <a href='/contests' className='text-xs bold text-cyan-500 flex font-bold'><FaCaretLeft className='my-auto' /> Back to Quiz</a>
                     <div className='flex sm:flex-row flex-col'>
-                        <ContestInformation user={user} />
-                        <ContestPrizes />
+                        <ContestInformation user={user} quizLoading={quizloading} setQuizLoading={setQuizLoading}/>
+                        <ContestPrizes quizLoading={quizloading}/>
                     </div>
                 </>
             }

@@ -8,16 +8,17 @@ import { fetchUser } from '../apis/fetchUser';
 
 interface ContestInformationProps {
   user: any;
+  quizLoading: boolean;
+  setQuizLoading: (quizLoading: boolean)=> void;
 }
 
-const ContestInformation: React.FC<ContestInformationProps> = ({ user }) => {
+const ContestInformation: React.FC<ContestInformationProps> = ({ user, quizLoading, setQuizLoading }) => {
   const router = useRouter();
   const [quizData, setQuizData] = useState<any>();
   const [quizTitle, setQuizTitle] = useState<any>();
   const [quizIndex, setQuizIndex] = useState<any>();
   const [quizDesc, setQuizDesc] = useState<any>();
   const [descLink, setQuizDescLink] = useState<any>();
-  const [loading, setLoading] = useState<any>(true);
 
   useEffect(() => {
     const fetchQuizData = async () => {
@@ -27,7 +28,7 @@ const ContestInformation: React.FC<ContestInformationProps> = ({ user }) => {
       setQuizData(data.quizData);
       setQuizDesc(data.quizDesc);
       setQuizDescLink(data.descLink);
-      setLoading(false);
+      setQuizLoading(false);
     }
     if (user) {
       fetchQuizData();
@@ -36,7 +37,7 @@ const ContestInformation: React.FC<ContestInformationProps> = ({ user }) => {
 
   return (
     <div className='sm:w-2/3 w-full mt-4 flex flex-col'>
-      {loading ?
+      {quizLoading ?
         <div className='flex flex-row mx-auto my-2'>
           <h1 className='mr-2'>Loading</h1>
           <span className="loading loading-spinner loading-sm"></span>
