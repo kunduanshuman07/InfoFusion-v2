@@ -24,8 +24,8 @@ const QuizFinishPopUp: React.FC<ModalProps> = ({ modalOpen, setModalOpen, actFun
                 <p className="py-2 text-center">Are you sure you want to End Quiz?</p>
                 <div className="modal-action flex flex-row">
                     <div className="flex flex-row">
-                        <button className="btn btn-sm bg-cyan-700 hover:bg-cyan-500 text-white mr-auto" onClick={handleEndQuiz}>End Quiz {loading? <span className="loading loading-spinner loading-sm text-white"></span>: ""}</button>
-                        <button className="btn btn-sm ml-auto" onClick={handleClose}>Cancel</button>
+                        <button className="btn btn-sm bg-cyan-700 hover:bg-cyan-500 text-white mr-2" onClick={handleEndQuiz}>End Quiz {loading? <span className="loading loading-spinner loading-sm text-white"></span>: ""}</button>
+                        <button className="btn btn-sm ml-4" onClick={handleClose}>Cancel</button>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import authRoutes from "../routes/auth.route.js";
 import quizRoutes from "../routes/quiz.route.js";
 import dashboardRoutes from "../routes/dashboard.route.js";
 import leaderboardRoutes from "../routes/leaderboard.route.js";
+import userRoutes from "../routes/user.route.js";
 
 const router = express.Router();
 
@@ -24,6 +25,10 @@ const defaultRoutes = [
     {
         path: '/leaderboard',
         route: leaderboardRoutes
+    },
+    {
+        path: '/user',
+        route: userRoutes
     }
 ]
 

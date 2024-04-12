@@ -1,10 +1,28 @@
 'use client'
+import { useState } from "react";
 import { GoDotFill } from "react-icons/go";
+import DeleteAccount from "./DeleteAccount";
+import { deleteAccount } from "../apis/deleteAccount";
+import { useRouter } from "next/navigation";
 interface ProfileProps {
   user: any;
+  errorMessage: any;
+  setErrorMessage: (errorMessage: any) => void;
 }
-const ProfileComp: React.FC<ProfileProps> = ({ user }) => {
-
+const ProfileComp: React.FC<ProfileProps> = ({ user, errorMessage, setErrorMessage }) => {
+  const router = useRouter();
+  const [deleteModal, setDeleteModal] = useState<any>(false);
+  const [updateModal, setUpdateModal] = useState<any>(false);
+  const handleDeleteAcc = async () => {
+    setErrorMessage(null);
+    const { status, data } = await deleteAccount({ userId: user?.id });
+    if (data?.message === 'Error deleting account !') {
+      setErrorMessage('Error deleting account !');
+    }
+    else {
+      router.push('/login');
+    }
+  }
   return (
     <div className="sm:w-1/3 w-full shadow-md p-2 rounded-lg sm:mt-0 mt-4 flex flex-col items-center">
       <div className="bg-cyan-600 text-neutral-content rounded-full w-12 flex items-center">
@@ -41,11 +59,12 @@ const ProfileComp: React.FC<ProfileProps> = ({ user }) => {
             <h1 className="collapse-title text-sm flex flex-row">Account Settings</h1>
             <div className="collapse-content flex flex-col">
               <a href="" className="text-[#0891b2] text-xs font-bold hover:underline mt-2">Change Password</a>
-              <a href="" className="text-[#dc2626] text-xs font-bold hover:underline mt-1">Delete Account</a>
+              <a className="text-[#dc2626] text-xs font-bold hover:underline mt-1 cursor-pointer" onClick={() => setDeleteModal(true)}>Delete Account</a>
             </div>
           </div>
         </div>
       </div>
+      {deleteModal && <DeleteAccount errorMessage={errorMessage} modalOpen={deleteModal} setModalOpen={setDeleteModal} actFunc={handleDeleteAcc} setErrorMessage={setErrorMessage}/>}
     </div>
   )
 }

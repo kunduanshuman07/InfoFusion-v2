@@ -6,7 +6,7 @@ interface LoginProps{
 
 const LoginCard:React.FC<LoginProps> = ({text}) => {
     return (
-        <div className="card w-96 bg-base-100 shadow-xl m-auto">
+        <div className="card w-full bg-base-100 m-auto items-center">
             <div className="card-body">
                 <p className="text-cyan-800 text-center">Please Sign In to view {text} !</p>
                 <div className="card-actions justify-center mt-2">

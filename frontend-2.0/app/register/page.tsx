@@ -25,7 +25,7 @@ const Register = () => {
     else {
       const userResp = await registerUser({ email, password, username });
       if (userResp.data.message === "Uniqueness") {
-        setErrorMessage('Email/Username you entered are already being used. Enter a new one or Sign In !');
+        setErrorMessage('Duplicate Email or Username !');
         setLoading(false);
       }
       else {

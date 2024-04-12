@@ -8,6 +8,7 @@ import { fetchUser } from "../apis/fetchUser";
 import { fetchDashboard } from "../apis/fetchDashboard";
 import { fetchLeaderboard } from "../apis/fetchLeaderboard";
 import LoginCard from "../components/LoginCard";
+import ErrorToast from "../components/ErrorToast";
 
 const Dashboard = () => {
   const { data, status } = useSession();
@@ -16,6 +17,7 @@ const Dashboard = () => {
   const [leaderboardRank, setLeaderboardRank] = useState<any>();
   const [userCount, setUserCount] = useState<any>();
   const [user, setUser] = useState<any>();
+  const [errorMessage, setErrorMessage] = useState<any>(null);
   useEffect(() => {
     const fetchUserData = async () => {
       const resp = await fetchUser({ userId: data?.user?.email });
@@ -56,7 +58,7 @@ const Dashboard = () => {
         </div>
         :
         <div className="flex sm:flex-row flex-col">
-          <ProfileComp user={user} />
+          <ProfileComp user={user} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
           <StatsComp userCount={userCount} leaderboardRank={leaderboardRank} dashboard={dashboard} />
         </div>
       }
