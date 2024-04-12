@@ -2,12 +2,9 @@
 import { FaArtstation, FaSignInAlt } from "react-icons/fa"
 import { FaIntercom } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
-import { CgProfile } from "react-icons/cg";
 import { LiaBlogSolid } from "react-icons/lia";
 import { FaSignOutAlt } from "react-icons/fa";
-import { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import { useUser } from "../context/UserContext";
 import { useRouter } from "next/navigation";
 const UserLayout = () => {
     const router = useRouter();
@@ -45,9 +42,9 @@ const UserLayout = () => {
                     }
                 </div>
             </div>
-            {data &&
-                <div className="drawer-side">
-                    <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
+            <div className="drawer-side">
+                <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
+                {data ?
                     <ul className="menu p-4 w-40 min-h-full bg-base-200">
                         <li><a className='mt-3' href="/contests"><FaIntercom /> Quiz</a></li>
                         <li><a className='mt-3' href="/learn"><LiaBlogSolid /> Learn</a></li>
@@ -57,8 +54,8 @@ const UserLayout = () => {
                     <ul className="menu p-4 w-40 min-h-full bg-base-200">
                         <li><a className='mt-3' href="/login"><FaSignInAlt />SignIn</a></li>
                     </ul>
-                </div>
-            }
+                }
+            </div>
         </div>
     )
 }
