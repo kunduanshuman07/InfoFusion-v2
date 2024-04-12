@@ -32,7 +32,7 @@ const ContestPrizes: React.FC<ContestPrizesProps> = ({ quizLoading }) => {
             <p className='text-xs mt-2 flex'><GoDotFill className="my-auto mr-2" /> 10 minutes 10 questions</p>
             <p className='text-xs mt-2 flex'><GoDotFill className="my-auto mr-2" /> Equal weightage and negative marking</p>
             <p className='text-xs mt-2 flex'><GoDotFill className="my-auto mr-2" /> Donot switch tabs between quiz</p>
-            <button className='btn btn-neutral mt-5'>Start Quiz</button>
+            <a className='btn btn-neutral mt-5' href="/quiz">Start Quiz</a>
           </div> : <></>
       }
     </>

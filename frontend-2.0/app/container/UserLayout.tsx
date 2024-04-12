@@ -10,7 +10,7 @@ const UserLayout = () => {
     const router = useRouter();
     const { data } = useSession();
     const handleSignout = async () => {
-        signOut();
+        await signOut();
         router.push('/login');
     }
     return (
