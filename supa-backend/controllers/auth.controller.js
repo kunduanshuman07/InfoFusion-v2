@@ -42,7 +42,7 @@ export const register = async (req, res) => {
         }]);
         if (error) {
             logError(apiName, error.message);
-            res.status(400).send(`Error: ${error.message}`);
+            res.status(200).send({message: "Uniqueness"});
         }
         const { data } = await supabase.from('User').select('*').match({ email: email });
         const leaderboardResp = await supabase.from('Leaderboard').insert([

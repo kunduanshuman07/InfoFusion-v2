@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Learn = () => {
+const Community = () => {
   return (
     <div>Coming soon ...</div>
   )
 }
 
-export default Learn
+export default Community

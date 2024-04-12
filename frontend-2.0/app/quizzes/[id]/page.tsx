@@ -32,7 +32,7 @@ const ContestPage = () => {
                 </div>
                 :
                 <>
-                    <a href='/contests' className='text-xs bold text-cyan-500 flex font-bold'><FaCaretLeft className='my-auto' /> Back to Quiz</a>
+                    <a href='/quizzes' className='text-xs bold text-cyan-500 flex font-bold'><FaCaretLeft className='my-auto' /> Back to Quiz</a>
                     <div className='flex sm:flex-row flex-col'>
                         <ContestInformation user={user} quizLoading={quizloading} setQuizLoading={setQuizLoading}/>
                         <ContestPrizes quizLoading={quizloading}/>

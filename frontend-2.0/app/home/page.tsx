@@ -1,4 +1,5 @@
 'use client'
+import Footer from '../components/Footer';
 import HomeCarousel from '../components/HomeCarousel';
 import { useSession } from 'next-auth/react';
 const Home = () => {
@@ -15,24 +16,26 @@ const Home = () => {
           <HomeCarousel />
           <div className='grid sm:grid-cols-3 sm:gap-4 grid-cols-1 mt-2'>
             <div className="mockup-code sm:mt-0 mt-2">
-              <pre data-prefix="$"><code>npm i daisyui</code></pre>
-              <pre data-prefix=">" className="text-warning"><code>installing...</code></pre>
-              <pre data-prefix=">" className="text-success"><code>Done!</code></pre>
+              <pre data-prefix="$"><code>git clone https://github.com/some.git</code></pre>
+              <pre data-prefix=">" className="text-warning"><code>cloning repository...</code></pre>
+              <pre data-prefix=">" className="text-success"><code>Repository cloned successfully!</code></pre>
             </div>
             <div className="mockup-code sm:mt-0 mt-2">
-              <pre data-prefix="$"><code>npm i daisyui</code></pre>
-              <pre data-prefix=">" className="text-warning"><code>installing...</code></pre>
-              <pre data-prefix=">" className="text-success"><code>Done!</code></pre>
+              <pre data-prefix="$"><code>docker-compose up</code></pre>
+              <pre data-prefix=">" className="text-warning"><code>starting containers...</code></pre>
+              <pre data-prefix=">" className="text-success"><code>Containers are up and running!</code></pre>
             </div>
             <div className="mockup-code sm:mt-0 mt-2">
-              <pre data-prefix="$"><code>npm i daisyui</code></pre>
-              <pre data-prefix=">" className="text-warning"><code>installing...</code></pre>
-              <pre data-prefix=">" className="text-success"><code>Done!</code></pre>
+              <pre data-prefix="$"><code>npm run build</code></pre>
+              <pre data-prefix=">" className="text-warning"><code>building project...</code></pre>
+              <pre data-prefix=">" className="text-success"><code>Project built successfully!</code></pre>
             </div>
+
           </div>
         </div>
-        <a className='btn m-auto mt-4 px-20 sm:mb-0 mb-4' href={data ? '/contests' : '/login'}>Get started</a>
+        <a className='btn m-auto mt-4 px-20 sm:mb-0 mb-4' href={data ? '/quizzes' : '/login'}>Get started</a>
       </div>
+      <Footer />
     </div>
   );
 }

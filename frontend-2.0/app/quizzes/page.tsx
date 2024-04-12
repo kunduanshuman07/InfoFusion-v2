@@ -11,8 +11,11 @@ import Image from 'next/image';
 import { fetchCurrentQuiz } from '../apis/fetchCurrentQuiz';
 import { fetchPastQuiz } from '../apis/fetchPastQuiz';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import LoginCard from '../components/LoginCard';
 const Contests = () => {
   const router = useRouter();
+  const {status} = useSession();
   const [loading, setLoading] = useState<any>(true);
   const [buttonLoading, setButtonLoading] = useState<any>(false);
   const [presentQuiz, setPresentQuiz] = useState<any>();
@@ -32,13 +35,14 @@ const Contests = () => {
   }, [])
   const handleEnterContest = () => {
     setButtonLoading(true);
-    const id = '123';
-    router.push(`/contests/${id}`);
+    const id = 'DailyQuiz';
+    router.push(`/quizzes/${id}`);
   }
   return (
     <div className='flex flex-col'>
       <ContestHeader />
-      {loading ?
+      {status==='unauthenticated'?<LoginCard text={'Quiz'}/>:
+        loading ?
         <div className='flex flex-row mx-auto my-2 p-5'>
           <h1 className='mr-2'>Loading</h1>
           <span className="loading loading-spinner loading-sm"></span>

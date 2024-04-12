@@ -7,9 +7,10 @@ import { useSession } from "next-auth/react";
 import { fetchUser } from "../apis/fetchUser";
 import { fetchDashboard } from "../apis/fetchDashboard";
 import { fetchLeaderboard } from "../apis/fetchLeaderboard";
+import LoginCard from "../components/LoginCard";
 
 const Dashboard = () => {
-  const { data } = useSession();
+  const { data, status } = useSession();
   const [loading, setLoading] = useState<any>(true);
   const [dashboard, setDashboard] = useState<any>();
   const [leaderboardRank, setLeaderboardRank] = useState<any>();
@@ -47,7 +48,8 @@ const Dashboard = () => {
   }, [user])
   return (
     <div className='flex flex-col p-5 w-full'>
-      {loading ?
+      {status==='unauthenticated'?<LoginCard text={'Dashboard'}/>:
+      loading ?
         <div className='flex flex-row mx-auto my-2 p-5'>
           <h1 className='mr-2'>Loading</h1>
           <span className="loading loading-spinner loading-sm"></span>
