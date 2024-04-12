@@ -13,7 +13,7 @@ const Home = () => {
           <h1 className='sm:text-5xl text-3xl text-white ml-auto mr-auto font-bold'>InfoFusion</h1>
           <p className='text-sm text-center text-white mt-1'>Where Knowledge Meets Innovation in Tech Learning.</p>
         </div>
-        <div className='flex flex-col'>
+        <div className='flex flex-col items-center'>
           <HomeCarousel />
           <div className='grid sm:grid-cols-3 sm:gap-4 grid-cols-1 mt-2'>
             <div className='bg-neutral p-4 rounded-lg shadow-md mt-2 flex flex-col'>
