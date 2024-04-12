@@ -32,7 +32,7 @@ const ProfileComp: React.FC<ProfileProps> = ({ user }) => {
             <input type="checkbox" />
             <h1 className="collapse-title mt-auto mb-auto text-sm">More on Quizzes</h1>
             <div className="collapse-content flex flex-col">
-              <a href="/dashboard/scorecards" className="text-[#38bdf8] text-xs font-bold hover:underline mt-2">Scorecards</a>
+              <a href="/scorecards" className="text-[#38bdf8] text-xs font-bold hover:underline mt-2">Scorecards</a>
               <a href="" className="text-[#38bdf8] text-xs font-bold hover:underline mt-1">Weightage System</a>
             </div>
           </div>

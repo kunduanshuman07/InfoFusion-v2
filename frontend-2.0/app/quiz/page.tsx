@@ -9,6 +9,8 @@ import { FaAngleRight } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import MyTimer from "../components/QuizTimer";
 import { RiTimerFlashFill } from "react-icons/ri";
+import QuizFinishPopUp from "../components/QuizFinishPopUp";
+import { submitQuiz } from "../apis/submitQuiz";
 const QuizPage = () => {
     const { data } = useSession();
     const router = useRouter();
@@ -22,7 +24,7 @@ const QuizPage = () => {
     const [quizId, setQuizId] = useState<any>();
     const [currentIndex, setCurrentIndex] = useState<any>(0);
     const [selectedOptions, setSelectedOptions] = useState<any>(Array.from({ length: 10 }, () => null));
-
+    const [modalOpen, setModalOpen] = useState<any>(false);
     useEffect(() => {
         const fetchUserData = async () => {
             const resp = await fetchUser({ userId: data?.user?.email });
@@ -51,6 +53,12 @@ const QuizPage = () => {
     const handleTimerEnding = () => {
         router.push('/contests');
     }
+    const handleSubmitQuiz = async () => {
+        const { status, data } = await submitQuiz({ quizId: quizId, userId: user.id, quizData, selectedOptions, quizTitle, quizIndex, username: user.username });
+        if (status == 200) {
+          router.push(`/contests`)
+        }
+      }
     return (
         <div className='p-1' style={{ background: 'linear-gradient(45deg, #155e75, #06b6d4)', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {loading ?
@@ -66,7 +74,7 @@ const QuizPage = () => {
                         ))}
                     </div>
                     <div className="flex flex-row">
-                    <RiTimerFlashFill className="m-auto mt-3 text-white"/><MyTimer expiryTimestamp={expriyTime} handleTimerEnding={handleTimerEnding} />
+                        <RiTimerFlashFill className="m-auto mt-3 text-white" /><MyTimer expiryTimestamp={expriyTime} handleTimerEnding={handleTimerEnding} />
                     </div>
                     <div className="flex flex-col sm:p-10 p-5 shadow-md rounded-lg mt-2 items-center" style={{ border: "2px solid #22d3ee" }}>
                         <h1 className="text-white font-bold sm:text-xl m-auto">{quizData?.[currentIndex]?.title}</h1>
@@ -87,11 +95,12 @@ const QuizPage = () => {
                     </div>
                     <div className="grid grid-cols-3 gap-2 mt-4">
                         <button className="sm:mt-5 mt-2 btn btn-warning text-white px-2 sm:btn-sm btn-xs" onClick={() => setCurrentIndex(currentIndex - 1)} disabled={currentIndex === 0}>Prev <FaAngleLeft /></button>
-                        <button className="sm:mt-5 mt-2 btn btn-accent text-white px-2 sm:btn-sm btn-xs">Submit</button>
+                        <button className="sm:mt-5 mt-2 btn btn-accent text-white px-2 sm:btn-sm btn-xs" onClick={()=>setModalOpen(true)}>Submit</button>
                         <button className="sm:mt-5 mt-2 btn btn-info text-white px-2 sm:btn-sm btn-xs" onClick={() => setCurrentIndex(currentIndex + 1)} disabled={currentIndex === 9}>Next <FaAngleRight /></button>
                     </div>
                 </>
             }
+            {modalOpen && <QuizFinishPopUp modalOpen={modalOpen} setModalOpen={setModalOpen} actFunc={handleSubmitQuiz}/>}
         </div>
     )
 }
