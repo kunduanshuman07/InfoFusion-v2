@@ -41,11 +41,12 @@ const LineChart: React.FC<LineChartProps> = ({ graph }) => {
           datasets: [
             {
               data: graph,
-              backgroundColor: "#2dd4bf",
+              backgroundColor: "#0e7490",
+              borderWidth: 5,
               showLine: true,
               stepped: false,
               borderJoinStyle: 'round',
-              borderColor: "#2dd4bf",
+              borderColor: "#0e7490",
               borderCapStyle: "round",
             },
           ],

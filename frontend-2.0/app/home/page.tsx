@@ -1,7 +1,5 @@
 'use client'
 import HomeCarousel from '../components/HomeCarousel';
-import { FaChevronRight } from "react-icons/fa";
-import { GoDotFill } from "react-icons/go";
 import { useSession } from 'next-auth/react';
 const Home = () => {
   const { data } = useSession();
@@ -16,35 +14,20 @@ const Home = () => {
         <div className='flex flex-col items-center'>
           <HomeCarousel />
           <div className='grid sm:grid-cols-3 sm:gap-4 grid-cols-1 mt-2'>
-            <div className='bg-neutral p-4 rounded-lg shadow-md mt-2 flex flex-col'>
-              <div className='flex flex-row text-slate-200'>
-                <GoDotFill />
-                <GoDotFill />
-                <GoDotFill />
-              </div>
-              <h1 className='text-[#e2e8f0] font-bold text-xs ml-1 mt-2'>$<span className='ml-3'>npm i express</span></h1>
-              <h1 className='flex text-xs text-amber-400 font-bold mt-2'><FaChevronRight className='my-auto' /><span className='ml-3'>createServer()</span></h1>
-              <h1 className='flex text-xs text-teal-500 font-bold mt-2'><FaChevronRight className='my-auto' /><span className='ml-3'>app.listen()</span></h1>
+            <div className="mockup-code sm:mt-0 mt-2">
+              <pre data-prefix="$"><code>npm i daisyui</code></pre>
+              <pre data-prefix=">" className="text-warning"><code>installing...</code></pre>
+              <pre data-prefix=">" className="text-success"><code>Done!</code></pre>
             </div>
-            <div className='bg-neutral p-4 rounded-lg shadow-md mt-2 flex flex-col'>
-              <div className='flex flex-row text-slate-200'>
-                <GoDotFill />
-                <GoDotFill />
-                <GoDotFill />
-              </div>
-              <h1 className='text-[#e2e8f0] font-bold text-xs ml-1 mt-2'>$<span className='ml-3'>npx create-react-app</span></h1>
-              <h1 className='flex text-xs text-amber-400 font-bold mt-2'><FaChevronRight className='my-auto' /><span className='ml-3'>import HomeComponent</span></h1>
-              <h1 className='flex text-xs text-teal-500 font-bold mt-2'><FaChevronRight className='my-auto' /><span className='ml-3'>useState()</span></h1>
+            <div className="mockup-code sm:mt-0 mt-2">
+              <pre data-prefix="$"><code>npm i daisyui</code></pre>
+              <pre data-prefix=">" className="text-warning"><code>installing...</code></pre>
+              <pre data-prefix=">" className="text-success"><code>Done!</code></pre>
             </div>
-            <div className='bg-neutral p-4 rounded-lg shadow-md mt-2 flex flex-col'>
-              <div className='flex flex-row text-slate-200'>
-                <GoDotFill/>
-                <GoDotFill/>
-                <GoDotFill/>
-              </div>
-              <h1 className='text-[#e2e8f0] font-bold text-xs ml-1 mt-2'>$<span className='ml-3'>npx create-next-app@latest</span></h1>
-              <h1 className='flex text-xs text-amber-400 font-bold mt-2'><FaChevronRight className='my-auto'/><span className='ml-3'>.next</span></h1>
-              <h1 className='flex text-xs text-teal-500 font-bold mt-2'><FaChevronRight className='my-auto'/><span className='ml-3'>server-actions</span></h1>
+            <div className="mockup-code sm:mt-0 mt-2">
+              <pre data-prefix="$"><code>npm i daisyui</code></pre>
+              <pre data-prefix=">" className="text-warning"><code>installing...</code></pre>
+              <pre data-prefix=">" className="text-success"><code>Done!</code></pre>
             </div>
           </div>
         </div>

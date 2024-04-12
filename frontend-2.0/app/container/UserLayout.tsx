@@ -42,7 +42,7 @@ const UserLayout = () => {
                     }
                 </div>
             </div>
-            <div className="drawer-side">
+            <div className="drawer-side z-10">
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                 {data ?
                     <ul className="menu p-4 w-40 min-h-full bg-base-200">
