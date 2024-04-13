@@ -18,17 +18,17 @@ const Home = () => {
             <div className="mockup-code sm:mt-0 mt-2">
               <pre data-prefix="$"><code>git clone xyz</code></pre>
               <pre data-prefix=">" className="text-warning"><code>cloning repository...</code></pre>
-              <pre data-prefix=">" className="text-success"><code>Repository cloned successfully!</code></pre>
+              <pre data-prefix=">" className="text-success"><code>Repository cloned!</code></pre>
             </div>
             <div className="mockup-code sm:mt-0 mt-2">
               <pre data-prefix="$"><code>docker-compose up</code></pre>
               <pre data-prefix=">" className="text-warning"><code>starting containers...</code></pre>
-              <pre data-prefix=">" className="text-success"><code>Containers are up and running!</code></pre>
+              <pre data-prefix=">" className="text-success"><code>Containers are running!</code></pre>
             </div>
             <div className="mockup-code sm:mt-0 mt-2">
               <pre data-prefix="$"><code>npm run build</code></pre>
               <pre data-prefix=">" className="text-warning"><code>building project...</code></pre>
-              <pre data-prefix=">" className="text-success"><code>Project built successfully!</code></pre>
+              <pre data-prefix=">" className="text-success"><code>Project built!</code></pre>
             </div>
 
           </div>
