@@ -56,7 +56,7 @@ const QuizPage = () => {
     const handleSubmitQuiz = async () => {
         const { status, data } = await submitQuiz({ quizId: quizId, userId: user.id, quizData, selectedOptions, quizTitle, quizIndex, username: user.username });
         if (status == 200) {
-          router.push(`/quizzes`)
+          router.push(`/scorecards`)
         }
       }
     return (

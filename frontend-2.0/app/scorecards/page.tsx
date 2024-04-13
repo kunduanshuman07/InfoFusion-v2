@@ -61,7 +61,7 @@ const Scorecards = () => {
                     </thead>
                     <tbody>
                         {scorecardData?.map((scores: any, index: any) => (
-                            <tr className='text-xs text-center' key={index}>
+                            <tr className={`text-center text-xs ${index===0?'bg-amber-100': ''}`} key={index}>
                                 <td>{index+1}</td>
                                 <td>{formatDateAndTime(scores?.submission_time)}</td>
                                 <td>{scores?.quiz_title}</td>

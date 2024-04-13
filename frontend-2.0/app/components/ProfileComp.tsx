@@ -40,7 +40,7 @@ const ProfileComp: React.FC<ProfileProps> = ({ user, errorMessage, setErrorMessa
       <h1 className="text-sm font-bold mt-2">{user?.username}</h1>
       <h1 className="text-xs mt-1">{user?.email}</h1>
       <div className="flex flex-row">
-        <a className="btn bg-cyan-50 mt-2 text-cyan-800 hover:bg-cyan-50 btn-sm px-10 mr-2" href="/profile"><GiPlagueDoctorProfile/> Profile </a>
+        <a className="btn bg-cyan-50 mt-2 text-cyan-800 hover:bg-cyan-50 btn-sm px-10 mr-2" href="/profile"><GiPlagueDoctorProfile /> Profile </a>
         <button className="btn bg-cyan-50 mt-2 text-cyan-800 hover:bg-cyan-50 btn-sm px-10" onClick={handleSignout}>SignOut <FaSignOutAlt /> {loading && <span className="loading loading-spinner text-cyan-800"></span>}</button>
       </div>
       <div className="mt-2 flex flex-col w-full" style={{ borderTop: "5px solid #94a3b8" }}>
@@ -58,14 +58,7 @@ const ProfileComp: React.FC<ProfileProps> = ({ user, errorMessage, setErrorMessa
           </div>
         </div>
         <div className="flex flex-col mt-4">
-          <div className="collapse collapse-arrow shadow-md rounded-lg">
-            <input type="checkbox" />
-            <h1 className="collapse-title mt-auto mb-auto text-sm">More on Quizzes</h1>
-            <div className="collapse-content flex flex-col">
-              <a href="/scorecards" className="text-[#38bdf8] text-xs font-bold hover:underline mt-2">Scorecards</a>
-              <a href="" className="text-[#38bdf8] text-xs font-bold hover:underline mt-1">Weightage System</a>
-            </div>
-          </div>
+          <a href="/scorecards" className="bg-cyan-500 p-2 rounded-lg text-white px-6 text-sm m-auto font-bold hover:underline mt-2">My Scorecards</a>
           <div className="collapse collapse-arrow shadow-md rounded-lg mt-4">
             <input type="checkbox" />
             <h1 className="collapse-title text-sm flex flex-row">Account Settings</h1>
