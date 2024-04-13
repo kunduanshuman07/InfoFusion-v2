@@ -24,7 +24,7 @@ export const forgotPassword = async(req,res) => {
     try {
         const {error} = await supabase.from('User').update({
             password: newPassword
-        }).match({id: userId});
+        }).match({email: userId});
         if(error){
             return res.status(200).send({message: "Error updating password !"});
         }

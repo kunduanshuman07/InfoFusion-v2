@@ -58,7 +58,7 @@ const ProfileComp: React.FC<ProfileProps> = ({ user, errorMessage, setErrorMessa
             <input type="checkbox" />
             <h1 className="collapse-title text-sm flex flex-row">Account Settings</h1>
             <div className="collapse-content flex flex-col">
-              <a href="" className="text-[#0891b2] text-xs font-bold hover:underline mt-2">Change Password</a>
+              <a href="/password" className="text-[#0891b2] text-xs font-bold hover:underline mt-2">Change Password</a>
               <a className="text-[#dc2626] text-xs font-bold hover:underline mt-1 cursor-pointer" onClick={() => setDeleteModal(true)}>Delete Account</a>
             </div>
           </div>

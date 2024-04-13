@@ -16,7 +16,6 @@ const DeleteAccount: React.FC<ModalProps> = ({ modalOpen, setModalOpen, actFunc,
     const handleDelete = async () => {
         setLoading(true);
         actFunc();
-        setLoading(false);
     }
     const handleClose = () => {
         setErrorMessage(null);

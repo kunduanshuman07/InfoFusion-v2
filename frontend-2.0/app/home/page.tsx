@@ -16,7 +16,7 @@ const Home = () => {
           <HomeCarousel />
           <div className='grid sm:grid-cols-3 sm:gap-4 grid-cols-1 mt-2'>
             <div className="mockup-code sm:mt-0 mt-2">
-              <pre data-prefix="$"><code>git clone https://github.com/some.git</code></pre>
+              <pre data-prefix="$"><code>git clone xyz</code></pre>
               <pre data-prefix=">" className="text-warning"><code>cloning repository...</code></pre>
               <pre data-prefix=">" className="text-success"><code>Repository cloned successfully!</code></pre>
             </div>
