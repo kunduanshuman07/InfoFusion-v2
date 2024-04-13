@@ -4,16 +4,16 @@ import { supabase } from "../config/db.config.js";
 
 
 export const updateProfile = async(req,res) => {
-    const {userId, skills, age, highestQual, aspiration, phone, home} = req.body;
+    const {userId, firstname, lastname, age, phone, skillOne, skillTwo, skillThree, aspiration, highestQual, home} = req.body;
     try {
         const {data, error} = await supabase.from('User').update({
-            firstname, lastname, age, skills, age, high_qual: highestQual, aspiration, phone, home
+            firstname, lastname, age, skill_one: skillOne, skill_two: skillTwo, skill_three: skillThree, age, high_qual: highestQual, aspiration, phone, home
         }).match({id: userId});
         if(error){
             return res.status(200).send({message: "Error updating profile !"});
         }
         const resp = await supabase.from('User').select('*').match({id: userId});
-        return res.status(200).send({message: 'Profile Updated Succesfully !', data: resp.data[0]});
+        return res.status(200).send({message: 'Profile Updated Succesfully !', user: resp.data[0]});
     } catch (error) {
         return res.status(500).send(`Error: ${error.message}`);
     }

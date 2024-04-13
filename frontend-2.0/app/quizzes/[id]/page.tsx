@@ -2,12 +2,13 @@
 import { fetchUser } from '@/app/apis/fetchUser';
 import ContestInformation from '@/app/components/ContestInformation'
 import ContestPrizes from '@/app/components/ContestPrizes'
+import LoginCard from '@/app/components/LoginCard';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { FaCaretLeft } from "react-icons/fa";
 
 const ContestPage = () => {
-    const { data } = useSession();
+    const { data, status } = useSession();
     const [user, setUser] = useState<any>();
     const [loading, setLoading] = useState<any>(true);
     const [quizloading, setQuizLoading] = useState<any>(true);
@@ -25,7 +26,8 @@ const ContestPage = () => {
     }, [data])
     return (
         <div className='flex flex-col w-full p-10'>
-            {loading ?
+            {status==='unauthenticated'?<LoginCard text={'Daily Quiz'}/>:
+                loading ?
                 <div className='flex flex-row mx-auto my-2 p-5'>
                     <h1 className='mr-2'>Loading</h1>
                     <span className="loading loading-spinner loading-sm"></span>

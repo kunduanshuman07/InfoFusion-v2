@@ -30,7 +30,7 @@ const ProfileComp: React.FC<ProfileProps> = ({ user, errorMessage, setErrorMessa
       </div>
       <h1 className="text-sm font-bold mt-2">{user?.username}</h1>
       <h1 className="text-xs mt-1">{user?.email}</h1>
-      <button className="btn bg-cyan-50 mt-2 text-cyan-800 hover:bg-cyan-50 btn-sm px-10">Edit Profile</button>
+      <a className="btn bg-cyan-50 mt-2 text-cyan-800 hover:bg-cyan-50 btn-sm px-10" href="/profile">Profile</a>
       <div className="mt-2 flex flex-col w-full" style={{ borderTop: "5px solid #94a3b8" }}>
         <h1 className="font-bold text-sm mt-2 flex text-slate-500"><GoDotFill className="my-auto mr-2 text-error" /> Skills</h1>
         <div className="grid grid-cols-3 flex flex-col py-1 px-2">

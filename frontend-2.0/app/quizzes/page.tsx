@@ -15,7 +15,6 @@ import { useSession } from 'next-auth/react';
 import LoginCard from '../components/LoginCard';
 const Contests = () => {
   const router = useRouter();
-  const {status} = useSession();
   const [loading, setLoading] = useState<any>(true);
   const [buttonLoading, setButtonLoading] = useState<any>(false);
   const [presentQuiz, setPresentQuiz] = useState<any>();
@@ -41,7 +40,7 @@ const Contests = () => {
   return (
     <div className='flex flex-col'>
       <ContestHeader />
-      {status==='unauthenticated'?<LoginCard text={'Quiz'}/>:
+      {
         loading ?
         <div className='flex flex-row mx-auto my-2 p-5'>
           <h1 className='mr-2'>Loading</h1>
@@ -64,8 +63,7 @@ const Contests = () => {
               <div className='shadow-md rounded-lg mt-2 sm:mr-auto mx-auto flex flex-col p-4' style={{ width: "250px" }} key={index}>
                 <Image src={index % 2 === 0 ? TechImage : TechImage2} alt='Tech' width={250} style={{ maxHeight: "150px", borderRadius: "10px" }} />
                 <h1 className='mt-2 font-bold'>{quiz.title}</h1>
-                <p className='mt-1 text-xs'>Ends in 12:05:65 hrs</p>
-                <button className='btn btn-neutral mt-2 mr-auto btn-sm'>Register</button>
+                <p className='mt-1 text-xs'>Starts in 12:05:65 hrs</p>
               </div>
             ))}
           </div>
