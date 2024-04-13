@@ -23,11 +23,15 @@ const Scorecards = () => {
             fetchUserData();
         }
     }, [data, user]);
-
+    const formatIdForViewScore = (userId: string, quizId: string) => {
+        const id = `${userId}+${quizId}`;
+        return id;
+    }
     useEffect(() => {
         const fetchScorecardsData = async () => {
             const { status, data } = await fetchScorecards({ userId: user?.id });
             if (status === 200) {
+                console.log(data);
                 setScorecardData(data.data);
                 setLoading(false);
             }
@@ -62,7 +66,7 @@ const Scorecards = () => {
                                 <td>{formatDateAndTime(scores?.submission_time)}</td>
                                 <td>{scores?.quiz_title}</td>
                                 <td>{scores?.score}</td>
-                                <td><a href='' className='text-cyan-400 font-bold'>View</a></td>
+                                <td><a href={`/scorecards/${formatIdForViewScore(user?.id, scores.quiz_id)}`} className='text-cyan-400 font-bold' target="_blank">View</a></td>
                             </tr>
                         ))}
                     </tbody>

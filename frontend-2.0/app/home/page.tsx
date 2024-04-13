@@ -1,6 +1,5 @@
 'use client'
 import Footer from '../components/Footer';
-import HomeCarousel from '../components/HomeCarousel';
 import { useSession } from 'next-auth/react';
 const Home = () => {
   const { data } = useSession();
@@ -13,27 +12,26 @@ const Home = () => {
           <p className='text-sm text-center text-white mt-1'>Where Knowledge Meets Innovation in Tech Learning.</p>
         </div>
         <div className='flex flex-col items-center'>
-          <HomeCarousel />
           <div className='grid sm:grid-cols-3 sm:gap-4 grid-cols-1 mt-2'>
             <div className="mockup-code sm:mt-0 mt-2">
-              <pre data-prefix="$"><code>git clone xyz</code></pre>
-              <pre data-prefix=">" className="text-warning"><code>cloning repository...</code></pre>
-              <pre data-prefix=">" className="text-success"><code>Repository cloned!</code></pre>
+              <pre data-prefix="$"><code>Quizzes</code></pre>
+              <pre data-prefix=">" className="text-warning"><code>Web dev quizzes</code></pre>
+              <pre data-prefix=">" className="text-success"><code>Hackathons!</code></pre>
             </div>
             <div className="mockup-code sm:mt-0 mt-2">
-              <pre data-prefix="$"><code>docker-compose up</code></pre>
-              <pre data-prefix=">" className="text-warning"><code>starting containers...</code></pre>
-              <pre data-prefix=">" className="text-success"><code>Containers are running!</code></pre>
+              <pre data-prefix="$"><code>Learn</code></pre>
+              <pre data-prefix=">" className="text-warning"><code>Depth</code></pre>
+              <pre data-prefix=">" className="text-success"><code>Tech stacks!</code></pre>
             </div>
             <div className="mockup-code sm:mt-0 mt-2">
-              <pre data-prefix="$"><code>npm run build</code></pre>
-              <pre data-prefix=">" className="text-warning"><code>building project...</code></pre>
-              <pre data-prefix=">" className="text-success"><code>Project built!</code></pre>
+              <pre data-prefix="$"><code>Dashboard</code></pre>
+              <pre data-prefix=">" className="text-warning"><code>Community</code></pre>
+              <pre data-prefix=">" className="text-success"><code>Discuss & Compete!</code></pre>
             </div>
 
           </div>
         </div>
-        <a className='btn m-auto sm:mt-4 px-20 sm:mb-0 mb-20 mt-8' href={data ? '/quizzes' : '/login'}>Get started</a>
+        <a className='btn m-auto sm:mt-10 px-20 sm:mb-0 mb-20 mt-10' href={data ? '/quizzes' : '/login'}>Get started</a>
       </div>
       <Footer />
     </div>

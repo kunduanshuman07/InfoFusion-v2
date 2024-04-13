@@ -4,6 +4,10 @@ import { GoDotFill } from "react-icons/go";
 import DeleteAccount from "./DeleteAccount";
 import { deleteAccount } from "../apis/deleteAccount";
 import { useRouter } from "next/navigation";
+import { FaSignOutAlt } from "react-icons/fa";
+import { GiPlagueDoctorProfile } from "react-icons/gi";
+import { signOut } from "next-auth/react";
+
 interface ProfileProps {
   user: any;
   errorMessage: any;
@@ -12,7 +16,12 @@ interface ProfileProps {
 const ProfileComp: React.FC<ProfileProps> = ({ user, errorMessage, setErrorMessage }) => {
   const router = useRouter();
   const [deleteModal, setDeleteModal] = useState<any>(false);
-  const [updateModal, setUpdateModal] = useState<any>(false);
+  const [loading, setLoading] = useState<any>(false);
+  const handleSignout = async () => {
+    setLoading(true);
+    await signOut({ redirect: false });
+    router.push('/login');
+  }
   const handleDeleteAcc = async () => {
     setErrorMessage(null);
     const { status, data } = await deleteAccount({ userId: user?.id });
@@ -30,7 +39,10 @@ const ProfileComp: React.FC<ProfileProps> = ({ user, errorMessage, setErrorMessa
       </div>
       <h1 className="text-sm font-bold mt-2">{user?.username}</h1>
       <h1 className="text-xs mt-1">{user?.email}</h1>
-      <a className="btn bg-cyan-50 mt-2 text-cyan-800 hover:bg-cyan-50 btn-sm px-10" href="/profile">Profile</a>
+      <div className="flex flex-row">
+        <a className="btn bg-cyan-50 mt-2 text-cyan-800 hover:bg-cyan-50 btn-sm px-10 mr-2" href="/profile"><GiPlagueDoctorProfile/> Profile </a>
+        <button className="btn bg-cyan-50 mt-2 text-cyan-800 hover:bg-cyan-50 btn-sm px-10" onClick={handleSignout}>SignOut <FaSignOutAlt /> {loading && <span className="loading loading-spinner text-cyan-800"></span>}</button>
+      </div>
       <div className="mt-2 flex flex-col w-full" style={{ borderTop: "5px solid #94a3b8" }}>
         <h1 className="font-bold text-sm mt-2 flex text-slate-500"><GoDotFill className="my-auto mr-2 text-error" /> Skills</h1>
         <div className="grid grid-cols-3 flex flex-col py-1 px-2">
@@ -64,7 +76,7 @@ const ProfileComp: React.FC<ProfileProps> = ({ user, errorMessage, setErrorMessa
           </div>
         </div>
       </div>
-      {deleteModal && <DeleteAccount errorMessage={errorMessage} modalOpen={deleteModal} setModalOpen={setDeleteModal} actFunc={handleDeleteAcc} setErrorMessage={setErrorMessage}/>}
+      {deleteModal && <DeleteAccount errorMessage={errorMessage} modalOpen={deleteModal} setModalOpen={setDeleteModal} actFunc={handleDeleteAcc} setErrorMessage={setErrorMessage} />}
     </div>
   )
 }

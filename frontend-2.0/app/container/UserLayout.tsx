@@ -1,20 +1,12 @@
 'use client'
 import { FaArtstation } from "react-icons/fa"
 import { FaIntercom } from "react-icons/fa";
-import { MdDashboard, MdKeyboardArrowRight } from "react-icons/md";
+import { MdDashboard } from "react-icons/md";
+import { FaLaptopCode } from "react-icons/fa";
 import { LiaBlogSolid } from "react-icons/lia";
-import { FaSignOutAlt } from "react-icons/fa";
-import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import NextBreadcrumb from "../components/NextBreadCrumb";
 import { CgCommunity } from "react-icons/cg";
 const UserLayout = () => {
-    const router = useRouter();
-    const { status } = useSession();
-    const handleSignout = async () => {
-        await signOut({ redirect: false });
-        router.push('/login');
-    }
     return (
         <div className="drawer">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -39,8 +31,8 @@ const UserLayout = () => {
                             <li><a href="/quizzes">Quiz</a></li>
                             <li><a href="/learn">Learn</a></li>
                             <li><a href="/dashboard">Dashboard</a></li>
+                            <li><a href="/hackathons">Hackathons</a></li>
                             <li><a href="/community">Community</a></li>
-                            {status === 'authenticated' && <li><a onClick={handleSignout}><FaSignOutAlt />SignOut</a></li>}
                         </ul>
                     </div>
                 </div>
@@ -51,8 +43,8 @@ const UserLayout = () => {
                     <li><a className='mt-3' href="/quizzes"><FaIntercom /> Quiz</a></li>
                     <li><a className='mt-3' href="/learn"><LiaBlogSolid /> Learn</a></li>
                     <li><a className='mt-3' href="/dashboard"><MdDashboard /> Dashboard</a></li>
+                    <li><a className='mt-3' href="/hackathons"><FaLaptopCode /> Hackathons</a></li>
                     <li><a className='mt-3' href="/community"><CgCommunity/> Community</a></li>
-                    {status === 'authenticated' && <li className="mt-3"><a onClick={handleSignout}><FaSignOutAlt />SignOut</a></li>}
                 </ul>
             </div>
         </div>
