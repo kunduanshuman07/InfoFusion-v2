@@ -33,7 +33,7 @@ const Home = () => {
 
           </div>
         </div>
-        <a className='btn m-auto mt-4 px-20 sm:mb-0 mb-4' href={data ? '/quizzes' : '/login'}>Get started</a>
+        <a className='btn m-auto sm:mt-4 px-20 sm:mb-0 mb-20 mt-8' href={data ? '/quizzes' : '/login'}>Get started</a>
       </div>
       <Footer />
     </div>
