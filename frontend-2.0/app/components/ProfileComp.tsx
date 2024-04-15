@@ -40,8 +40,8 @@ const ProfileComp: React.FC<ProfileProps> = ({ user, errorMessage, setErrorMessa
       <h1 className="text-sm font-bold mt-2">{user?.username}</h1>
       <h1 className="text-xs mt-1">{user?.email}</h1>
       <div className="flex flex-row">
-        <a className="btn bg-cyan-50 mt-2 text-cyan-800 hover:bg-cyan-50 btn-sm px-10 mr-2" href="/profile"><GiPlagueDoctorProfile /> Profile </a>
-        <button className="btn bg-cyan-50 mt-2 text-cyan-800 hover:bg-cyan-50 btn-sm px-10" onClick={handleSignout}>SignOut <FaSignOutAlt /> {loading && <span className="loading loading-spinner text-cyan-800"></span>}</button>
+        <a className="btn bg-cyan-50 mt-2 text-cyan-800 hover:bg-cyan-50 btn-sm px-6 mr-2" href="/profile"><GiPlagueDoctorProfile /> Profile </a>
+        <button className="btn bg-cyan-50 mt-2 text-cyan-800 hover:bg-cyan-50 btn-sm px6" onClick={handleSignout}>SignOut <FaSignOutAlt /> {loading && <span className="loading loading-spinner text-cyan-800"></span>}</button>
       </div>
       <div className="mt-2 flex flex-col w-full" style={{ borderTop: "5px solid #94a3b8" }}>
         <h1 className="font-bold text-sm mt-2 flex text-slate-500"><GoDotFill className="my-auto mr-2 text-error" /> Skills</h1>
