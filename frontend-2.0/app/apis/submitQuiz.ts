@@ -38,8 +38,7 @@ export const submitQuiz = async ({ userId, quizId, quizData, selectedOptions, qu
             weighted_score = weighted_score + weightage[quizData[i].category];
             correct_answers.push(formattedObject)
         }
-        else if (quizData[i].correctAnswer !== selectedOptions[i]) {
-            weighted_score = weighted_score - weightage[quizData[i].category];
+        else {
             incorrect_answers.push(formattedObject)
         }
     }
@@ -55,7 +54,6 @@ export const submitQuiz = async ({ userId, quizId, quizData, selectedOptions, qu
             incorrect_answers: incorrect_answers,
             correct_answers: correct_answers,
             quiz_title: quizTitle,
-            quiz_index: quizIndex
         }
     ])
     if (error) {

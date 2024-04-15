@@ -5,7 +5,7 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 export const registerUser = async ({ email, username, password }: any) => {
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL || '', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '');
     const { error } = await supabase.from('User').insert([{
-        username, email, password
+        username, email, password, role: "user"
     }]);
     if (error) {
         return {status: 200, data: {message: "Uniqueness"}};
@@ -24,7 +24,7 @@ export const registerUser = async ({ email, username, password }: any) => {
             username: data?.[0].username,
             quiz_count: 0,
             rating_graph: [0],
-            highest_score: 0
+            highest_score: 0,
         }
     ])
     if (leaderboardResp.error) {

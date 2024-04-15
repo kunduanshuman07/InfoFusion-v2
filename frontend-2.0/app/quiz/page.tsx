@@ -56,9 +56,9 @@ const QuizPage = () => {
     const handleSubmitQuiz = async () => {
         const { status, data } = await submitQuiz({ quizId: quizId, userId: user.id, quizData, selectedOptions, quizTitle, quizIndex, username: user.username });
         if (status == 200) {
-          router.push(`/scorecards`)
+            router.push(`/scorecards`)
         }
-      }
+    }
     return (
         <div className='p-1' style={{ background: 'linear-gradient(45deg, #155e75, #06b6d4)', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {loading ?
@@ -73,10 +73,16 @@ const QuizPage = () => {
                             <a role="tab" className={`tab ${index === currentIndex ? 'tab-active [--tab-bg:#0e7490] text-white font-bold text-xs' : ''}`} key={index} onClick={() => setCurrentIndex(index)}>{index + 1}</a>
                         ))}
                     </div>
-                    <div className="flex flex-row">
-                        <RiTimerFlashFill className="m-auto mt-3 text-white" /><MyTimer expiryTimestamp={expriyTime} handleTimerEnding={handleTimerEnding} />
+                    <div className="grid grid-cols-3 gap-2 mt-1">
+                        <button className="sm:mt-5 mt-2 btn btn-warning text-white px-2 sm:btn-sm btn-xs" onClick={() => setCurrentIndex(currentIndex - 1)} disabled={currentIndex === 0}>Prev <FaAngleLeft /></button>
+                        <button className="sm:mt-5 mt-2 btn btn-accent text-white px-2 sm:btn-sm btn-xs" onClick={() => setModalOpen(true)}>Submit</button>
+                        <button className="sm:mt-5 mt-2 btn btn-info text-white px-2 sm:btn-sm btn-xs" onClick={() => setCurrentIndex(currentIndex + 1)} disabled={currentIndex === 9}>Next <FaAngleRight /></button>
                     </div>
-                    <div className="flex flex-col sm:p-10 p-5 shadow-md rounded-lg mt-2 items-center" style={{ border: "2px solid #22d3ee" }}>
+                    <div className="flex flex-row mt-2">
+                        <RiTimerFlashFill className="mt-3 text-white" /><MyTimer expiryTimestamp={expriyTime} handleTimerEnding={handleTimerEnding} />
+                    </div>
+                    <h1 className="text-center ml-2 mt-2 text-xs bg-neutral px-5 py-1 rounded-lg text-white">{quizData?.[currentIndex]?.category}</h1>
+                    <div className="flex flex-col sm:px-10 px-5 mt-4 items-center" >
                         <h1 className="text-white font-bold sm:text-xl m-auto">{quizData?.[currentIndex]?.title}</h1>
                         <div className="grid sm:grid-cols-2 gap-5 grid-cols-1 mt-3 p-5">
                             {quizData?.[currentIndex]?.options.map((option: any, index: any) => (
@@ -86,21 +92,17 @@ const QuizPage = () => {
                                         id={`option-${index}`}
                                         checked={selectedOptions[currentIndex] === option}
                                         onChange={() => handleOptionChange(option)}
-                                        className="checkbox checkbox-neutral"
+                                        className="checkbox checkbox-neutral my-auto"
                                     />
                                     <label htmlFor={''} className="sm:text-sm text-xs ml-2 text-cyan-500 font-bold m-auto">{option}</label>
                                 </div>
                             ))}
                         </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 mt-4">
-                        <button className="sm:mt-5 mt-2 btn btn-warning text-white px-2 sm:btn-sm btn-xs" onClick={() => setCurrentIndex(currentIndex - 1)} disabled={currentIndex === 0}>Prev <FaAngleLeft /></button>
-                        <button className="sm:mt-5 mt-2 btn btn-accent text-white px-2 sm:btn-sm btn-xs" onClick={()=>setModalOpen(true)}>Submit</button>
-                        <button className="sm:mt-5 mt-2 btn btn-info text-white px-2 sm:btn-sm btn-xs" onClick={() => setCurrentIndex(currentIndex + 1)} disabled={currentIndex === 9}>Next <FaAngleRight /></button>
-                    </div>
+
                 </>
             }
-            {modalOpen && <QuizFinishPopUp modalOpen={modalOpen} setModalOpen={setModalOpen} actFunc={handleSubmitQuiz}/>}
+            {modalOpen && <QuizFinishPopUp modalOpen={modalOpen} setModalOpen={setModalOpen} actFunc={handleSubmitQuiz} />}
         </div>
     )
 }

@@ -6,7 +6,24 @@ import { FaLaptopCode } from "react-icons/fa";
 import { LiaBlogSolid } from "react-icons/lia";
 import NextBreadcrumb from "../components/NextBreadCrumb";
 import { CgCommunity } from "react-icons/cg";
+import { RiAdminFill } from "react-icons/ri";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { fetchUser } from "../apis/fetchUser";
 const UserLayout = () => {
+    const {data} = useSession();
+    const [user, setUser] = useState<any>();
+    useEffect(() => {
+        const fetchUserData = async () => {
+          const resp = await fetchUser({ userId: data?.user?.email });
+          if (resp.status === 200) {
+            setUser(resp.data.user);
+          }
+        }
+        if (data != null) {
+          fetchUserData();
+        }
+      }, [data])
     return (
         <div className="drawer">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -33,6 +50,7 @@ const UserLayout = () => {
                             <li><a href="/dashboard">Dashboard</a></li>
                             <li><a href="/hackathons">Hackathons</a></li>
                             <li><a href="/community">Community</a></li>
+                            {user?.role==='admin' && <li><a href="/admin"><RiAdminFill/> Admin</a></li>}
                         </ul>
                     </div>
                 </div>
@@ -45,6 +63,7 @@ const UserLayout = () => {
                     <li><a className='mt-3' href="/dashboard"><MdDashboard /> Dashboard</a></li>
                     <li><a className='mt-3' href="/hackathons"><FaLaptopCode /> Hackathons</a></li>
                     <li><a className='mt-3' href="/community"><CgCommunity/> Community</a></li>
+                    {user?.role==='admin' && <li><a className='mt-3' href="/admin"><RiAdminFill/> Admin</a></li>}
                 </ul>
             </div>
         </div>
