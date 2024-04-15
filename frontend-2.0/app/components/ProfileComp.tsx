@@ -53,12 +53,19 @@ const ProfileComp: React.FC<ProfileProps> = ({ user, errorMessage, setErrorMessa
         <div className="flex flex-col mt-4">
           <h1 className="font-bold text-sm mt-2 flex text-slate-500"><GoDotFill className="my-auto mr-2 text-info" />Community Stats</h1>
           <div className="grid grid-cols-2 gap-5 mt-2">
-            <a className="btn btn-xs mt-1 text-xs btn-primary">Likes 40</a>
-            <a className="btn btn-xs mt-1 text-xs btn-accent text-white">Comments 50</a>
+            <a className="btn btn-xs mt-1 text-xs btn-primary">Likes 0</a>
+            <a className="btn btn-xs mt-1 text-xs btn-accent text-white">Comments 0</a>
           </div>
         </div>
         <div className="flex flex-col mt-4">
-          <a href="/scorecards" className="bg-cyan-500 p-2 rounded-lg text-white px-6 text-sm m-auto font-bold hover:underline mt-2">My Scorecards</a>
+          <div className="collapse collapse-arrow shadow-md rounded-lg mt-4">
+            <input type="checkbox" />
+            <h1 className="collapse-title text-sm flex flex-row">Quiz History</h1>
+            <div className="collapse-content flex flex-col">
+            <a href="/scorecards" className="text-cyan-400 text-xs font-bold hover:underline mt-1 cursor-pointer">My Scorecards</a>
+              <a className="text-cyan-400 text-xs font-bold hover:underline mt-1 cursor-pointer">My Quizzes</a>
+            </div>
+          </div>
           <div className="collapse collapse-arrow shadow-md rounded-lg mt-4">
             <input type="checkbox" />
             <h1 className="collapse-title text-sm flex flex-row">Account Settings</h1>
