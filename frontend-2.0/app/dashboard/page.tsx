@@ -35,8 +35,8 @@ const Dashboard = () => {
       const leaderBoardResp = await fetchLeaderboard();
       if (status == 200 && leaderBoardResp.status == 200) {
         setDashboard(data.data);
-        setUserCount(leaderBoardResp.data.data.length);
-        leaderBoardResp.data.data.map((users: any, index: any) => {
+        setUserCount(leaderBoardResp?.data?.data?.length);
+        leaderBoardResp?.data?.data?.map((users: any, index: any) => {
           if (users.user_id === user.id) {
             setLeaderboardRank(index + 1);
           }
@@ -50,17 +50,17 @@ const Dashboard = () => {
   }, [user])
   return (
     <div className='flex flex-col p-5 w-full'>
-      {status==='unauthenticated'?<LoginCard text={'Dashboard'}/>:
-      loading ?
-        <div className='flex flex-row mx-auto my-2 p-5'>
-          <h1 className='mr-2'>Loading</h1>
-          <span className="loading loading-spinner loading-sm"></span>
-        </div>
-        :
-        <div className="flex sm:flex-row flex-col">
-          <ProfileComp user={user} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
-          <StatsComp userCount={userCount} leaderboardRank={leaderboardRank} dashboard={dashboard} />
-        </div>
+      {status === 'unauthenticated' ? <LoginCard text={'Dashboard'} /> :
+        loading ?
+          <div className='flex flex-row mx-auto my-2 p-5'>
+            <h1 className='mr-2'>Loading</h1>
+            <span className="loading loading-spinner loading-sm"></span>
+          </div>
+          :
+          <div className="flex sm:flex-row flex-col">
+            <ProfileComp user={user} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
+            <StatsComp userCount={userCount} leaderboardRank={leaderboardRank} dashboard={dashboard} />
+          </div>
       }
     </div>
   )

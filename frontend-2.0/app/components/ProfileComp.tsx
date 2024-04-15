@@ -46,9 +46,9 @@ const ProfileComp: React.FC<ProfileProps> = ({ user, errorMessage, setErrorMessa
       <div className="mt-2 flex flex-col w-full" style={{ borderTop: "5px solid #94a3b8" }}>
         <h1 className="font-bold text-sm mt-2 flex text-slate-500"><GoDotFill className="my-auto mr-2 text-error" /> Skills</h1>
         <div className="grid grid-cols-3 flex flex-col py-1 px-2">
-          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">React Js</h1>
-          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">Node Js</h1>
-          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">Express Js</h1>
+          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">{user?.skill_one}</h1>
+          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">{user?.skill_two}</h1>
+          <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">{user?.skill_three}</h1>
         </div>
         <div className="flex flex-col mt-4">
           <h1 className="font-bold text-sm mt-2 flex text-slate-500"><GoDotFill className="my-auto mr-2 text-info" />Community Stats</h1>

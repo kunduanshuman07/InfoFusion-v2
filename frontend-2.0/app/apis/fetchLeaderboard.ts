@@ -1,8 +1,8 @@
 'use server'
-import axios from "axios"
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+import { createClient } from "@supabase/supabase-js";
 
 export const fetchLeaderboard = async () => {
-    const res = await axios.get(`${BACKEND_URL}/leaderboard/fetch-leaderboard`);
-    return {status: res.status, data: res.data };
+    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL || '', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '');
+    const { data, error } = await supabase.from('Leaderboard').select('*').order('rating', { ascending: false });
+    return {status:200, data: { message: "Successfully fetched Leaderboard.", data: data }};
 }

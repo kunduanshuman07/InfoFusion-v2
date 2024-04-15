@@ -17,7 +17,7 @@ const ScorecardsTable: React.FC<ScorecardProps> = ({ modalOpen, setModalOpen, qu
     useEffect(() => {
         const fetchScorecardData = async () => {
             const { status, data } = await fetchFullScorecard({ userId, quizId });
-            setScorecardsdata(data?.data[0]);
+            setScorecardsdata(data?.data?.[0]);
             setLoading(false);
         }
         fetchScorecardData();
@@ -41,8 +41,8 @@ const ScorecardsTable: React.FC<ScorecardProps> = ({ modalOpen, setModalOpen, qu
                                     <tr className="bg-cyan-800 text-white text-xs font-bold text-center">
                                         <th>#</th>
                                         <th>Question</th>
-                                        <th>Your Ans</th>
                                         <th>Correct Ans</th>
+                                        <th>Your Ans</th>
                                     </tr>
                                 </thead>
                                 <tbody>

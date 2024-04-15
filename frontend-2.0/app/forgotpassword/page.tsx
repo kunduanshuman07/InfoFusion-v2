@@ -60,6 +60,7 @@ const ForgotPassword = () => {
                 <input className="input input-sm input-bordered mt-4  text-xs w-1/2" value={password} type="password" placeholder="Enter New Password" onChange={(e) => setPassword(e.target.value)} />
                 <input className="input input-sm input-bordered mt-4 text-xs w-1/2" value={cpassword} type='text' placeholder="ConfirmPassword" onChange={(e) => setCPassword(e.target.value)} />
                 <button className="btn btn-sm mt-4 bg-cyan-600 hover:bg-cyan-500 text-white" onClick={handlePasswordUpdate} disabled={buttonloading || !email || !password || !cpassword || password !== cpassword}>Update Password {buttonloading ? <span className="loading loading-spinner loading-xs"></span> : ''}</button>
+                <a href="/login" className="mt-2 text-xs text-cyan-400 font-bold">Login</a>
             </div>
         </div>
     )
