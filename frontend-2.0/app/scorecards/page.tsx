@@ -5,10 +5,13 @@ import { fetchScorecards } from "../apis/fetchScorecards";
 import { useSession } from "next-auth/react";
 import { fetchUser } from "../apis/fetchUser";
 import { formatDateAndTime } from "../utils/timeFormat";
+import ScorecardsTable from "../components/ScorecardTable";
 
 const Scorecards = () => {
     const [loading, setLoading] = useState<any>(true);
     const [scorecardData, setScorecardData] = useState<any>([]);
+    const [scorecardModal, setScorecardModal] = useState<any>(false);
+    const [quizId, setQuizId] = useState<any>();
     const { data } = useSession();
     const [user, setUser] = useState<any>();
     useEffect(() => {
@@ -23,10 +26,6 @@ const Scorecards = () => {
             fetchUserData();
         }
     }, [data, user]);
-    const formatIdForViewScore = (userId: string, quizId: string) => {
-        const id = `${userId}+${quizId}`;
-        return id;
-    }
     useEffect(() => {
         const fetchScorecardsData = async () => {
             const { status, data } = await fetchScorecards({ userId: user?.id });
@@ -41,6 +40,10 @@ const Scorecards = () => {
             fetchScorecardsData();
         }
     }, [user]);
+    const handleScorecard = (quizId: any) => {
+        setQuizId(quizId);
+        setScorecardModal(true);
+    }
     return (
         <div className="overflow-x-auto flex">
             {loading ?
@@ -66,12 +69,13 @@ const Scorecards = () => {
                                 <td>{formatDateAndTime(scores?.submission_time)}</td>
                                 <td>{scores?.quiz_title}</td>
                                 <td>{scores?.score}</td>
-                                <td><a href={`/scorecards/${formatIdForViewScore(user?.id, scores.quiz_id)}`} className='text-cyan-400 font-bold' target="_blank">View</a></td>
+                                <td><button className='text-cyan-400 font-bold' onClick={()=>handleScorecard(scores.quiz_id)}>View</button></td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             }
+            {scorecardModal && <ScorecardsTable modalOpen={scorecardModal} setModalOpen={setScorecardModal} quizId={quizId} userId={user.id}/>}
         </div>
     )
 }
