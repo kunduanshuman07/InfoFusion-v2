@@ -31,7 +31,7 @@ const Home = () => {
 
           </div>
         </div>
-        <a className='btn m-auto sm:mt-10 px-20 sm:mb-0 mb-20 mt-10' href={data ? '/quizzes' : '/login'}>Get started</a>
+        <a className='btn m-auto sm:mt-10 px-20 sm:mb-0 mb-20 sm:mt-10 mt-5' href={data ? '/quizzes' : '/login'}>Get started</a>
       </div>
       <Footer />
     </div>
