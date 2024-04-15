@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div style={{ background: 'linear-gradient(45deg, #155e75, #06b6d4)', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div className='flex flex-col w-full px-2 items-center'>
-        <div className='flex flex-col px-10 py-8 rounded-lg' >
+        <div className='flex flex-col px-10 sm:py-8 pt-3 rounded-lg' >
           <h1 className='sm:text-5xl text-3xl text-white ml-auto mr-auto font-bold'>InfoFusion</h1>
           <p className='text-sm text-center text-white mt-1'>Where Knowledge Meets Innovation in Tech Learning.</p>
         </div>
