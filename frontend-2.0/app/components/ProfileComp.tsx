@@ -53,8 +53,8 @@ const ProfileComp: React.FC<ProfileProps> = ({ user, errorMessage, setErrorMessa
         <div className="flex flex-col mt-4">
           <h1 className="font-bold text-sm mt-2 flex text-slate-500"><GoDotFill className="my-auto mr-2 text-info" />Community Stats</h1>
           <div className="grid grid-cols-2 gap-5 mt-2">
-            <a className="btn btn-xs mt-1 text-xs btn-primary">Likes 0</a>
-            <a className="btn btn-xs mt-1 text-xs btn-accent text-white">Comments 0</a>
+            <a className="btn btn-xs mt-1 text-xs btn-primary">Upvotes 0</a>
+            <a className="btn btn-xs mt-1 text-xs btn-accent text-white">Replies 0</a>
           </div>
         </div>
         <div className="flex flex-col mt-4">

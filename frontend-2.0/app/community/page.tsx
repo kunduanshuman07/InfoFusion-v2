@@ -6,6 +6,7 @@ const Community = () => {
   const [buttonState, setButtonState] = useState<any>('Interview');
   return (
     <div className='flex flex-col p-1'>
+      <h1 className='text-center font-bold text-error text-sm'>This page is in development stage.</h1>
       <CommunityHeader buttonState={buttonState} setButtonState={setButtonState}/>
       <div className='grid mt-4 grid-cols-1 shadow-md rounded-lg'>
         <div className='flex sm:flex-row flex-col p-2' style={{ borderTop: "1px solid #cbd5e1", borderBottom: "1px solid #cbd5e1" }}>
