@@ -11,9 +11,11 @@ const ReactCodeBlock:React.FC<props> = ({code, showLineNumbers}) => {
     <CopyBlock
       text={code}
       language='jsx'
-      wrapLongLines
+      wrapLongLines={true}
       theme={atomOneDark}
       showLineNumbers={showLineNumbers}
+      codeBlock={false}
+
     />
   )
 }

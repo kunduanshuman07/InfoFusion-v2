@@ -15,7 +15,7 @@ const Learn = () => {
       <div className='grid mt-4 sm:grid-cols-4 gap-2 grid-cols-2'>
         <div className='flex flex-col p-2 shadow-md rounded-lg cursor-pointer bg-gray-500 text-white' onClick={handleTopicClick}>
           <div className='flex flex-col items-center m-auto'>
-            <h1 className='text-xl font-bold'>ReactJS Summary</h1>
+            <h1 className='text-sm font-bold'>ReactJS Summary</h1>
             <h1 className='text-xs text-slate-200 mt-2'>Created at: 12.04.2024</h1>
           </div>
           <div className='flex flex-row mt-4 m-auto'>
