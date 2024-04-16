@@ -49,7 +49,7 @@ const UserLayout = () => {
                             <li><a href="/learn">Learn</a></li>
                             <li><a href="/dashboard">Dashboard</a></li>
                             <li><a href="/hackathons">Hackathons</a></li>
-                            <li><a href="/community">Community</a></li>
+                            <li><a href="/community">Discuss</a></li>
                             {user?.role==='admin' && <li><a href="/admin"><RiAdminFill/> Admin</a></li>}
                         </ul>
                     </div>
@@ -62,7 +62,7 @@ const UserLayout = () => {
                     <li><a className='mt-3' href="/learn"><LiaBlogSolid /> Learn</a></li>
                     <li><a className='mt-3' href="/dashboard"><MdDashboard /> Dashboard</a></li>
                     <li><a className='mt-3' href="/hackathons"><FaLaptopCode /> Hackathons</a></li>
-                    <li><a className='mt-3' href="/community"><CgCommunity/> Community</a></li>
+                    <li><a className='mt-3' href="/community"><CgCommunity/> Discuss</a></li>
                     {user?.role==='admin' && <li><a className='mt-3' href="/admin"><RiAdminFill/> Admin</a></li>}
                 </ul>
             </div>
