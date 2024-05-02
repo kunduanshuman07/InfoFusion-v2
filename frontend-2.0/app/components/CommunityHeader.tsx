@@ -6,7 +6,7 @@ const CommunityHeader = () => {
   return (
     <div className='flex flex-row mt-1 p-1'>
         <input className="input input-xs input-bordered mr-1" placeholder="Search Topics" />
-        <button className="btn btn-neutral btn-outline btn-xs mr-auto my-auto">New Post<AiFillFileAdd /></button>
+        <a className="btn btn-neutral btn-outline btn-xs mr-auto my-auto" href="/community/create-post">New Post<AiFillFileAdd /></a>
     </div>
   )
 }
