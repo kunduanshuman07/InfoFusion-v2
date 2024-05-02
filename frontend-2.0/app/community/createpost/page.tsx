@@ -69,7 +69,7 @@ const CreatePost = () => {
                         </div>
                         <TextEditor content={content} setContent={setContent}/>
                     </div>
-                    <div className="w-full flex flex-col mt-4">
+                    <div className="w-full flex flex-col mt-12">
                         <h1 className="text-xs text-center mb-2 text-slate-500 font-bold">Want to add codes? Write it below!</h1>
                         <Editor
                             value={code}
@@ -83,7 +83,7 @@ const CreatePost = () => {
                                 borderRadius: "10px"
                             }}
                         />
-                        <button className='btn btn-sm mx-auto bg-cyan-800 text-white hover:bg-cyan-600 mt-4' onClick={handleCreatePost}>Create {buttonLoading && <span className="loading loading-spinner loading-xs"></span>}</button>
+                        <button className='btn btn-sm mx-auto bg-cyan-800 text-white hover:bg-cyan-600 mt-4' onClick={handleCreatePost}>Create Post {buttonLoading && <span className="loading loading-spinner loading-xs"></span>}</button>
                     </div>
                 </div>
             }
