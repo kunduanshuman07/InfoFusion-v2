@@ -20,7 +20,7 @@ const UserLayout = () => {
                         </label>
                     </div>
                     <div className="flex-1 px-2 mx-2 text-cyan-700 font-bold">
-                        <a className="flex cursor-pointer" href="/"><FaArtstation className="my-auto mr-2" /> InfoFusion</a>
+                        <a className="flex cursor-pointer" href="/home"><FaArtstation className="my-auto mr-2" /> InfoFusion</a>
                     </div>
                     <div className="flex-none hidden lg:block ">
                         <ul className="menu menu-horizontal text-xs text-cyan-700 bg-white">

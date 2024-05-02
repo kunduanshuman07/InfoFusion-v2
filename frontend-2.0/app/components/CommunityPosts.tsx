@@ -52,7 +52,7 @@ const CommunityPosts = () => {
                                 <h1 className="text-xs text-slate-400 font-bold">{formatDateAndTime(post?.created_at)}</h1>
                             </div>
                         </div>
-                        <a className="font-bold text-cyan-700 mt-2 mx-auto text-lg hover:text-cyan-500">{post?.title}</a>
+                        <a className="font-bold text-cyan-700 mt-2 mx-auto text-lg hover:text-cyan-500" href={`community/${post?.id}`}>{post?.title}</a>
                         <div className="flex flex-row mx-auto">
                             {post?.tag_one && <h1 className="text-xs text-slate-400 font-bold mt-2 ">#{post?.tag_one}</h1>}
                             {post?.tag_two && <h1 className="text-xs text-slate-400 font-bold mt-2 ml-1">#{post?.tag_two}</h1>}
@@ -60,7 +60,6 @@ const CommunityPosts = () => {
                         <div className="flex flex-row mt-6">
                             <button className="btn btn-xs"><BiSolidUpvote/> {post?.upvotes} Upvotes</button>
                             <button className="btn btn-xs ml-2 mr-auto"><FaComments/>{post?.comments} Comments</button>
-                            <button className="btn btn-xs ml-auto"><SiGooglekeep/></button>
                         </div>
                     </div>
                     
