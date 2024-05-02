@@ -1,6 +1,9 @@
-import React from 'react'
+'use client'
+import dynamic from 'next/dynamic';
 import 'quill/dist/quill.snow.css'
-import ReactQuill from 'react-quill'
+import React from 'react';
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 interface Props{
     content: any;
