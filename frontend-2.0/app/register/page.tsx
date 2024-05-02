@@ -43,17 +43,33 @@ const Register = () => {
 
   }
   return (
-    <div className={`flex flex-col p-4 sm:shadow-md sm:border rounded-lg mx-auto my-10 sm:w-1/3 w-full`}>
-      {errorMessage && <ErrorToast text={errorMessage} />}
-      <FaArtstation className="m-auto text-cyan-600" />
-      <h1 className="m-auto text-xl text-cyan-600 font-bold">InfoFusion</h1>
-      <input className="input input-sm input-bordered mt-4 text-xs" type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-      <input className="input input-sm input-bordered mt-4 text-xs" type='password' placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-      <input className="input input-sm input-bordered mt-4 text-xs" type='text' placeholder="Confirm Password" onChange={(e) => setCPassword(e.target.value)} />
-      <input className="input input-sm input-bordered mt-4 text-xs" type='text' placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
-      <button className="btn btn-sm mt-4 bg-cyan-600 hover:bg-cyan-500 text-white" onClick={handleRegister} disabled={loading || !email || !username || !password || !cpassword}>Sign Up {loading ? <span className="loading loading-spinner loading-xs"></span> : ''}</button>
-      <div className="flex flex-row mt-4">
-        <a href="/login" className="text-xs text-cyan-500 mx-auto">Sign In</a>
+    <div className='flex flex-row w-full'>
+      <div className='flex flex-col sm:w-1/3 w-full p-4 sm:mx-5 mx-auto' >
+        {errorMessage && <ErrorToast text={errorMessage} />}
+        <h1 className="text-2xl text-cyan-700">Welcome !</h1>
+        <h1 className="text-xs mt-2">Register your account.</h1>
+        <h1 className="text-xs ml-1 mt-5">Email</h1>
+        <input className="input input-sm input-bordered mt-2 text-xs" placeholder="someone@gmail.com" type="text" onChange={(e) => setEmail(e.target.value)} />
+        <h1 className="text-xs ml-1 mt-2">Password</h1>
+        <input className="input input-sm input-bordered mt-2 text-xs" placeholder="●●●●●●●●" type="password" onChange={(e) => setPassword(e.target.value)} />
+        <h1 className="text-xs ml-1 mt-2">Confirm Password</h1>
+        <input className="input input-sm input-bordered mt-2 text-xs" placeholder="Re-enter your password" type="text" onChange={(e) => setCPassword(e.target.value)} />
+        <h1 className="text-xs ml-1 mt-2">Username</h1>
+        <input className="input input-sm input-bordered mt-2 text-xs" placeholder="Username" type="text" onChange={(e) => setUsername(e.target.value)} />
+        <button className="btn bg-cyan-700 text-white mt-6 btn-sm" disabled={loading} onClick={handleRegister}>Sign In {loading && <span className="loading loading-dots loading-sm loading-white"></span>}</button>
+        <a href="login" className="text-xs m-auto mt-2">{`Already have an account?`}<span className="ml-1 underline">Sign In Now</span></a>
+      </div>
+      <div className='w-2/3 flex flex-col hidden sm:block'>
+        <div className="flex flex-col mx-auto mt-20 items-center">
+          <FaArtstation className="text-6xl text-cyan-600" />
+          <h1 className="mx-auto mt-5 text-xl font-bold text-cyan-600">Create your own standards of being a developer.</h1>
+          <ul className="steps mt-10">
+            <li className="step text-sm text-cyan-600 font-bold" data-content="">Quiz</li>
+            <li className="step text-sm text-cyan-600 font-bold" data-content="">Learn</li>
+            <li className="step text-sm text-cyan-600 font-bold" data-content="">Track</li>
+            <li className="step text-sm text-cyan-600 font-bold" data-content="">Contribute</li>
+          </ul>
+        </div>
       </div>
     </div>
   )

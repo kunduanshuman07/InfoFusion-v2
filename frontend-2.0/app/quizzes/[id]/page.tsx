@@ -11,6 +11,7 @@ import { FaCaretLeft } from "react-icons/fa";
 
 const ContestPage = () => {
     const { data, status } = useSession();
+    const [auth, setAuth] = useState<any>(false);
     const [user, setUser] = useState<any>();
     const [loading, setLoading] = useState<any>(true);
     const [quizloading, setQuizLoading] = useState<any>(true);
@@ -23,38 +24,43 @@ const ContestPage = () => {
             if (resp.status === 200) {
                 setUser(resp.data.user);
                 setQuizId(resp2.data.quizId);
+                setLoading(false);
             }
         }
-        if (data != null) {
-            fetchUserData();
+        if (status === 'unauthenticated') {
+            setAuth(false);
+            setLoading(false);
         }
-    }, [data])
-    useEffect(()=>{
-        const fetchQuizEnability = async() => {
-            const {status, data} = await fetchEnability({userId: user?.id, quizId});
+        else {
+            fetchUserData();
+            setAuth(true);
+        }
+    }, [status, data])
+    useEffect(() => {
+        const fetchQuizEnability = async () => {
+            const { status, data } = await fetchEnability({ userId: user?.id, quizId });
             setEnability(data?.value);
             setLoading(false);
         }
-        if(user?.id && quizId){
+        if (user?.id && quizId) {
             fetchQuizEnability();
         }
-    },[quizId, user?.id])
+    }, [quizId, user?.id])
     return (
-        <div className='flex flex-col w-full p-10'>
-            {status==='unauthenticated'?<LoginCard text={'Daily Quiz'}/>:
-                loading ?
-                <div className='flex flex-row mx-auto my-2 p-5'>
-                    <h1 className='mr-2'>Loading</h1>
-                    <span className="loading loading-spinner loading-sm"></span>
+        <div className="flex flex-col">
+            {loading && <div style={{ margin: "auto auto" }}><span className="loading text-cyan-700 loading-dots loading-lg"></span></div>}
+            {!loading && !auth &&
+                <div style={{ margin: "auto auto" }}>
+                    <a className="text-sm text-cyan-700" href="/login">Please <span className="text-lg font-bold hover:underline">Sign In</span> to continue!</a>
                 </div>
-                :
-                <>
-                    <a href='/quizzes' className='text-xs bold text-cyan-500 flex font-bold'><FaCaretLeft className='my-auto' /> Back to Quiz</a>
+            }
+            {!loading && auth &&
+                <div className='p-4'>
                     <div className='flex sm:flex-row flex-col'>
-                        <ContestInformation user={user} quizLoading={quizloading} setQuizLoading={setQuizLoading}/>
-                        <ContestPrizes quizLoading={quizloading} enability={enability}/>
+                        <ContestInformation user={user} quizLoading={quizloading} setQuizLoading={setQuizLoading} />
+                        <ContestPrizes quizLoading={quizloading} enability={enability} />
                     </div>
-                </>
+                </div>
             }
         </div>
     )

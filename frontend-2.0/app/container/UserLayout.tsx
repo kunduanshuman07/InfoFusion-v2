@@ -1,9 +1,7 @@
 'use client'
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { FaArtstation } from "react-icons/fa";
-import { GiTripleGate } from "react-icons/gi";
 const UserLayout = () => {
     const { data: session } = useSession();
     const router = useRouter();
@@ -26,7 +24,7 @@ const UserLayout = () => {
                     </div>
                     <div className="flex-none hidden lg:block ">
                         <ul className="menu menu-horizontal text-xs text-cyan-700 bg-white">
-                            <li className="text-cyan-700 font-bold"><a href="/quiz">Quiz</a></li>
+                            <li className="text-cyan-700 font-bold"><a href="/quizzes">Quiz</a></li>
                             <li className="text-cyan-700 font-bold"><a href="/dashboard">Dashboard</a></li>
                             <li className="text-cyan-700 font-bold"><a href="/learn">Learn</a></li>
                             <li className="text-cyan-700 font-bold"><a href="/hackathons">Hackathons</a></li>
@@ -52,7 +50,7 @@ const UserLayout = () => {
             <div className="drawer-side z-10">
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-52 min-h-full bg-base-200">
-                    <li className="mt-3 text-cyan-900 font-bold"><a href="/quiz">Quiz</a></li>
+                    <li className="mt-3 text-cyan-900 font-bold"><a href="/quizzes">Quiz</a></li>
                     <li className="mt-3 text-cyan-900 font-bold"><a href="/dashboard">Dashboard</a></li>
                     <li className="mt-3 text-cyan-900 font-bold"><a href="/learn">Learn</a></li>
                     <li className="mt-3 text-cyan-900 font-bold"><a href="/hackathons">Hackathons</a></li>
