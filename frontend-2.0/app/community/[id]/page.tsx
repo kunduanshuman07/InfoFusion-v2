@@ -26,7 +26,7 @@ const CommunityPost = () => {
         const fetchCommunityPostData = async () => {
             const postResp = await fetchSinglePost({ id });
             const resp = await fetchUser({ userId: data?.user?.email });
-            const commentResp = await fetchAllPostComments();
+            const commentResp = await fetchAllPostComments({post_id:id});
             if (resp.status === 200) {
                 setUser(resp.data.user);
             }
@@ -49,12 +49,20 @@ const CommunityPost = () => {
     }, [status, id, data])
     const handleAddComment = async () => {
         setCommentLoading(true);
-        const commentResp = await addComment({ user_id: user?.id, username: user?.username, comment: commentData, post_id: id });
+        const commentResp = await addComment({ user_id: user?.id, username: user?.username, comment: commentData, post_id: id, comment_length: postData?.comments+1 });
         if (commentResp?.status == 200) {
             setAllComments(commentResp?.data?.data);
             setCommentData('');
             setCommentLoading(false);
             
+        }
+    }
+    const handleUpvotes = async (state: any) => {
+        if(state==='Add'){
+
+        }
+        else{
+
         }
     }
     return (
@@ -84,8 +92,7 @@ const CommunityPost = () => {
                         {postData?.tag_two && <h1 className="text-xs text-white font-bold ml-2">#{postData?.tag_two}</h1>}
                     </div>
                     <div className="flex flex-row mt-6">
-                        <button className="btn btn-xs"><BiSolidUpvote /> {postData?.upvotes} Upvotes</button>
-                        <button className="btn btn-xs ml-2" onClick={() => commentsRef?.current?.scrollIntoView({ behavior: 'smooth' })}><FaComments />{postData?.comments} Comments</button>
+                        <button className="btn btn-xs ml-2" onClick={() => commentsRef?.current?.scrollIntoView({ behavior: 'smooth' })}><FaComments />{allComments?.length} Comments</button>
                         <button className="btn btn-xs ml-2"><SiGooglekeep />Save</button>
                     </div>
                     <h1 className="mt-10 text-slate-400 font-bold">Description</h1>

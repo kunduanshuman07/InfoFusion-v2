@@ -1,7 +1,7 @@
 'use server'
 import { createClient } from "@supabase/supabase-js";
 
-export const addComment = async ({ user_id, username, post_id, comment }: any) => {
+export const addComment = async ({ user_id, username, post_id, comment}: any) => {
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL || '', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '')
     const { error } = await supabase.from('comments').insert([{
         user_id, comment, post_id, username
@@ -9,13 +9,35 @@ export const addComment = async ({ user_id, username, post_id, comment }: any) =
     if (error) {
         return { status: 200, data: { message: "Error Adding comment" } };
     }
-    const allComments = await supabase.from('comments').select('*');
+    const allComments = await supabase.from('comments').select('*').match({post_id: post_id});
     return { status: 200, data: { message: "Successfully added comment !", data: allComments.data } }
 }
 
-export const fetchAllPostComments = async () => {
+export const fetchAllPostComments = async ({post_id}: any) => {
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL || '', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '')
-    const {data, error} = await supabase.from('comments').select('*').order('created_at', { ascending: false });;
+    const {data, error} = await supabase.from('comments').select('*').match({post_id: post_id}).order('created_at', { ascending: false });;
+    if (error) {
+        return { status: 200, data: { message: "Error Adding comment" } };
+    }
+    return { status: 200, data: { message: "Successfully added comment !", data: data } }
+}
+
+export const addUpvotes = async({post_id, new_upvotes}: any) => {
+    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL || '', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '')
+    const {data, error} = await supabase.from('community_posts').update([{
+        upvotes: new_upvotes
+    }]).match({id: post_id});
+    if (error) {
+        return { status: 200, data: { message: "Error Adding comment" } };
+    }
+    return { status: 200, data: { message: "Successfully added comment !", data: data } }
+}
+
+export const deleteUpvote = async({post_id, new_upvotes}: any) => {
+    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL || '', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '')
+    const {data, error} = await supabase.from('community_posts').update([{
+        upvotes: new_upvotes
+    }]).match({id: post_id});
     if (error) {
         return { status: 200, data: { message: "Error Adding comment" } };
     }
