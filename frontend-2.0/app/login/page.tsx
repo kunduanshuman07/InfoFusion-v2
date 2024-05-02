@@ -29,16 +29,33 @@ const Login = () => {
     }
   }
   return (
-    <div className={`flex flex-col p-4 sm:shadow-md sm:border rounded-lg mx-auto my-10 sm:w-1/3 `}>
-      {loginError && <ErrorToast text={"Invalid Credentials ! Please try again."} />}
-      <FaArtstation className="m-auto text-cyan-600" />
-      <h1 className="m-auto text-xl text-cyan-600 font-bold">InfoFusion</h1>
-      <input className="input input-sm input-bordered mt-4 text-xs" type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-      <input className="input input-sm input-bordered mt-4 text-xs" type='password' placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-      <button className="btn btn-sm mt-4 bg-cyan-600 hover:bg-cyan-500 text-white" onClick={handleLogin} disabled={loading || !email || !password}>Sign In {loading ? <span className="loading loading-spinner loading-xs"></span> : ''}</button>
-      <div className="flex flex-row mt-4">
-        <a href="/forgotpassword" className="text-xs text-cyan-500 mr-10">Forgot Password?</a>
-        <a href="/register" className="text-xs text-cyan-500 ml-auto">Sign Up</a>
+    <div className='flex flex-row w-full'>
+      <div className='flex flex-col sm:w-1/3 w-full mt-2 p-4 sm:mx-5 mx-auto' >
+        {loginError && <ErrorToast text={"Invalid Credentials ! Please try again."} />}
+        <h1 className="text-2xl text-cyan-700">Welcome Back</h1>
+        <h1 className="text-xs mt-2">Sign in to your account.</h1>
+        <h1 className="text-xs ml-1 mt-10">Email</h1>
+        <input className="input input-sm input-bordered mt-2 text-xs" placeholder="someone@gmail.com" type="text" onChange={(e) => setEmail(e.target.value)} />
+        <div className="flex ml-1 mt-4">
+          <h1 className="text-xs">Password</h1>
+          <a className="ml-auto text-xs" href="">Forgot Password?</a>
+        </div>
+        <input className="input input-sm input-bordered mt-2 text-xs" placeholder="●●●●●●●●" type="password" onChange={(e) => setPassword(e.target.value)} />
+        <button className="btn bg-cyan-600 text-white mt-6 btn-sm" disabled={loading} onClick={handleLogin}>Sign In {loading && <span className="loading loading-dots loading-sm loading-white"></span>}</button>
+        <a href="/register" className="text-xs m-auto mt-10">{`Don't have an account?`}<span className="ml-1 underline">Sign Up Now</span></a>
+        <p className="text-xs mt-10 mx-auto test-slate-300">{`By continuing, you agree to InfoFusion's Terms of Service and Privacy Policy, and to receive periodic emails with updates.`}</p>
+      </div>
+      <div className='w-2/3 flex flex-col hidden sm:block'>
+        <div className="flex flex-col mx-auto mt-20 items-center">
+          <FaArtstation className="text-6xl text-cyan-600" />
+          <h1 className="mx-auto mt-5 text-xl font-bold text-cyan-600">Create your own standards of being a developer.</h1>
+          <ul className="steps mt-10">
+            <li className="step text-sm text-cyan-600 font-bold" data-content="">Quiz</li>
+            <li className="step text-sm text-cyan-600 font-bold" data-content="">Learn</li>
+            <li className="step text-sm text-cyan-600 font-bold" data-content="">Track</li>
+            <li className="step text-sm text-cyan-600 font-bold" data-content="">Contribute</li>
+          </ul>
+        </div>
       </div>
     </div>
   )

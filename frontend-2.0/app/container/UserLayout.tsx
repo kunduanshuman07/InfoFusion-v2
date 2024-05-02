@@ -1,69 +1,63 @@
 'use client'
-import { FaArtstation } from "react-icons/fa"
-import { FaIntercom } from "react-icons/fa";
-import { MdDashboard } from "react-icons/md";
-import { FaLaptopCode } from "react-icons/fa";
-import { LiaBlogSolid } from "react-icons/lia";
-import NextBreadcrumb from "../components/NextBreadCrumb";
-import { CgCommunity } from "react-icons/cg";
-import { RiAdminFill } from "react-icons/ri";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { fetchUser } from "../apis/fetchUser";
+import { FaArtstation } from "react-icons/fa";
+import { GiTripleGate } from "react-icons/gi";
 const UserLayout = () => {
-    const {data} = useSession();
-    const [user, setUser] = useState<any>();
-    useEffect(() => {
-        const fetchUserData = async () => {
-          const resp = await fetchUser({ userId: data?.user?.email });
-          if (resp.status === 200) {
-            setUser(resp.data.user);
-          }
-        }
-        if (data != null) {
-          fetchUserData();
-        }
-      }, [data])
+    const { data: session } = useSession();
+    const router = useRouter();
+    const handleSignout = async () => {
+        await signOut({ redirect: false });
+        router.push('/login');
+    }
     return (
-        <div className="drawer">
+        <div className={`drawer `}>
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col p-0">
-                <div className="w-full navbar" style={{ borderBottom: "1px solid #e2e8f0" }}>
+            <div className="drawer-content flex flex-col">
+                <div className="w-full navbar">
                     <div className="flex-none lg:hidden">
                         <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="text-teal-400 inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         </label>
                     </div>
-                    <NextBreadcrumb
-                        homeElement={'InfoFusion'}
-                        separator={<span> | </span>}
-                        activeClasses='text-cyan-800 sm:text-sm text-xs m-auto'
-                        containerClasses='flex py-2 bg-white'
-                        listClasses='sm:text-sm text-xs hover:underline mx-2 font-bold m-auto'
-                        capitalizeLinks
-                    />
-                    <a className="flex-1 px-2 mx-2 text-sm text-[#0891b2] font-bold cursor-pointer" href="/"><FaArtstation className="ml-auto" /></a>
-                    <div className="flex-none hidden lg:block">
-                        <ul className="menu menu-horizontal text-xs">
-                            <li><a href="/quizzes">Quiz</a></li>
-                            <li><a href="/learn">Learn</a></li>
-                            <li><a href="/dashboard">Dashboard</a></li>
-                            <li><a href="/hackathons">Hackathons</a></li>
-                            <li><a href="/community">Discuss</a></li>
-                            {user?.role==='admin' && <li><a href="/admin"><RiAdminFill/> Admin</a></li>}
+                    <div className="flex-1 px-2 mx-2 text-cyan-700 font-bold">
+                        <a className="flex cursor-pointer" href="/"><FaArtstation className="my-auto mr-2" /> InfoFusion</a>
+                    </div>
+                    <div className="flex-none hidden lg:block ">
+                        <ul className="menu menu-horizontal text-xs text-cyan-700 bg-white">
+                            <li className="text-cyan-700 font-bold"><a href="/quiz">Quiz</a></li>
+                            <li className="text-cyan-700 font-bold"><a href="/dashboard">Dashboard</a></li>
+                            <li className="text-cyan-700 font-bold"><a href="/learn">Learn</a></li>
+                            <li className="text-cyan-700 font-bold"><a href="/hackathons">Hackathons</a></li>
+                            <li className="text-cyan-700 font-bold"><a href="/community">Community</a></li>
+                            <li>
+                                <ul className={`dropdown-menu ${session ? '' : 'hidden'}`}>
+                                    <li className="relative group">
+                                        <div className="flex flex-col">
+                                            <span className="font-bold">Account</span>
+                                            <ul className="submenu absolute hidden group-hover:block bg-white shadow-md rounded-lg mt-6 py-2 px-2 w-28 mr-10">
+                                                <li><a href="/profile" className="block text-xs text-cyan-700 font-bold hover:rounded-lg">Profile</a></li>
+                                                <li><a onClick={handleSignout} className="block text-xs text-cyan-700 font-bold hover:rounded-lg">Sign Out</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+
                         </ul>
                     </div>
                 </div>
             </div>
             <div className="drawer-side z-10">
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-40 min-h-full bg-base-200">
-                    <li><a className='mt-3' href="/quizzes"><FaIntercom /> Quiz</a></li>
-                    <li><a className='mt-3' href="/learn"><LiaBlogSolid /> Learn</a></li>
-                    <li><a className='mt-3' href="/dashboard"><MdDashboard /> Dashboard</a></li>
-                    <li><a className='mt-3' href="/hackathons"><FaLaptopCode /> Hackathons</a></li>
-                    <li><a className='mt-3' href="/community"><CgCommunity/> Discuss</a></li>
-                    {user?.role==='admin' && <li><a className='mt-3' href="/admin"><RiAdminFill/> Admin</a></li>}
+                <ul className="menu p-4 w-52 min-h-full bg-base-200">
+                    <li className="mt-3 text-cyan-900 font-bold"><a href="/quiz">Quiz</a></li>
+                    <li className="mt-3 text-cyan-900 font-bold"><a href="/dashboard">Dashboard</a></li>
+                    <li className="mt-3 text-cyan-900 font-bold"><a href="/learn">Learn</a></li>
+                    <li className="mt-3 text-cyan-900 font-bold"><a href="/hackathons">Hackathons</a></li>
+                    <li className="mt-3 text-cyan-900 font-bold"><a href="/community">Community</a></li>
+                    <li className="mt-3 text-cyan-900 font-bold"><a onClick={handleSignout}>Sign Out</a></li>
                 </ul>
             </div>
         </div>
