@@ -26,7 +26,6 @@ const UserLayout = () => {
                         <ul className="menu menu-horizontal text-xs text-cyan-700 bg-white">
                             <li className="text-cyan-700 font-bold"><a href="/quizzes">Quiz</a></li>
                             <li className="text-cyan-700 font-bold"><a href="/dashboard">Dashboard</a></li>
-                            <li className="text-cyan-700 font-bold"><a href="/learn">Learn</a></li>
                             <li className="text-cyan-700 font-bold"><a href="/hackathons">Hackathons</a></li>
                             <li className="text-cyan-700 font-bold"><a href="/community">Community</a></li>
                             <li>
@@ -52,7 +51,6 @@ const UserLayout = () => {
                 <ul className="menu p-4 w-52 min-h-full bg-base-200">
                     <li className="mt-3 text-cyan-900 font-bold"><a href="/quizzes">Quiz</a></li>
                     <li className="mt-3 text-cyan-900 font-bold"><a href="/dashboard">Dashboard</a></li>
-                    <li className="mt-3 text-cyan-900 font-bold"><a href="/learn">Learn</a></li>
                     <li className="mt-3 text-cyan-900 font-bold"><a href="/hackathons">Hackathons</a></li>
                     <li className="mt-3 text-cyan-900 font-bold"><a href="/community">Community</a></li>
                     <li className="mt-3 text-cyan-900 font-bold"><a onClick={handleSignout}>Sign Out</a></li>

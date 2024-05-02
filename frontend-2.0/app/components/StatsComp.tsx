@@ -9,7 +9,6 @@ interface StatsProps {
 }
 
 const StatsComp: React.FC<StatsProps> = ({ userCount, leaderboardRank, dashboard }) => {
-  console.log(userCount, leaderboardRank, dashboard);
   return (
     <div className="sm:w-2/3 w-full sm:ml-2 p-2 rounded-lg sm:mt-0 mt-4 flex flex-col">
       <div className="flex sm:flex-row flex-col w-full">

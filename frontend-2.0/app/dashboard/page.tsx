@@ -22,7 +22,6 @@ const Dashboard = () => {
       const resp = await fetchUser({ userId: data?.user?.email });
       if (resp.status === 200) {
         setUser(resp.data.user);
-        setLoading(false);
       }
     }
     if (status === 'unauthenticated') {
