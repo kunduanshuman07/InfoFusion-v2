@@ -11,8 +11,6 @@ import Image from 'next/image';
 import { fetchCurrentQuiz } from '../apis/fetchCurrentQuiz';
 import { fetchPastQuiz } from '../apis/fetchPastQuiz';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
-import LoginCard from '../components/LoginCard';
 import { fetchUpcomingQuiz } from '../apis/fetchUpcomingQuiz';
 const Contests = () => {
   const router = useRouter();
@@ -45,6 +43,7 @@ const Contests = () => {
     const id = 'DailyQuiz';
     router.push(`/quizzes/${id}`);
   }
+  console.log(presentQuiz, pastQuiz);
   return (
     <div className='flex flex-col'>
       <ContestHeader />
@@ -76,6 +75,20 @@ const Contests = () => {
                     <Image src={index % 2 === 0 ? TechImage : TechImage2} alt='Tech' width={250} style={{ maxHeight: "150px", borderRadius: "10px" }} />
                     <h1 className='mt-2 font-bold'>{quiz.title}</h1>
                     <p className='mt-1 text-xs'>Starts Tomorrow at 12 p.m.</p>
+                  </div>
+                ))}
+            </div>
+            <button className='btn btn-sm bg-slate-200 text-neutral flex mt-4 hover:bg-slate-200 m-auto'><FaChevronLeft className='my-auto mx-2' /> Past Quizzes <FaChevronRight className='my-auto mx-2' /></button>
+            <div className='sm:grid sm:grid-cols-4 mt-2 sm:mx-auto mx-auto'>
+              {!pastQuiz ?
+                <h1 className='text-cyan-800 font-bold sm:text-sm text-xs text-center'>
+                  Nothing to show in the Past Quizzes!
+                </h1> :
+                pastQuiz?.map((quiz: any, index: any) => (
+                  quiz.id != presentQuiz?.quizId && <div className='shadow-md rounded-lg mt-2 sm:mr-auto mx-auto flex flex-col p-4' style={{ width: "250px" }} key={index}>
+                    <Image src={index % 2 === 0 ? TechImage4 : TechImage5} alt='Tech' width={250} style={{ maxHeight: "150px", borderRadius: "10px" }} />
+                    <h1 className='mt-2 font-bold'>{quiz.title}</h1>
+                    <button className='btn btn-sm mr-auto mt-2 btn-neutral px-10'>Attempt {buttonLoading ? <span className="loading loading-spinner loading-xs"></span> : ''}</button>
                   </div>
                 ))}
             </div>

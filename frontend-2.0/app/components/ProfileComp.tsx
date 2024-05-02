@@ -40,21 +40,14 @@ const ProfileComp: React.FC<ProfileProps> = ({ user, errorMessage, setErrorMessa
       <h1 className="text-sm font-bold mt-2">{user?.username}</h1>
       <h1 className="text-xs mt-1">{user?.email}</h1>
       <div className="mt-2 flex flex-col w-full" style={{ borderTop: "5px solid #94a3b8" }}>
-        <h1 className="font-bold text-sm mt-2 flex text-slate-500"><GoDotFill className="my-auto mr-2 text-error" /> Skills</h1>
+        <h1 className="font-bold text-sm mt-4 flex text-slate-500"><GoDotFill className="my-auto mr-2 text-error" /> Skills</h1>
         <div className="grid grid-cols-3 flex flex-col py-1 px-2">
           <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">{user?.skill_one}</h1>
           <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">{user?.skill_two}</h1>
           <h1 className="px-4 py-1 rounded-lg text-xs bg-slate-200 mr-auto mt-1">{user?.skill_three}</h1>
         </div>
-        <div className="flex flex-col mt-4">
-          <h1 className="font-bold text-sm mt-2 flex text-slate-500"><GoDotFill className="my-auto mr-2 text-info" />Community Stats</h1>
-          <div className="grid grid-cols-2 gap-5 mt-2">
-            <a className="btn btn-xs mt-1 text-xs btn-primary">Upvotes 0</a>
-            <a className="btn btn-xs mt-1 text-xs btn-accent text-white">Replies 0</a>
-          </div>
-        </div>
-        <div className="flex flex-col mt-4">
-          <div className="collapse collapse-arrow shadow-md rounded-lg mt-4">
+        <div className="flex flex-col mt-2">
+          <div className="collapse collapse-arrow shadow-md rounded-lg">
             <input type="checkbox" />
             <h1 className="collapse-title text-sm flex flex-row">Quiz History</h1>
             <div className="collapse-content flex flex-col">
