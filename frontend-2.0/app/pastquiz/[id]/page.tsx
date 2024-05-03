@@ -12,7 +12,6 @@ const PastQuiz = () => {
     const [loading, setLoading] = useState<any>(true);
     const [auth, setAuth] = useState<any>(false);
     const [quizData, setQuizData] = useState<any>([]);
-    console.log(quizData);
     useEffect(()=>{
         const fetchQuizData = async() => {
             const quizResp = await fetchQuiz({quizId: id});

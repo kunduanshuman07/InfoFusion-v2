@@ -6,7 +6,6 @@ export const createCommunityPost = async ({ user_id, title,username,  content, c
     const { error } = await supabase.from('community_posts').insert([{
         user_id, title, content, code, tag_one, tag_two, username,
     }]);
-    console.log(error);
     if (error) {
         return { status: 200, data: { message: "Error creating Post" } };
     }

@@ -2,7 +2,6 @@
 import { createClient } from "@supabase/supabase-js";
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL || '', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '');
 export const addQuizQuestions = async ({quiz_id, question}: any) => {
-    console.log(quiz_id, question);
     const {data, error} = await supabase.from('Questions').insert([
         {
             title: question.question,
@@ -12,7 +11,6 @@ export const addQuizQuestions = async ({quiz_id, question}: any) => {
             options: question.options
         }
     ])
-    console.log(error);
 }
 export const adminAddQuiz = async ({title, quiz_index, quiz_description, desc_link, quizData}: any) => {
     

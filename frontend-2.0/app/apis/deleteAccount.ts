@@ -5,7 +5,6 @@ export const deleteAccount = async ({userId}: any) => {
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL||'', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY||'')
     const {error} = await supabase.from('Quiz_Scores').delete().match({user_id: userId});
         if(error){
-            console.log("Error1", error)
             return {status: 200, data:{message: "Error deleting account !"}};
         }
         const second = await supabase.from('Leaderboard').delete().match({user_id: userId});

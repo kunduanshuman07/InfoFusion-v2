@@ -26,7 +26,6 @@ const MyQuizzes = () => {
             setAuth(true);
         }
     }, [status, data]);
-    console.log(myquizdata);
     return (
         <div className="flex flex-col">
             {loading && <div style={{ margin: "auto auto" }}><span className="loading text-cyan-700 loading-dots loading-lg"></span></div>}
@@ -37,7 +36,7 @@ const MyQuizzes = () => {
             }
             {!loading && auth &&
                 <div className="sm:p-10 p-4 flex flex-col">
-                    {myquizdata.length === 0 ? <div className='flex flex-row mx-auto my-2 p-5'>
+                    {myquizdata?.length === 0 ? <div className='flex flex-row mx-auto my-2 p-5'>
                         <h1 className='mr-2 text-cyan-800 font-bold'>Attempt a quiz to view your Quiz Attempts!</h1>
                     </div> :
                         <>

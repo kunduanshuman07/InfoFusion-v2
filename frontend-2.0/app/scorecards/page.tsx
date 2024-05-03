@@ -30,7 +30,6 @@ const Scorecards = () => {
         const fetchScorecardsData = async () => {
             const { status, data } = await fetchScorecards({ userId: user?.id });
             if (status === 200) {
-                console.log(data);
                 setScorecardData(data.data);
                 setLoading(false);
             }

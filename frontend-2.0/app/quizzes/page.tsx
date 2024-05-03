@@ -43,7 +43,6 @@ const Contests = () => {
     const id = 'DailyQuiz';
     router.push(`/quizzes/${id}`);
   }
-  console.log(presentQuiz, pastQuiz);
   return (
     <div className='flex flex-col'>
       <ContestHeader />

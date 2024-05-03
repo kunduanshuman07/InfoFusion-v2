@@ -4,10 +4,8 @@ import { fetchEnability } from '@/app/apis/fetchQuizEnability';
 import { fetchUser } from '@/app/apis/fetchUser';
 import ContestInformation from '@/app/components/ContestInformation'
 import ContestPrizes from '@/app/components/ContestPrizes'
-import LoginCard from '@/app/components/LoginCard';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import { FaCaretLeft } from "react-icons/fa";
 
 const ContestPage = () => {
     const { data, status } = useSession();
@@ -38,7 +36,7 @@ const ContestPage = () => {
     }, [status, data])
     useEffect(() => {
         const fetchQuizEnability = async () => {
-            const { status, data } = await fetchEnability({ userId: user?.id, quizId });
+            const { data } = await fetchEnability({ userId: user?.id, quizId });
             setEnability(data?.value);
             setLoading(false);
         }
