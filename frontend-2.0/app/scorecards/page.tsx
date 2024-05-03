@@ -52,6 +52,9 @@ const Scorecards = () => {
                     <span className="loading loading-spinner loading-sm"></span>
                 </div>
                 :
+                scorecardData.length===0?<div className='flex flex-row mx-auto my-2 p-5'>
+                <h1 className='mr-2 text-cyan-800 font-bold'>Attempt a quiz to view scorecards!</h1>
+            </div>:
                 <table className="table">
                     <thead>
                         <tr className='bg-cyan-700 text-slate-200 text-center'>

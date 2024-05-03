@@ -2,7 +2,9 @@
 
 const page = () => {
   return (
-    <div>Coming soon...</div>
+    <div>
+      <h1 className="text-center font-bold text-cyan-800">Coming Soon ...</h1>
+    </div>
   )
 }
 

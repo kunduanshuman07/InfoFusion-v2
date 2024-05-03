@@ -1,13 +1,17 @@
 'use client'
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FaArtstation } from "react-icons/fa";
 const UserLayout = () => {
-    const { data: session } = useSession();
+    const [buttonLoading, setButtonoading] = useState<any>(false);
+    const { status } = useSession();
     const router = useRouter();
     const handleSignout = async () => {
+        setButtonoading(true);
         await signOut({ redirect: false });
         router.push('/login');
+        setButtonoading(false);
     }
     return (
         <div className={`drawer `}>
@@ -28,19 +32,7 @@ const UserLayout = () => {
                             <li className="text-cyan-700 font-bold"><a href="/dashboard">Dashboard</a></li>
                             <li className="text-cyan-700 font-bold"><a href="/hackathons">Hackathons</a></li>
                             <li className="text-cyan-700 font-bold"><a href="/community">Community</a></li>
-                            <li>
-                                <ul className={`dropdown-menu ${session ? '' : 'hidden'}`}>
-                                    <li className="relative group">
-                                        <div className="flex flex-col">
-                                            <span className="font-bold">Account</span>
-                                            <ul className="submenu absolute hidden group-hover:block bg-white shadow-md rounded-lg mt-6 py-2 px-2 w-28 mr-10">
-                                                <li><a href="/profile" className="block text-xs text-cyan-700 font-bold hover:rounded-lg">Profile</a></li>
-                                                <li><a onClick={handleSignout} className="block text-xs text-cyan-700 font-bold hover:rounded-lg">Sign Out</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                            {status==='authenticated' && <li><a onClick={handleSignout} className="block text-xs text-cyan-700 font-bold hover:rounded-lg">{!buttonLoading ? `Sign Out` : <span className="loading loading-ring loading-xs"></span>}</a></li>}
 
                         </ul>
                     </div>
@@ -53,7 +45,8 @@ const UserLayout = () => {
                     <li className="mt-3 text-cyan-900 font-bold"><a href="/dashboard">Dashboard</a></li>
                     <li className="mt-3 text-cyan-900 font-bold"><a href="/hackathons">Hackathons</a></li>
                     <li className="mt-3 text-cyan-900 font-bold"><a href="/community">Community</a></li>
-                    <li className="mt-3 text-cyan-900 font-bold"><a onClick={handleSignout}>Sign Out</a></li>
+                    <li className="mt-3 text-cyan-900 font-bold"><a href="/profile">Profile</a></li>
+                   {status==='authenticated' &&  <li className="mt-3 text-cyan-900 font-bold"><a onClick={handleSignout}>{!buttonLoading ? `Sign Out` : <span className="loading loading-ring loading-xs"></span>}</a></li>}
                 </ul>
             </div>
         </div>

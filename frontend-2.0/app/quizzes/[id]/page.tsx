@@ -56,7 +56,7 @@ const ContestPage = () => {
             }
             {!loading && auth &&
                 <div className='p-4'>
-                    <div className='flex sm:flex-row flex-col'>
+                    <div className='flex flex-col'>
                         <ContestInformation user={user} quizLoading={quizloading} setQuizLoading={setQuizLoading} />
                         <ContestPrizes quizLoading={quizloading} enability={enability} />
                     </div>

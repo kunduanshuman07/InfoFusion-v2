@@ -38,7 +38,7 @@ const Login = () => {
         <input className="input input-sm input-bordered mt-2 text-xs" placeholder="someone@gmail.com" type="text" onChange={(e) => setEmail(e.target.value)} />
         <div className="flex ml-1 mt-4">
           <h1 className="text-xs">Password</h1>
-          <a className="ml-auto text-xs" href="">Forgot Password?</a>
+          <a className="ml-auto text-xs" href="/forgotpassword">Forgot Password?</a>
         </div>
         <input className="input input-sm input-bordered mt-2 text-xs" placeholder="●●●●●●●●" type="password" onChange={(e) => setPassword(e.target.value)} />
         <button className="btn bg-cyan-600 text-white mt-6 btn-sm" disabled={loading} onClick={handleLogin}>Sign In {loading && <span className="loading loading-dots loading-sm loading-white"></span>}</button>

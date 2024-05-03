@@ -26,5 +26,5 @@ export const fetchQuiz = async({quizId}: any) => {
     if (questionResp.error) {
         return { status: 200, data: { message: 'Error fetching the latest quiz data.' } };
     }
-    return { status: 200, data: { message: 'Current quiz successfully fetched', quizId: data[0].id, quizTitle: data[0].title, quizIndex: data[0].quiz_index, quizDesc: data[0].quiz_description, descLink: data[0].desc_link, quizData: questionResp.data, } }
+    return { status: 200, data: { message: 'Current quiz successfully fetched', quizId: data[0].id, quizTitle: data[0].title, quizIndex: data[0].quiz_index, quizDesc: data[0].quiz_description, descLink: data[0].desc_link, quizData: questionResp.data, quizDate: data[0].created_at } }
 }

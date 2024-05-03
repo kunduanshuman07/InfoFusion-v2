@@ -11,7 +11,7 @@ const ContestPrizes: React.FC<ContestPrizesProps> = ({ quizLoading, enability })
     <>
       {
         !quizLoading ?
-          <div className='sm:w-1/3 w-full shadow-md rounded-lg p-5 mt-4 sm:ml-2 ml-0 flex flex-col'>
+          <div className='w-full shadow-md rounded-lg p-5 mt-4 sm:ml-2 ml-0 flex flex-col'>
             <h1 className='text-xl font-bold text-amber-500'>Question Division</h1>
             <div className='flex flex-row mt-2 text-xs p-2' style={{ borderBottom: "1px solid #e2e8f0" }}>
               <h1 className='font-bold'>Easy</h1>

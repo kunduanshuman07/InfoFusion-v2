@@ -22,6 +22,10 @@ const Register = () => {
       setErrorMessage('Password mismatch !');
       setLoading(false);
     }
+    else if(!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}/.test(password)){
+      setErrorMessage('Password Criteria not Fulfilled !');
+      setLoading(false);
+    }
     else {
       const userResp = await registerUser({ email, password, username });
       if (userResp.data.message === "Uniqueness") {
@@ -52,6 +56,11 @@ const Register = () => {
         <input className="input input-sm input-bordered mt-2 text-xs" placeholder="someone@gmail.com" type="text" onChange={(e) => setEmail(e.target.value)} />
         <h1 className="text-xs ml-1 mt-2">Password</h1>
         <input className="input input-sm input-bordered mt-2 text-xs" placeholder="●●●●●●●●" type="password" onChange={(e) => setPassword(e.target.value)} />
+        <div className="flex flex-col">
+          <h1 className="text-xs font-bold text-slate-400 mt-2">Password Criteria:</h1>
+          <h1 className="text-xs font-bold text-slate-400">● Min 8 letters with one uppercase and one lowercase letter.</h1>
+          <h1 className="text-xs font-bold text-slate-400">● One special character and one number.</h1>
+        </div>
         <h1 className="text-xs ml-1 mt-2">Confirm Password</h1>
         <input className="input input-sm input-bordered mt-2 text-xs" placeholder="Re-enter your password" type="text" onChange={(e) => setCPassword(e.target.value)} />
         <h1 className="text-xs ml-1 mt-2">Username</h1>
