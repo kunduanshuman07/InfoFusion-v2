@@ -17,6 +17,7 @@ const Dashboard = () => {
   const [userCount, setUserCount] = useState<any>();
   const [user, setUser] = useState<any>();
   const [errorMessage, setErrorMessage] = useState<any>(null);
+  const [leaderboard, setLeaderboard] = useState<any>();
   useEffect(() => {
     const fetchUserData = async () => {
       const resp = await fetchUser({ userId: data?.user?.email });
@@ -40,6 +41,7 @@ const Dashboard = () => {
       if (status == 200 && leaderBoardResp.status == 200) {
         setDashboard(data.data);
         setUserCount(leaderBoardResp?.data?.data?.length);
+        setLeaderboard(leaderBoardResp?.data?.data);
         leaderBoardResp?.data?.data?.map((users: any, index: any) => {
           if (users.user_id === user.id) {
             setLeaderboardRank(index + 1);
@@ -62,8 +64,8 @@ const Dashboard = () => {
       }
       {!loading && auth &&
         <div className="flex sm:flex-row flex-col">
-          <ProfileComp user={user} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
-          <StatsComp userCount={userCount} leaderboardRank={leaderboardRank} dashboard={dashboard} />
+          <ProfileComp user={user} errorMessage={errorMessage} setErrorMessage={setErrorMessage} dashboard={dashboard}/>
+          <StatsComp userCount={userCount} leaderboardRank={leaderboardRank} dashboard={dashboard} leaderboard={leaderboard}/>
         </div>
       }
     </div>

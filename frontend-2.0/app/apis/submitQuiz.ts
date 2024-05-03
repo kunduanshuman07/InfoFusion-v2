@@ -63,7 +63,7 @@ export const submitQuiz = async ({ userId, quizId, quizData, selectedOptions, qu
     const user = data?.[0];
     const newRating = user.quiz_count == 0 ? (weighted_score * 10) : ((user.rating * user.quiz_count) + (weighted_score * 10)) / (user.quiz_count + 1);
     const new_high_score = user.highest_score < total_score ? total_score : user.highest_score;
-    const updatedRatingGraph = [...user.rating_graph, newRating];
+    const updatedRatingGraph = [...user.rating_graph, Math.floor(newRating)];
     const leaderboardResp = await supabase.from('Leaderboard').update({
         rating: Math.floor(newRating),
         questions: user.questions + 10,
@@ -75,6 +75,6 @@ export const submitQuiz = async ({ userId, quizId, quizData, selectedOptions, qu
         quiz_count: user.quiz_count + 1,
         rating_graph: updatedRatingGraph,
         highest_score: new_high_score,
-    }).match({ user_id: userId });
+    }).match({ user_id: user.user_id });
     return { status: 200, data: { message: 'SuccessFull quiz submission' } };
 }

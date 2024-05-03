@@ -88,7 +88,7 @@ const Contests = () => {
                   quiz.id != presentQuiz?.quizId && <div className='shadow-md rounded-lg mt-2 sm:mr-auto mx-auto flex flex-col p-4' style={{ width: "250px" }} key={index}>
                     <Image src={index % 2 === 0 ? TechImage4 : TechImage5} alt='Tech' width={250} style={{ maxHeight: "150px", borderRadius: "10px" }} />
                     <h1 className='mt-2 font-bold'>{quiz.title}</h1>
-                    <button className='btn btn-sm mr-auto mt-2 btn-neutral px-10'>Attempt {buttonLoading ? <span className="loading loading-spinner loading-xs"></span> : ''}</button>
+                    <a href={`/pastquiz/${quiz.id}`} className='btn btn-sm mr-auto mt-2 btn-neutral px-10'>View {buttonLoading ? <span className="loading loading-spinner loading-xs"></span> : ''}</a>
                   </div>
                 ))}
             </div>
